@@ -16,3 +16,6 @@ MonoBehaviour:
   - SceneName: MainMenu
     poolManagersList:
     - {fileID: 8070445538123262702, guid: 8c1cf2928ba548e48a9fffb627784776, type: 3}
+  - SceneName: Gameplay
+    poolManagersList:
+    - {fileID: 7179797118641440070, guid: dd72403f4f5aeb84ea7b3c24b8399764, type: 3}

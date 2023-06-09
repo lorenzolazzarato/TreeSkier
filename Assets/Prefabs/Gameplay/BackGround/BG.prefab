@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &832991073279126489
+--- !u!1 &5774555737941644745
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5588700127211820177}
-  - component: {fileID: 7179797118641440070}
+  - component: {fileID: 5774555737941644744}
+  - component: {fileID: 5774555737941644751}
   m_Layer: 0
-  m_Name: BackGroundManager
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5588700127211820177
+--- !u!4 &5774555737941644744
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832991073279126489}
+  m_GameObject: {fileID: 5774555737941644745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,19 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7179797118641440070
+--- !u!114 &5774555737941644751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832991073279126489}
+  m_GameObject: {fileID: 5774555737941644745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e804692780d55458b7646db4c9c670, type: 3}
+  m_Script: {fileID: 11500000, guid: 4413862ecf2d77d418db3488eacd1c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ID: {fileID: 11400000, guid: 6fa2d7f8d2c3f234fab4f000a55388d0, type: 2}
-  _PoolableObjectPrefab: {fileID: 5932006970686066914, guid: 6a1730d7c51e10f46a38ca867674de4a, type: 3}
-  _Quantity: 6
-  _ObjectsPerFrame: 3
+  _StartingSpawnLocation: {fileID: 0}
+  _BottomSpawnLocation: {fileID: 0}
+  _BackGroundIdContainer: {fileID: 11400000, guid: 6fa2d7f8d2c3f234fab4f000a55388d0, type: 2}
+  _OutOfScreenEvent: {fileID: 11400000, guid: 74b7eef65648ba346a7e446fb8b14933, type: 2}

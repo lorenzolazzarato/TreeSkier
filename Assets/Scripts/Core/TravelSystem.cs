@@ -9,6 +9,9 @@ public class TravelSystem : Singleton<TravelSystem>, ISystem
     public delegate void OnTravelCompleteDelegate();
     public OnTravelCompleteDelegate TravelComplete;
 
+    public delegate void OnChangingScene();
+    public OnChangingScene ChangingScene;
+
     [SerializeField]
     private string _InitialScene;
     [SerializeField]
@@ -32,6 +35,10 @@ public class TravelSystem : Singleton<TravelSystem>, ISystem
 
         AsyncOperation op_loading = SceneManager.LoadSceneAsync(_LoadingScene, LoadSceneMode.Additive);
         yield return new WaitUntil(() => { return op_loading.isDone; });
+       
+        FlowSystem.Instance.SetFSMVariable("SCENE_TO_LOAD", _targetScene);
+
+        ChangingScene?.Invoke();
 
         AsyncOperation op_current = SceneManager.UnloadSceneAsync(_currentScene);
         yield return new WaitUntil(() => { return op_current.isDone; });
@@ -44,7 +51,6 @@ public class TravelSystem : Singleton<TravelSystem>, ISystem
         op_loading = SceneManager.UnloadSceneAsync(_LoadingScene);
         yield return new WaitUntil(() => { return op_loading.isDone; });
 
-        FlowSystem.Instance.SetFSMVariable("SCENE_TO_LOAD", _currentScene);
 
         TravelComplete?.Invoke();
     }
