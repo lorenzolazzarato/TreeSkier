@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TravelSystem : Singleton<TravelSystem>, ISystem
 {
-    public delegate void TravelCompleteDelegate();
-    public TravelCompleteDelegate OnTravelComplete; 
+    public delegate void OnTravelCompleteDelegate();
+    public OnTravelCompleteDelegate TravelComplete;
 
     [SerializeField]
     private string _InitialScene;
@@ -44,7 +44,9 @@ public class TravelSystem : Singleton<TravelSystem>, ISystem
         op_loading = SceneManager.UnloadSceneAsync(_LoadingScene);
         yield return new WaitUntil(() => { return op_loading.isDone; });
 
-        OnTravelComplete?.Invoke();
+        FlowSystem.Instance.SetFSMVariable("SCENE_TO_LOAD", _currentScene);
+
+        TravelComplete?.Invoke();
     }
 
     public void Setup() {
