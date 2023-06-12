@@ -9,8 +9,6 @@ public class BackGround : MonoBehaviour
     [SerializeField]
     public GameObject _StartingSpawnLocation;
     
-    [SerializeField]
-    public GameObject _BottomSpawnLocation;
 
     [SerializeField]
     public IdContainer _BackGroundIdContainer;
@@ -23,7 +21,8 @@ public class BackGround : MonoBehaviour
     private float _spriteHeight;
 
     // We use three background for safety, two should be enough
-    BackGroundSprite _firstBg, _secondBg, _thirdBg;
+    BackGroundSprite _bgSprite;
+    Queue<BackGroundSprite> _queue;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -39,22 +38,32 @@ public class BackGround : MonoBehaviour
     {
         // Get the pool manager instance and initiate the background
         _poolManager = PoolingSystem.Instance.getPoolManagerInstance(_BackGroundIdContainer);
-        _firstBg = _poolManager.GetPoolableObject<BackGroundSprite>();
-        _secondBg = _poolManager.GetPoolableObject<BackGroundSprite>();
-        _thirdBg = _poolManager.GetPoolableObject<BackGroundSprite>();
 
-        _spriteHeight = _firstBg.GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
+        // Create a queue to handle the background sprite
+        _queue = new Queue<BackGroundSprite>();
 
-        // At the start set the position based on the spawn location
-        _firstBg.transform.position = _StartingSpawnLocation.transform.position;
+        _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
+        
+        _spriteHeight = _bgSprite.GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
 
-        _secondBg.transform.position = new Vector3(_StartingSpawnLocation.transform.position.x, 
-            _StartingSpawnLocation.transform.position.y - _spriteHeight, 
+        _bgSprite.transform.position = new Vector3(_StartingSpawnLocation.transform.position.x,
+        _StartingSpawnLocation.transform.position.y + _spriteHeight * 2,
+        _StartingSpawnLocation.transform.position.z);
+
+        _queue.Enqueue(_bgSprite);
+
+        // Create 3 background sprite and move the in the right position
+        for (int i = 1; i > -2; --i)
+        {
+            _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
+
+            _bgSprite.transform.position = new Vector3(_StartingSpawnLocation.transform.position.x,
+            _StartingSpawnLocation.transform.position.y + _spriteHeight * i,
             _StartingSpawnLocation.transform.position.z);
 
-        _thirdBg.transform.position = new Vector3(_secondBg.transform.position.x,
-            _secondBg.transform.position.y - _spriteHeight,
-            _secondBg.transform.position.z);
+            _queue.Enqueue(_bgSprite);
+
+        }
 
     }
 
@@ -63,19 +72,20 @@ public class BackGround : MonoBehaviour
         //Debug.Log("Have to spawn another background");
 
         // Return the BG that is out of the screen
-        _poolManager.ReturnPoolableObject(_firstBg);
-
-        _firstBg = _secondBg;
-
-        _secondBg = _thirdBg;
+        _poolManager.ReturnPoolableObject(_queue.Dequeue());
 
         // Create another bg at the bottom of the last one
-        _thirdBg = _poolManager.GetPoolableObject<BackGroundSprite>();
+        BackGroundSprite bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
 
-        _thirdBg.transform.position = new Vector3(_secondBg.transform.position.x,
-            _secondBg.transform.position.y - _spriteHeight,
-            _secondBg.transform.position.z);
+        bgSprite.transform.position = new Vector3(_bgSprite.transform.position.x,
+            _bgSprite.transform.position.y - _spriteHeight,
+            _bgSprite.transform.position.z);
 
+        // Enqueue the new sprite just created
+        _queue.Enqueue(bgSprite);
+
+        // Keep track of the last sprite create
+        _bgSprite = bgSprite;
     }
     
 }

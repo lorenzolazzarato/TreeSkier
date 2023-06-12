@@ -24,7 +24,7 @@ public class BackGroundSprite : PoolableObject
 
         // TODO
         // Checks if the sprite is out of the screen. In case it is, call an event
-        if (transform.position.y >= height)
+        if (transform.position.y >= height * 2)
         {
             _OutOfScreenEvent.Invoke();
         }
