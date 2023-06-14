@@ -255,6 +255,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _MaxSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _SlowRatio
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _AccelerationRatio
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: -1705697131854732058, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _IdProvider
       value: 

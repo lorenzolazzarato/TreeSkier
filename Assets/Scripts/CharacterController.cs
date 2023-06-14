@@ -2,7 +2,13 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+public enum MovementDirection
+{
+    RIGHT, LEFT, STILL
+}
 
 public class CharacterController : MonoBehaviour
 {
@@ -17,6 +23,20 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField]
     private float _HorizontalDistanceForSwipe = 50;
+
+    [SerializeField]
+    private float _SlowRatio = 0.0001f;
+
+    [SerializeField]
+    private float _AccelerationRatio = 0.0001f;
+
+    [SerializeField]
+    private float _MaxSpeed = 1f;
+
+    // Takes
+    private MovementDirection _direction =MovementDirection.STILL;
+
+    private float _xSpeed = 0;
 
 
     private GameplayInputProvider _gameplayInputProvider;
@@ -38,6 +58,70 @@ public class CharacterController : MonoBehaviour
     private void Start()
     {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+
+        Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
+        Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
+        Debug.LogFormat("Value of slow: {0}", _SlowRatio);
+    }
+
+    private void Update()
+    {
+        // Calculate how much the player is moving
+        if (_direction != MovementDirection.STILL)
+        {
+            //Debug.Log("Character moving");
+            // Add to the speed the acceleration in the correct direction
+            _xSpeed += _AccelerationRatio * (_direction == MovementDirection.RIGHT ? 1 : -1);
+        }
+        else 
+        {
+            //Debug.Log("Character not moving");
+            // Else, the speed gradually comes back to zero
+            if (_xSpeed > 0)
+            {
+                _xSpeed -= _SlowRatio;
+            }
+            else if (_xSpeed < 0)
+            {
+                _xSpeed += _SlowRatio;
+            }
+        }
+
+        Debug.LogFormat("Speed before clamp {0}", _xSpeed);
+        
+        
+        Debug.LogFormat("clamp value {0}", _MaxSpeed);
+
+
+
+        // Clamp the speed between 2 value
+        _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, _MaxSpeed);
+
+        Debug.LogFormat("Speed after clamp {0}", _xSpeed);
+        // Set the speed to 0 if is less then the AccelerationRatio
+        if (Math.Abs(_xSpeed) < _AccelerationRatio )
+        {
+            _xSpeed = 0;
+        }
+        //Debug.Log(_xSpeed);
+
+        // Translate the character by the correct amount
+        transform.Translate(_xSpeed, 0, 0);
+
+
+        // Check if the character is out of the screen, in case teleport it to the other side
+        if (transform.position.x < -4)
+        {
+            transform.position = new Vector3(4, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x > 4)
+        {
+            transform.position = new Vector3(-4, transform.position.y, transform.position.z);
+        }
+
+        
+
+        //Debug.LogFormat("Transform Position {0}", transform.position.x);
     }
 
     private void OnEnable()
@@ -62,19 +146,14 @@ public class CharacterController : MonoBehaviour
 
     private void MoveCharacter(Vector2 value)
     {
-        //Debug.LogFormat("Moved {0}, {1}", value.x, value.y);
-
-        //Debug.Log("Move Started");
-
-        //Debug.Log(Screen.width / 2);
-
+        // Select the correct direction of the movement
         if (value.x < Screen.width / 2) 
         {
-            Debug.Log("Moving Left");
+            _direction = MovementDirection.LEFT;
         }
         else
         {
-            Debug.Log("Moving Right");
+            _direction = MovementDirection.RIGHT;
         }
 
     }
@@ -87,12 +166,15 @@ public class CharacterController : MonoBehaviour
     private void StartTouch(Vector2 value)
     {
         //Debug.LogFormat("Started touching {0}", value);
+        MoveCharacter(value);
         _position = value;
         _timeStart = Time.time;
     }
 
     private void EndTouch(Vector2 value)
     {
+        // Stop the player movement
+        _direction = MovementDirection.STILL;
 
         //Debug.LogFormat("Ended touching {0}", value);
         float endTime = Time.time;
