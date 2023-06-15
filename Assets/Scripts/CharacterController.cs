@@ -59,9 +59,9 @@ public class CharacterController : MonoBehaviour
     {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
 
-        Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
-        Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
-        Debug.LogFormat("Value of slow: {0}", _SlowRatio);
+        //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
+        //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
+        //Debug.LogFormat("Value of slow: {0}", _SlowRatio);
     }
 
     private void Update()
@@ -87,17 +87,12 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        Debug.LogFormat("Speed before clamp {0}", _xSpeed);
         
-        
-        Debug.LogFormat("clamp value {0}", _MaxSpeed);
-
-
 
         // Clamp the speed between 2 value
         _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, _MaxSpeed);
 
-        Debug.LogFormat("Speed after clamp {0}", _xSpeed);
+        
         // Set the speed to 0 if is less then the AccelerationRatio
         if (Math.Abs(_xSpeed) < _AccelerationRatio )
         {
