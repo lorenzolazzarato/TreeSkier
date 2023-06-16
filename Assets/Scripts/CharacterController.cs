@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum MovementDirection
@@ -33,8 +34,14 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _MaxSpeed = 1f;
 
+    [SerializeField]
+    private IdContainerGameEvent _HitEvent;
+
+    [SerializeField]
+    private IdContainerGameEvent _GatherEvent;
+
     // Takes
-    private MovementDirection _direction =MovementDirection.STILL;
+    private MovementDirection _direction = MovementDirection.STILL;
 
     private float _xSpeed = 0;
 
@@ -73,7 +80,7 @@ public class CharacterController : MonoBehaviour
             // Add to the speed the acceleration in the correct direction
             _xSpeed += _AccelerationRatio * (_direction == MovementDirection.RIGHT ? 1 : -1);
         }
-        else 
+        else
         {
             //Debug.Log("Character not moving");
             // Else, the speed gradually comes back to zero
@@ -87,14 +94,14 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        
+
 
         // Clamp the speed between 2 value
         _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, _MaxSpeed);
 
-        
+
         // Set the speed to 0 if is less then the AccelerationRatio
-        if (Math.Abs(_xSpeed) < _AccelerationRatio )
+        if (Math.Abs(_xSpeed) < _AccelerationRatio)
         {
             _xSpeed = 0;
         }
@@ -114,7 +121,7 @@ public class CharacterController : MonoBehaviour
             transform.position = new Vector3(-4, transform.position.y, transform.position.z);
         }
 
-        
+
 
         //Debug.LogFormat("Transform Position {0}", transform.position.x);
     }
@@ -125,6 +132,10 @@ public class CharacterController : MonoBehaviour
 
         _gameplayInputProvider.OnStartTouch += StartTouch;
         _gameplayInputProvider.OnEndTouch += EndTouch;
+
+        _HitEvent.Subscribe(HitCharacter);
+        _GatherEvent.Subscribe(GatherObject);
+
     }
     private void OnDisable()
     {
@@ -132,6 +143,10 @@ public class CharacterController : MonoBehaviour
 
         _gameplayInputProvider.OnStartTouch -= StartTouch;
         _gameplayInputProvider.OnEndTouch -= EndTouch;
+
+        _HitEvent.Unsubscribe(HitCharacter);
+        _GatherEvent.Unsubscribe(GatherObject);
+
     }
 
     private void JumpCharacter()
@@ -142,7 +157,7 @@ public class CharacterController : MonoBehaviour
     private void MoveCharacter(Vector2 value)
     {
         // Select the correct direction of the movement
-        if (value.x < Screen.width / 2) 
+        if (value.x < Screen.width / 2)
         {
             _direction = MovementDirection.LEFT;
         }
@@ -201,5 +216,22 @@ public class CharacterController : MonoBehaviour
                 //Debug.Log("Swipe down");
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.GetComponentInParent<MoovableObject>().HitObject();
+    }
+
+    private void HitCharacter(GameEvent evt)
+    {
+
+        Debug.Log("Character hit");
+    }
+
+    private void GatherObject(GameEvent evt)
+    {
+        Debug.Log("Gathered object");
+        Debug.Log(((GatherableEvent)evt).gatheredObject.name);
     }
 }

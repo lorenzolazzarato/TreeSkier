@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a001d2d042ddea44cae6c76e0a88bca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ObjectIdContainer: {fileID: 11400000, guid: 6fa2d7f8d2c3f234fab4f000a55388d0, type: 2}
+  _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _OutOfScreenEvent: {fileID: 11400000, guid: 74b7eef65648ba346a7e446fb8b14933, type: 2}
 --- !u!1 &7219279063895836809
 GameObject:

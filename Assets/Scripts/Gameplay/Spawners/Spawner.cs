@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
 
         spawned.transform.position = _StartingSpawnLocation.transform.position;
 
-        Debug.LogFormat("Spawned Object: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
+        //Debug.LogFormat("Spawned Object: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
 
         return spawned;
     }
@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
 
         spawned.transform.position = position;
 
-        Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
+        //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }
 
     public void SpawnWithPosition(float x, float y = -1, float z = -1)
@@ -50,14 +50,14 @@ public class Spawner : MonoBehaviour
         float tempX, tempY, tempZ;
 
         tempX = x;
-        tempY  = y == -1 ? spawned.transform.position.y : y;
+        tempY = y == -1 ? spawned.transform.position.y : y;
         tempZ = z == -1 ? spawned.transform.position.z : z;
 
         Vector3 position = new Vector3(tempX, tempY, tempZ);
 
         spawned.transform.position = position;
 
-        Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
+        //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }
 
     public void InitiateSpawner()

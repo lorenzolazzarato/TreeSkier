@@ -26,6 +26,12 @@ public class BackGroundSprite : MoovableObject
     {
         base.Setup();
 
-        
+
+    }
+
+    protected override void RemoveSelf()
+    {
+        // Deactivate remove self because it is handled in the background script
+        // Because it is different from the other
     }
 }
