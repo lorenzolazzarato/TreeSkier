@@ -56,6 +56,8 @@ MonoBehaviour:
   _MaxSpeed: 0.05
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
+  _CoinIdContainer: {fileID: 11400000, guid: 4d39dbc5d02dbcc4994579983899b8cc, type: 2}
+  _BombIdContainer: {fileID: 11400000, guid: 0219032d3a6bd274ca1a14c900c0f014, type: 2}
 --- !u!61 &5629525596810780055
 BoxCollider2D:
   m_ObjectHideFlags: 0

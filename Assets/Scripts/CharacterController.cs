@@ -16,6 +16,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainer _IdProvider;
 
+    [Header("Swipe")]
+
     [SerializeField]
     private float _MaxTimeToSwipeInSeconds = 1;
 
@@ -24,6 +26,8 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField]
     private float _HorizontalDistanceForSwipe = 50;
+
+    [Header("Speed")]
 
     [SerializeField]
     private float _SlowRatio = 0.0001f;
@@ -34,11 +38,22 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _MaxSpeed = 1f;
 
+    [Header("Events")]
+
     [SerializeField]
     private IdContainerGameEvent _HitEvent;
 
     [SerializeField]
     private IdContainerGameEvent _GatherEvent;
+
+    [Header("Gatherable Containers")]
+    [SerializeField]
+    private IdContainer _CoinIdContainer;
+
+    [SerializeField]
+    private IdContainer _BombIdContainer;
+
+
 
     // Takes
     private MovementDirection _direction = MovementDirection.STILL;
@@ -229,9 +244,36 @@ public class CharacterController : MonoBehaviour
         Debug.Log("Character hit");
     }
 
+    // Function called when an object is gathered
     private void GatherObject(GameEvent evt)
     {
-        Debug.Log("Gathered object");
-        Debug.Log(((GatherableEvent)evt).gatheredObject.name);
+        //Debug.Log("Gathered object");
+        GatherableEvent gEvt = (GatherableEvent)evt;
+
+        if (gEvt != null)
+        {
+            //Debug.Log(gEvt.gatheredObject._ObjectIdContainer);
+            if (gEvt.gatheredObject == _CoinIdContainer)
+                CoinGathered();
+            else if (gEvt.gatheredObject == _BombIdContainer)
+                BombGathered();
+        }
+        else
+        {
+            Debug.Log("Event is not a gatherable event");
+            return;
+        }
+
+
+    }
+
+    private void CoinGathered()
+    {
+        Debug.Log("Coin Gathered");
+    }
+
+    private void BombGathered()
+    {
+        Debug.Log("Bomb Gathered");
     }
 }

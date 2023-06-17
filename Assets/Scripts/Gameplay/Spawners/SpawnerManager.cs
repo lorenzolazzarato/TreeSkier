@@ -19,7 +19,7 @@ public class SpawnerManager : MonoBehaviour
 
     [SerializeField]
     private int _MinTimeForSpawn;
-    
+
     [SerializeField]
     private int _MaxTimeForSpawn;
 
@@ -32,8 +32,8 @@ public class SpawnerManager : MonoBehaviour
     private void Awake()
     {
         totalProbability = 0;
-        foreach (SpawnerWithProbability spawner in _Spawners.SpawnerList) 
-        { 
+        foreach (SpawnerWithProbability spawner in _Spawners.SpawnerList)
+        {
             // Calculate the total probability
             totalProbability += spawner.Probability;
 
@@ -71,15 +71,15 @@ public class SpawnerManager : MonoBehaviour
 
         spawner.SpawnWithPosition(UnityEngine.Random.Range(-4f, 4f));
 
-        Debug.Log("Spawned something");
+        //Debug.Log("Spawned something");
 
     }
 
     // Gets the correct spawner selected from the random value passed (used when choosing what the game has to spawn)
-    private Spawner GetCorrectSpawner(int value) 
+    private Spawner GetCorrectSpawner(int value)
     {
         int currValue = 0;
-        
+
 
         foreach (SpawnerWithProbability spawner in _Spawners.SpawnerList)
         {

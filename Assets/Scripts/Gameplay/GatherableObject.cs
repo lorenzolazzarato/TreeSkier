@@ -10,7 +10,7 @@ public class GatherableObject : MoovableObject
     public override void HitObject()
     {
         base.HitObject();
-        _GatherEvent.gatheredObject = this;
+        _GatherEvent.gatheredObject = _ObjectIdContainer;
         _GatherEvent.Invoke();
     }
 }

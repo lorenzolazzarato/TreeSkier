@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1c6001d7a983942a0e4ec8c5517f5b, type: 3}
   m_Name: GatherEvent
   m_EditorClassIdentifier: 
-  idContainer: {fileID: 0}
+  idContainer: {fileID: 11400000, guid: 337800d991110a04ba4b1a1b70911526, type: 2}
   gatheredObject: {fileID: 0}
