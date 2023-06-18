@@ -53,6 +53,16 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainer _BombIdContainer;
 
+    // SPRITES
+    [Header("Sprites")]
+    [SerializeField]
+    private Sprite _RunningSprite;
+
+    [SerializeField]
+    private Sprite _OuchSprite;
+
+    private SpriteRenderer _spriteRenderer;
+
 
 
     // Takes
@@ -80,6 +90,7 @@ public class CharacterController : MonoBehaviour
     private void Start()
     {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
@@ -194,6 +205,13 @@ public class CharacterController : MonoBehaviour
         MoveCharacter(value);
         _position = value;
         _timeStart = Time.time;
+
+        // flip sprite if not facing current direction
+        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
+            _spriteRenderer.flipX = true;
+        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
+            _spriteRenderer.flipX = false;
+        }
     }
 
     private void EndTouch(Vector2 value)
@@ -240,8 +258,9 @@ public class CharacterController : MonoBehaviour
 
     private void HitCharacter(GameEvent evt)
     {
-
         Debug.Log("Character hit");
+        StartCoroutine(OuchSpriteAnimation());
+
     }
 
     // Function called when an object is gathered
@@ -275,5 +294,11 @@ public class CharacterController : MonoBehaviour
     private void BombGathered()
     {
         Debug.Log("Bomb Gathered");
+    }
+
+    IEnumerator OuchSpriteAnimation() {
+        _spriteRenderer.sprite = _OuchSprite;
+        yield return new WaitForSeconds(2);
+        _spriteRenderer.sprite = _RunningSprite;
     }
 }
