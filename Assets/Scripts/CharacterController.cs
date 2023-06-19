@@ -53,6 +53,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainer _BombIdContainer;
 
+    [SerializeField]
+    private IdContainer _FlagIdContainer;
+
     // SPRITES
     [Header("Sprites")]
     [SerializeField]

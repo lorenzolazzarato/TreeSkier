@@ -27,25 +27,39 @@ public class Spawner : MonoBehaviour
     {
         MoovableObject spawned = _poolManager.GetPoolableObject<MoovableObject>();
 
-        spawned.transform.position = _StartingSpawnLocation.transform.position;
+        if (spawned != null)
+        {
+            spawned.transform.position = _StartingSpawnLocation.transform.position;
+        }
 
         //Debug.LogFormat("Spawned Object: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
 
         return spawned;
     }
 
-    public void SpawnWithPosition(Vector3 position)
+    public bool SpawnWithPosition(Vector3 position)
     {
         MoovableObject spawned = Spawn();
 
+        if (spawned == null) 
+        {
+            return false;
+        }
+
         spawned.transform.position = position;
+        return true;
 
         //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }
 
-    public void SpawnWithPosition(float x, float y = -1, float z = -1)
+    public bool SpawnWithPosition(float x, float y = -1, float z = -1)
     {
         MoovableObject spawned = Spawn();
+
+        if (spawned == null)
+        {
+            return false;
+        }
 
         float tempX, tempY, tempZ;
 
@@ -56,6 +70,8 @@ public class Spawner : MonoBehaviour
         Vector3 position = new Vector3(tempX, tempY, tempZ);
 
         spawned.transform.position = position;
+
+        return true;
 
         //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }

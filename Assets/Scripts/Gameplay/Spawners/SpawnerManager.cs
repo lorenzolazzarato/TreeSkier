@@ -69,7 +69,10 @@ public class SpawnerManager : MonoBehaviour
 
         Spawner spawner = GetCorrectSpawner(value);
 
-        spawner.SpawnWithPosition(UnityEngine.Random.Range(-4f, 4f));
+        if(!spawner.SpawnWithPosition(UnityEngine.Random.Range(-4f, 4f)))
+        {
+            SpawnSomething();
+        }
 
         //Debug.Log("Spawned something");
 
