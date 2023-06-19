@@ -64,6 +64,11 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private Sprite _OuchSprite;
 
+    [Header("Player Lives")]
+
+    [SerializeField]
+    private int _PlayerLife = 6;
+
     private SpriteRenderer _spriteRenderer;
 
 
@@ -264,6 +269,12 @@ public class CharacterController : MonoBehaviour
         Debug.Log("Character hit");
         StartCoroutine(OuchSpriteAnimation());
 
+        // remove half heart and check game over
+        _PlayerLife -= 1;
+        if (_PlayerLife <= 0) {
+            Debug.Log("GAME OVER");
+            // TO DO: Add Event Game Over <----------------------------------------------------
+        }
     }
 
     // Function called when an object is gathered
@@ -292,6 +303,7 @@ public class CharacterController : MonoBehaviour
     private void CoinGathered()
     {
         Debug.Log("Coin Gathered");
+        ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
     }
 
     private void BombGathered()
