@@ -7,11 +7,21 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
+    [SerializeField]
+    private ChangeLivesEvent _changeLivesEvent;
+
     private TMP_Text _score;
     private HeartScript[] _healthBar;
 
+    
+
     void OnEnable() {
-        
+        _changeLivesEvent.Subscribe(OnChangeLives);
+    }
+
+    void OnDisable()
+    {
+        _changeLivesEvent.Unsubscribe(OnChangeLives);
     }
 
     void Start() {
@@ -44,5 +54,17 @@ public class UIManager : MonoBehaviour
             _healthBar[i].ChangeSprite(HeartValue.Empty);
         }
 
+    }
+
+    private void OnChangeLives(GameEvent evt) 
+    { 
+        ChangeLivesEvent changeLivesEvt = evt as ChangeLivesEvent;
+
+        Debug.LogFormat("Change Lives called - number of life: {0}", changeLivesEvt.numberOfLives);
+
+        if (changeLivesEvt != null)
+        {
+            DrawHearts(changeLivesEvt.numberOfLives);
+        }
     }
 }

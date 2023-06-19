@@ -46,6 +46,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainerGameEvent _GatherEvent;
 
+    [SerializeField]
+    private ChangeLivesEvent _changeLivesEvent;
+
     [Header("Gatherable Containers")]
     [SerializeField]
     private IdContainer _CoinIdContainer;
@@ -271,6 +274,9 @@ public class CharacterController : MonoBehaviour
 
         // remove half heart and check game over
         _PlayerLife -= 1;
+        _changeLivesEvent.numberOfLives = _PlayerLife;
+        _changeLivesEvent.Invoke();
+
         if (_PlayerLife <= 0) {
             Debug.Log("GAME OVER");
             // TO DO: Add Event Game Over <----------------------------------------------------
