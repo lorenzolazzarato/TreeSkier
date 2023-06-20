@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CoinSprite : GatherableObject
 {
+
+    [SerializeField]
+    private int _Score;
+
     protected override void Update()
     {
         base.Update();
@@ -13,5 +17,11 @@ public class CoinSprite : GatherableObject
     public override void Setup()
     {
         base.Setup();
+    }
+
+    public override void HitObject()
+    {
+        base.HitObject();
+        ScoreManager.Instance.AddScore(_Score);
     }
 }

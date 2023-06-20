@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         _score.SetText("Score: " + ScoreManager.Instance.GetScore());
-        DrawHearts(6);
+        //DrawHearts(6);
     }
 
     private void DrawHearts(float health) {

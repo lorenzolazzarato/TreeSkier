@@ -145,7 +145,7 @@ public class CharacterController : MonoBehaviour
         //Debug.Log(_xSpeed);
 
         // Translate the character by the correct amount
-        transform.Translate(_xSpeed, 0, 0);
+        transform.Translate(_xSpeed * Time.deltaTime, 0, 0);
 
 
         // Check if the character is out of the screen, in case teleport it to the other side
@@ -309,7 +309,7 @@ public class CharacterController : MonoBehaviour
     private void CoinGathered()
     {
         Debug.Log("Coin Gathered");
-        ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
+        //ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
     }
 
     private void BombGathered()

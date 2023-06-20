@@ -5,7 +5,8 @@ using UnityEngine;
 public class PoolableObject : MonoBehaviour, IMoovableObject
 {
 
-    private int _speed = 2;
+    [SerializeField]
+    private int _speed = 10;
 
     public int Speed { get => _speed; }
 

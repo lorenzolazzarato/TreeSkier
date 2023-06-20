@@ -24,4 +24,4 @@ MonoBehaviour:
   - SpawnerObject: {fileID: -2980627940623966084, guid: 619683752be23f34ea90275335b82262, type: 3}
     Probability: 5
   - SpawnerObject: {fileID: 8327422620940662468, guid: 76a34b9c578c1374688ff63047dcca26, type: 3}
-    Probability: 50
+    Probability: 5

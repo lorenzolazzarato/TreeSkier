@@ -35,7 +35,7 @@ public class MoovableObject : PoolableObject
         if (isActiveAndEnabled)
         {
             transform.Translate(Vector3.up * Time.deltaTime * Speed);
-            //Debug.Log("Debugging");
+            Debug.LogFormat("Debugging {0}", Speed);
         }
     }
 
