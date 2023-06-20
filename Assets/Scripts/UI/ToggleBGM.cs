@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class ToggleBGM : MonoBehaviour {
     Toggle m_Toggle;
 
-    void Start() {
+    void Awake() {
         //Fetch the Toggle GameObject
         m_Toggle = GetComponent<Toggle>();
+        if(!AudioSystemManager.Instance.IsBGMPlaying()) {
+            m_Toggle.isOn = false;
+        }
         //Add listener for when the state of the Toggle changes, to take action
         m_Toggle.onValueChanged.AddListener(delegate {
             ToggleValueChanged(m_Toggle);

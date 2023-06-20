@@ -816,6 +816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToggleBGM
       objectReference: {fileID: 0}
+    - target: {fileID: 5770968995798923679, guid: 34aacc5a4eea7334691dbd9ef5a40c8a, type: 3}
+      propertyPath: m_IsOn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34aacc5a4eea7334691dbd9ef5a40c8a, type: 3}
 --- !u!1 &447273860107540333 stripped
