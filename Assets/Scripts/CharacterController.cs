@@ -295,7 +295,7 @@ public class CharacterController : MonoBehaviour
             if (gEvt.gatheredObject == _CoinIdContainer)
                 CoinGathered();
             else if (gEvt.gatheredObject == _BombIdContainer)
-                BombGathered();
+                BombGathered(evt);
         }
         else
         {
@@ -312,9 +312,10 @@ public class CharacterController : MonoBehaviour
         ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
     }
 
-    private void BombGathered()
+    private void BombGathered(GameEvent evt)
     {
         Debug.Log("Bomb Gathered");
+        HitCharacter(evt);
     }
 
     IEnumerator OuchSpriteAnimation() {
