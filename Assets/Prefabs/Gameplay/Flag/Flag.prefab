@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20c726b2c63dd44b97ab897b735f1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 10
   _ObjectIdContainer: {fileID: 11400000, guid: 8e93025e09b8e2448a3c3a3f5255e9a9, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}

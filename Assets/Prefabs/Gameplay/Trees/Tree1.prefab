@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e16244178c5b1459a5f06be15123e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 10
   _ObjectIdContainer: {fileID: 11400000, guid: cb185a0711da5e8418715da5323d47fd, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}

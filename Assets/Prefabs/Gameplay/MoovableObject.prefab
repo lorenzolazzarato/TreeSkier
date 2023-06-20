@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a0e14944fe4af4c947e84de8cdec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
   _ObjectIdContainer: {fileID: 0}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}

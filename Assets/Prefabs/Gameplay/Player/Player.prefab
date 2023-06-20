@@ -51,9 +51,9 @@ MonoBehaviour:
   _MaxTimeToSwipeInSeconds: 1
   _VerticalDistanceForSwipe: 50
   _HorizontalDistanceForSwipe: 50
-  _SlowRatio: 0.0002
-  _AccelerationRatio: 0.0002
-  _MaxSpeed: 0.05
+  _SlowRatio: 0.3
+  _AccelerationRatio: 0.2
+  _MaxSpeed: 10
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
   _changeLivesEvent: {fileID: 11400000, guid: 9efa6eb12e562524880617418cf739c0, type: 2}

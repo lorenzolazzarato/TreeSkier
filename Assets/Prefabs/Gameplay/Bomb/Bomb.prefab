@@ -216,9 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f87056dc7930634684575e1d507d305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 10
   _ObjectIdContainer: {fileID: 11400000, guid: 0219032d3a6bd274ca1a14c900c0f014, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
+  _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
 --- !u!4 &761714397235159742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6649292101444652352, guid: f76151621aea8cb49bca995284b6c772, type: 3}
