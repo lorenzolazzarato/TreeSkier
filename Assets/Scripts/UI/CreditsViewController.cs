@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionsViewController : MonoBehaviour
+public class CreditsViewController : MonoBehaviour
 {
-    public void CloseOptionsView()
+    public void CloseCreditsView()
     {
         Destroy(gameObject);
     }
