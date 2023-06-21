@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 24ca41cb599aff9469c986a3a0691575
+=======
+<<<<<<<< HEAD:Assets/TextMesh Pro/Fonts/Boba Milky SDF.asset.meta
+guid: d3bc82d3038f7cb4783fe514b57df6a6
+========
+guid: c893bf5cad32d31458994f3e92c809bc
+>>>>>>>> game:Assets/Unity.VisualScripting.Generated/VisualScripting.Core/Variables/Resources/ApplicationVariables.asset.meta
+>>>>>>> game
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

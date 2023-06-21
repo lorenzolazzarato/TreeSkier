@@ -6,43 +6,68 @@ using UnityEngine.InputSystem;
 public class GameplayInputProvider : InputProvider
 {
     #region Delegate
-    public OnFloatDelegate OnMove;
-    public OnVoidDelegate OnJump;
+    public OnVector2Delegate OnMove;
+    public OnVector2Delegate OnStartTouch;
+    public OnVector2Delegate OnEndTouch;
     #endregion
 
     [Header("Gameplay")]
     [SerializeField]
     private InputActionReference _Move;
 
+
     [SerializeField]
-    private InputActionReference _Jump;
+    private InputActionReference _IsTouching;
+
+
+    private Vector2 _positionTouch;
 
     private void OnEnable()
     {
         _Move.action.Enable();
-        _Jump.action.Enable();
+        _IsTouching.action.Enable();
 
         _Move.action.performed += MovePerfomed;
-        _Jump.action.performed += JumpPerfomed;
+        _IsTouching.action.started += StartTouch;
+        _IsTouching.action.canceled += EndTouch;
     }
 
     private void OnDisable()
     {
         _Move.action.Disable();
-        _Jump.action.Disable();
+        _IsTouching.action.Disable();
+        
 
         _Move.action.performed -= MovePerfomed;
-        _Jump.action.performed -= JumpPerfomed;
+
+        _IsTouching.action.started -= StartTouch;
+        _IsTouching.action.canceled -= EndTouch;
     }
 
     private void MovePerfomed(InputAction.CallbackContext obj)
     {
-        float value = obj.action.ReadValue<float>();
+
+
+        Vector2 value = obj.action.ReadValue<Vector2>();
+        _positionTouch = value;
+
         OnMove?.Invoke(value);
     }
 
-    private void JumpPerfomed(InputAction.CallbackContext obj)
+
+    private void StartTouch(InputAction.CallbackContext obj)
     {
-        OnJump?.Invoke();
+        //Debug.Log("Started touch");
+
+        //Vector2 value = obj.action.ReadValue<Vector2>();
+        OnStartTouch?.Invoke(_positionTouch);
+    }
+
+    private void EndTouch(InputAction.CallbackContext obj)
+    {
+        //Debug.Log("Ended touch");
+
+        //Vector2 value = obj.action.ReadValue<Vector2>();
+        OnEndTouch?.Invoke(_positionTouch);
     }
 }

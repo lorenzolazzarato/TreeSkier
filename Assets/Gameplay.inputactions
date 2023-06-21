@@ -1,0 +1,54 @@
+{
+    "name": "Gameplay",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "c2e73286-c1c9-41cb-9eff-fe56f9d9c1b3",
+            "actions": [
+                {
+                    "name": "PrimaryTouch",
+                    "type": "Value",
+                    "id": "b1a3a4c3-53dc-4d71-ba84-1bf3bf0d7d56",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PrimaryContact",
+                    "type": "Button",
+                    "id": "bb297bbd-00b0-4733-b952-b9fd35b9221e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "227ebe30-eb25-4d3d-9398-64c01e71f72e",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50b1a7ad-a215-4665-aef6-8a489189b2ca",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
