@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlagSprite : GatherableObject
+public class FlagScript : GatherableObject
 {
     public override void Setup() 
     { 

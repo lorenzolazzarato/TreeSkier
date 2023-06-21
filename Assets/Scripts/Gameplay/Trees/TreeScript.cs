@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeSprite : HittableObject
+public class TreeScript : HittableObject
 {
 
     // Update is called once per frame

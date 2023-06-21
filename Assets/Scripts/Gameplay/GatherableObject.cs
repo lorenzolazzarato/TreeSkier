@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatherableObject : MoovableObject
+public class GatherableObject : MovableObject
 {
     [SerializeField]
     private GatherableEvent _GatherEvent;

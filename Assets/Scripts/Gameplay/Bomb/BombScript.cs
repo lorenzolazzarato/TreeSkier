@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombSprite : GatherableObject
+public class BombScript : GatherableObject
 {
 
     [SerializeField]
@@ -22,7 +22,7 @@ public class BombSprite : GatherableObject
     public override void HitObject()
     {
         base.HitObject();
-        // Audiomanager.playSound(this.containerId);
+        AudioSystemManager.Instance.PlaySoundEffect(_ObjectIdContainer);
         _HitEvent.Invoke();
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGroundSprite : MoovableObject
+public class BackgroundScript : MovableObject
 {
 
     [SerializeField]

@@ -23,11 +23,11 @@ public class Spawner : MonoBehaviour
     }
 
     [ContextMenu("Spawn")]
-    public virtual MoovableObject Spawn()
+    public virtual MovableObject Spawn()
     {
         Debug.LogFormat("Spawned {0} from normal spawn", _SpriteIdContainer);
 
-        MoovableObject spawned = _poolManager.GetPoolableObject<MoovableObject>();
+        MovableObject spawned = _poolManager.GetPoolableObject<MovableObject>();
 
         if (spawned != null)
         {
@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
 
     public virtual bool SpawnWithPosition(Vector3 position)
     {
-        MoovableObject spawned = Spawn();
+        MovableObject spawned = Spawn();
 
         if (spawned == null) 
         {
@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
     public virtual bool SpawnWithPosition(float x, float y = -1, float z = -1)
     {
         
-        MoovableObject spawned = Spawn();
+        MovableObject spawned = Spawn();
 
         if (spawned == null)
         {

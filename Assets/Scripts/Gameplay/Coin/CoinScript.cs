@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSprite : GatherableObject
+public class CoinScript : GatherableObject
 {
 
     [SerializeField]
@@ -23,5 +23,6 @@ public class CoinSprite : GatherableObject
     {
         base.HitObject();
         ScoreManager.Instance.AddScore(_Score);
+        AudioSystemManager.Instance.PlaySoundEffect(_ObjectIdContainer);
     }
 }

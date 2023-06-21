@@ -220,7 +220,7 @@ MonoBehaviour:
   _ObjectIdContainer: {fileID: 11400000, guid: 4d39dbc5d02dbcc4994579983899b8cc, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
-  _Score: 0
+  _Score: 100
 --- !u!4 &8048259784967865524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6649292101444652352, guid: f76151621aea8cb49bca995284b6c772, type: 3}

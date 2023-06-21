@@ -264,7 +264,7 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponentInParent<MoovableObject>().HitObject();
+        collision.GetComponentInParent<MovableObject>().HitObject();
     }
 
     private void HitCharacter(GameEvent evt)

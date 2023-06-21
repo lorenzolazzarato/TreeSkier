@@ -15,24 +15,24 @@ public class TreesSpawner : Spawner
     protected PoolManager _poolManagerTree3;
 
 
-    public override MoovableObject Spawn()
+    public override MovableObject Spawn()
     {
         //Debug.Log("spawned tree from tree spawner");
-        MoovableObject spawned = null;
+        MovableObject spawned = null;
         switch (UnityEngine.Random.Range(1, 3))
         {
             case 1:
-                spawned = _poolManager.GetPoolableObject<MoovableObject>();
+                spawned = _poolManager.GetPoolableObject<MovableObject>();
                 break;
 
 
             case 2:
-                spawned = _poolManagerTree2.GetPoolableObject<MoovableObject>();
+                spawned = _poolManagerTree2.GetPoolableObject<MovableObject>();
                 break;
 
 
             case 3:
-                spawned = _poolManagerTree3.GetPoolableObject<MoovableObject>();
+                spawned = _poolManagerTree3.GetPoolableObject<MovableObject>();
                 break;
 
             default:

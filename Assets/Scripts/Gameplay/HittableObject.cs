@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HittableObject : MoovableObject
+public class HittableObject : MovableObject
 {
     [SerializeField]
     private IdContainerGameEvent _HitEvent;

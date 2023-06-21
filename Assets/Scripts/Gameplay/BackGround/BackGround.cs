@@ -21,8 +21,8 @@ public class BackGround : MonoBehaviour
     private float _spriteHeight;
 
     // We use three background for safety, two should be enough
-    BackGroundSprite _bgSprite;
-    Queue<BackGroundSprite> _queue;
+    BackgroundScript _bgSprite;
+    Queue<BackgroundScript> _queue;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -40,9 +40,9 @@ public class BackGround : MonoBehaviour
         _poolManager = PoolingSystem.Instance.getPoolManagerInstance(_BackGroundIdContainer);
 
         // Create a queue to handle the background sprite
-        _queue = new Queue<BackGroundSprite>();
+        _queue = new Queue<BackgroundScript>();
 
-        _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
+        _bgSprite = _poolManager.GetPoolableObject<BackgroundScript>();
         
         _spriteHeight = _bgSprite.GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
 
@@ -55,7 +55,7 @@ public class BackGround : MonoBehaviour
         // Create 3 background sprite and move the in the right position
         for (int i = 1; i > -2; --i)
         {
-            _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
+            _bgSprite = _poolManager.GetPoolableObject<BackgroundScript>();
 
             _bgSprite.transform.position = new Vector3(_StartingSpawnLocation.transform.position.x,
             _StartingSpawnLocation.transform.position.y + _spriteHeight * i,
@@ -75,7 +75,7 @@ public class BackGround : MonoBehaviour
         _poolManager.ReturnPoolableObject(_queue.Dequeue());
 
         // Create another bg at the bottom of the last one
-        BackGroundSprite bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
+        BackgroundScript bgSprite = _poolManager.GetPoolableObject<BackgroundScript>();
 
         bgSprite.transform.position = new Vector3(_bgSprite.transform.position.x,
             _bgSprite.transform.position.y - _spriteHeight,
