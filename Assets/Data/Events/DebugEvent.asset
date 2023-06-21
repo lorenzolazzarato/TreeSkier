@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b36141cd494b8478fd70b1902d0d8a, type: 3}
   m_Name: DebugEvent
   m_EditorClassIdentifier: 
-  idContainer: {fileID: 0}
+  idContainer: {fileID: 11400000, guid: c794d36ade225bf43a89096cbdddb6eb, type: 2}

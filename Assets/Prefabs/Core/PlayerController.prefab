@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7beda089bcde1488bedf1c2c3b663c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Priority: 0
   _ProviderList:
   - {fileID: 1274629025164210719}
   - {fileID: 1274629023895504062}
@@ -152,5 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Id: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
-  _Move: {fileID: -6269801820462639491, guid: 6cfab8ada81cecb49b8a2e2313381617, type: 3}
+  _Move: {fileID: -960308170740688577, guid: 7c06c386e6de5434ca03843f06d169a7, type: 3}
   _Jump: {fileID: -3157138534395577827, guid: 6cfab8ada81cecb49b8a2e2313381617, type: 3}

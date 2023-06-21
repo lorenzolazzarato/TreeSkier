@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1c6001d7a983942a0e4ec8c5517f5b, type: 3}
+  m_Name: GatherEvent
+  m_EditorClassIdentifier: 
+  idContainer: {fileID: 11400000, guid: 337800d991110a04ba4b1a1b70911526, type: 2}
+  gatheredObject: {fileID: 0}
