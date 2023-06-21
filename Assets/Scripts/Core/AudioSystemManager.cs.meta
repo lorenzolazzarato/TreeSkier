@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Core/AudioSystemManager.cs.meta
 guid: 6ea5f042c3484974190374989167685a
-========
-guid: 7b78fffd7f13d8a498ca8a63835efd58
->>>>>>>> game:Assets/Scripts/IMoovableObject.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

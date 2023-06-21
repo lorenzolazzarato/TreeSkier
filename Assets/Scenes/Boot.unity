@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,10 +182,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
-    - target: {fileID: 1274629025164210719, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
-      propertyPath: _IsTouching
-      value: 
-      objectReference: {fileID: 5167243174165612798, guid: 7c06c386e6de5434ca03843f06d169a7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
 --- !u!1 &273225831
@@ -374,10 +370,6 @@ PrefabInstance:
     - target: {fileID: 7117900036990592966, guid: e2974217d334dad4a8f3dece486eefcb, type: 3}
       propertyPath: _Priority
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7117900036990592966, guid: e2974217d334dad4a8f3dece486eefcb, type: 3}
-      propertyPath: _OnStartGameplayEventName
-      value: ON_GAMEPLAY_START
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2974217d334dad4a8f3dece486eefcb, type: 3}

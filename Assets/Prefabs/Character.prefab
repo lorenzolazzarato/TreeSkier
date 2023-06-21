@@ -45,9 +45,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
-  _MaxTimeToSwipeInSeconds: 1
-  _VerticalDistanceForSwipe: 50
-  _HorizontalDistanceForSwipe: 50
-  _SlowRatio: 0.001
-  _AccelerationRatio: 0.001
-  _MaxSpeed: 1

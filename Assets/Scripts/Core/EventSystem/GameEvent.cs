@@ -8,28 +8,23 @@ public class GameEvent : ScriptableObject
 {
     private event Action<GameEvent> _onEventTriggered;
 
-    public void Invoke()
-    {
+    public void Invoke() {
         _onEventTriggered?.Invoke(this);
     }
-    public void Subscribe(Action<GameEvent> cbk)
-    {
+    public void Subscribe(Action<GameEvent> cbk) {
         _onEventTriggered += cbk;
         GameEventSystem.Instance.addHotEvent(this);
     }
-    public void Unsubscribe(Action<GameEvent> cbk)
-    {
+
+    public void Unsubscribe(Action<GameEvent> cbk) {
         _onEventTriggered -= cbk;
-        if (_onEventTriggered == null)
-        {
+        if(_onEventTriggered == null) {
             GameEventSystem.Instance.removeHotEvent(this);
         }
     }
 
-    public void Clear()
-    {
-        foreach (Delegate del in _onEventTriggered.GetInvocationList())
-        {
+    public void Clear() {
+        foreach(Delegate del in _onEventTriggered.GetInvocationList()) {
             _onEventTriggered -= (Action<GameEvent>)del;
         }
     }
