@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7017808341531924894}
   - component: {fileID: 5055021476016111654}
   m_Layer: 0
-  m_Name: TreeSpawner1
+  m_Name: TreeSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _StartingSpawnLocation: {fileID: 2133252820343675481, guid: 82a5ba4649594ef429a25aaf1fb2fa8c, type: 3}
   _SpriteIdContainer: {fileID: 11400000, guid: cb185a0711da5e8418715da5323d47fd, type: 2}
+  _TreeIdContainer2: {fileID: 11400000, guid: 8a8c062a195d4cc4faa126ee5e00d796, type: 2}
+  _TreeIdContainer3: {fileID: 11400000, guid: a1721a8001f05c54c87e03a747f0c2f0, type: 2}

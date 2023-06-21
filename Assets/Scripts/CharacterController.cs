@@ -269,7 +269,7 @@ public class CharacterController : MonoBehaviour
 
     private void HitCharacter(GameEvent evt)
     {
-        Debug.Log("Character hit");
+        //Debug.Log("Character hit");
         StartCoroutine(OuchSpriteAnimation());
 
         // remove half heart and check game over
@@ -308,13 +308,13 @@ public class CharacterController : MonoBehaviour
 
     private void CoinGathered()
     {
-        Debug.Log("Coin Gathered");
+        //Debug.Log("Coin Gathered");
         //ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
     }
 
     private void BombGathered(GameEvent evt)
     {
-        Debug.Log("Bomb Gathered");
+        //Debug.Log("Bomb Gathered");
         HitCharacter(evt);
     }
 

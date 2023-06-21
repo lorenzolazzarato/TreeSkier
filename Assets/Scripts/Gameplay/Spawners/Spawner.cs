@@ -23,8 +23,10 @@ public class Spawner : MonoBehaviour
     }
 
     [ContextMenu("Spawn")]
-    public MoovableObject Spawn()
+    public virtual MoovableObject Spawn()
     {
+        Debug.LogFormat("Spawned {0} from normal spawn", _SpriteIdContainer);
+
         MoovableObject spawned = _poolManager.GetPoolableObject<MoovableObject>();
 
         if (spawned != null)
@@ -37,7 +39,7 @@ public class Spawner : MonoBehaviour
         return spawned;
     }
 
-    public bool SpawnWithPosition(Vector3 position)
+    public virtual bool SpawnWithPosition(Vector3 position)
     {
         MoovableObject spawned = Spawn();
 
@@ -52,8 +54,9 @@ public class Spawner : MonoBehaviour
         //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }
 
-    public bool SpawnWithPosition(float x, float y = -1, float z = -1)
+    public virtual bool SpawnWithPosition(float x, float y = -1, float z = -1)
     {
+        
         MoovableObject spawned = Spawn();
 
         if (spawned == null)
@@ -71,12 +74,13 @@ public class Spawner : MonoBehaviour
 
         spawned.transform.position = position;
 
+        //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
+        
         return true;
 
-        //Debug.LogFormat("Spawned Object moved to: {0}, {1}, {2}", spawned.transform.position.x, spawned.transform.position.y, spawned.transform.position.z);
     }
 
-    public void InitiateSpawner()
+    public virtual void InitiateSpawner()
     {
         _poolManager = PoolingSystem.Instance.getPoolManagerInstance(_SpriteIdContainer);
     }

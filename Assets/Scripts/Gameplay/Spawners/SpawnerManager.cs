@@ -71,7 +71,7 @@ public class SpawnerManager : MonoBehaviour
 
         if(!spawner.SpawnWithPosition(UnityEngine.Random.Range(-4f, 4f)))
         {
-            SpawnSomething();
+            //SpawnSomething();
         }
 
         //Debug.Log("Spawned something");

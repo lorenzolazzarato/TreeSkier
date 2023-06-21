@@ -35,13 +35,13 @@ public class MoovableObject : PoolableObject
         if (isActiveAndEnabled)
         {
             transform.Translate(Vector3.up * Time.deltaTime * Speed);
-            Debug.LogFormat("Debugging {0}", Speed);
         }
     }
 
     public override void Setup()
     {
         base.Setup();
+
 
         width = GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.x;
         height = GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;

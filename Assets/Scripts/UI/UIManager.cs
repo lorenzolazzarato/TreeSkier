@@ -28,12 +28,13 @@ public class UIManager : MonoBehaviour
         _score = GetComponentInChildren<TMP_Text>();
         //populate health bar list
         _healthBar = GetComponentsInChildren<HeartScript>();
-        Debug.Log("List size is " + _healthBar.Length);
+        //Debug.Log("List size is " + _healthBar.Length);
     }
     // Update is called once per frame
     void Update()
     {
         _score.SetText("Score: " + ScoreManager.Instance.GetScore());
+        //DrawHearts(6);
     }
 
     private void DrawHearts(float health) {
@@ -59,7 +60,7 @@ public class UIManager : MonoBehaviour
     { 
         ChangeLivesEvent changeLivesEvt = evt as ChangeLivesEvent;
 
-        Debug.LogFormat("Change Lives called - number of life: {0}", changeLivesEvt.numberOfLives);
+        //Debug.LogFormat("Change Lives called - number of life: {0}", changeLivesEvt.numberOfLives);
 
         if (changeLivesEvt != null)
         {
