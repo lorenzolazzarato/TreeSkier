@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Images.meta
+guid: af62a1454be302c469fa901a3906aa15
+========
+guid: fa8e58f22cf3e4b459b5b98600a705d8
+>>>>>>>> game:Assets/Audio.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

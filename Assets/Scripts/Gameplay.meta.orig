@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TextMesh Pro/Documentation.meta
+guid: 8e7e8f5a82a3a134e91c54efd2274ea9
+========
+guid: 6fdd04fc8d0c7c84b8b28a8ed0dfa4bc
+>>>>>>>> game:Assets/Scripts/Gameplay.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

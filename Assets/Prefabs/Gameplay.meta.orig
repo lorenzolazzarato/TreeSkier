@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Music.meta
+guid: 4d62b20328c323f49b7fcb2dc4e78d10
+========
+guid: 08c4e9b6d8c47334984992556c134164
+>>>>>>>> game:Assets/Prefabs/Gameplay.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
