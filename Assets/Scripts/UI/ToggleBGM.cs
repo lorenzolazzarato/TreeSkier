@@ -10,7 +10,7 @@ public class ToggleBGM : MonoBehaviour {
     void Awake() {
         //Fetch the Toggle GameObject
         m_Toggle = GetComponent<Toggle>();
-        if(!AudioSystemManager.Instance.IsBGMPlaying()) {
+        if(!AudioManager.Instance.IsBGMPlaying()) {
             m_Toggle.isOn = false;
         }
         //Add listener for when the state of the Toggle changes, to take action
@@ -21,6 +21,6 @@ public class ToggleBGM : MonoBehaviour {
 
     //Output the new state of the Toggle into Text
     void ToggleValueChanged(Toggle change) {
-        AudioSystemManager.Instance.ToggleBGM();
+        AudioManager.Instance.ToggleBGM();
     }
 }

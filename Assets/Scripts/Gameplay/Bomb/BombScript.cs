@@ -22,7 +22,7 @@ public class BombScript : GatherableObject
     public override void HitObject()
     {
         base.HitObject();
-        AudioSystemManager.Instance.PlaySoundEffect(_ObjectIdContainer);
+        AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
         _HitEvent.Invoke();
     }
 

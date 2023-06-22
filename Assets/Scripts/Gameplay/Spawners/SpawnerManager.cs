@@ -18,10 +18,10 @@ public class SpawnerManager : MonoBehaviour
     private SpawnersList _Spawners;
 
     [SerializeField]
-    private int _MinTimeForSpawn;
+    private float _MinTimeForSpawn;
 
     [SerializeField]
-    private int _MaxTimeForSpawn;
+    private float _MaxTimeForSpawn;
 
     // If the spawner manager can spawn the next object
     private bool _canSpawn = true;

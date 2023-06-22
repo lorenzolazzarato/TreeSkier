@@ -23,6 +23,6 @@ public class CoinScript : GatherableObject
     {
         base.HitObject();
         ScoreManager.Instance.AddScore(_Score);
-        AudioSystemManager.Instance.PlaySoundEffect(_ObjectIdContainer);
+        AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
     }
 }

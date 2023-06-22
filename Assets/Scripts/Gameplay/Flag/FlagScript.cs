@@ -15,5 +15,10 @@ public class FlagScript : GatherableObject
         base.Update();
     }
 
+    public override void HitObject() {
+        base.HitObject();
+        ScoreManager.Instance.SetMultiplier();
+        AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
+    }
 
 }

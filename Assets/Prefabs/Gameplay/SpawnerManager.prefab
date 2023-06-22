@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Spawners: {fileID: 11400000, guid: 1229e7d290d3fc647803ebdbb3a9d653, type: 2}
-  _MinTimeForSpawn: 1
-  _MaxTimeForSpawn: 5
+  _MinTimeForSpawn: 0.3
+  _MaxTimeForSpawn: 1

@@ -30,7 +30,11 @@ public class ScoreManager : MonoBehaviour
         return _score;
     }
 
-    IEnumerator SetMultiplier() {
+    public void SetMultiplier() {
+        StartCoroutine(SetMultiplierCO());
+    }
+
+    IEnumerator SetMultiplierCO() {
         _multiplier = 2;
         yield return new WaitForSeconds(10);
         _multiplier = 1;

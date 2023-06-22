@@ -170,7 +170,7 @@ public class CharacterController : MonoBehaviour
         _gameplayInputProvider.OnStartTouch += StartTouch;
         _gameplayInputProvider.OnEndTouch += EndTouch;
 
-        _HitEvent.Subscribe(HitCharacter);
+        _HitEvent.Subscribe(CharacterHit);
         _GatherEvent.Subscribe(GatherObject);
 
     }
@@ -181,7 +181,7 @@ public class CharacterController : MonoBehaviour
         _gameplayInputProvider.OnStartTouch -= StartTouch;
         _gameplayInputProvider.OnEndTouch -= EndTouch;
 
-        _HitEvent.Unsubscribe(HitCharacter);
+        _HitEvent.Unsubscribe(CharacterHit);
         _GatherEvent.Unsubscribe(GatherObject);
 
     }
@@ -267,7 +267,8 @@ public class CharacterController : MonoBehaviour
         collision.GetComponentInParent<MovableObject>().HitObject();
     }
 
-    private void HitCharacter(GameEvent evt)
+    // called when the player takes damage (tree, bomb, failed jump etc)
+    private void CharacterHit(GameEvent evt)
     {
         //Debug.Log("Character hit");
         StartCoroutine(OuchSpriteAnimation());
@@ -315,7 +316,7 @@ public class CharacterController : MonoBehaviour
     private void BombGathered(GameEvent evt)
     {
         //Debug.Log("Bomb Gathered");
-        HitCharacter(evt);
+        //CharacterHit(evt);
     }
 
     IEnumerator OuchSpriteAnimation() {
