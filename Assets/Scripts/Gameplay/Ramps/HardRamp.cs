@@ -7,6 +7,7 @@ public class HardRamp : Ramp
     public override void Setup()
     {
         base.Setup();
+        _difficulty = 3;
     }
 
     protected override void Update()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HittableObject : MoovableObject
 {
     [SerializeField]
-    private IdContainerGameEvent _HitEvent;
+    protected IdContainerGameEvent _HitEvent;
 
     public override void HitObject()
     {

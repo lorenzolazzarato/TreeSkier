@@ -181,4 +181,4 @@ MonoBehaviour:
   _speed: 10
   _ObjectIdContainer: {fileID: 11400000, guid: 951bd50e6889a2d4794b9cbecaa5adfe, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
-  _HitEvent: {fileID: 0}
+  _HitEvent: {fileID: 11400000, guid: 47b48c80f7f7e7c4c8fae492e3140904, type: 2}
