@@ -49,6 +49,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private ChangeLivesEvent _changeLivesEvent;
 
+    [SerializeField]
+    private IdContainerGameEvent _JumpEndEvent;
+
     [Header("Gatherable Containers")]
     [SerializeField]
     private IdContainer _CoinIdContainer;
@@ -71,6 +74,11 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField]
     private int _PlayerLife = 6;
+
+    [Header("Jump Controller")]
+
+    [SerializeField]
+    private JumpController _JumpController;
 
     private SpriteRenderer _spriteRenderer;
 
@@ -172,6 +180,7 @@ public class CharacterController : MonoBehaviour
 
         _HitEvent.Subscribe(HitCharacter);
         _GatherEvent.Subscribe(GatherObject);
+        _JumpEndEvent.Subscribe(OnJumpEnd);
 
     }
     private void OnDisable()
@@ -184,11 +193,17 @@ public class CharacterController : MonoBehaviour
         _HitEvent.Unsubscribe(HitCharacter);
         _GatherEvent.Unsubscribe(GatherObject);
 
+        _JumpEndEvent.Unsubscribe(OnJumpEnd);
+
     }
 
     private void JumpCharacter()
     {
         Debug.Log("JUMP");
+
+        gameObject.layer = LayerMask.NameToLayer("Air");
+
+        _JumpController.StartJump(1);
     }
 
     private void MoveCharacter(Vector2 value)
@@ -316,6 +331,12 @@ public class CharacterController : MonoBehaviour
     {
         //Debug.Log("Bomb Gathered");
         HitCharacter(evt);
+    }
+
+    private void OnJumpEnd(GameEvent evt)
+    {
+        Debug.Log("Jump ended from player controller");
+        gameObject.layer = LayerMask.NameToLayer("Ground-Air");
     }
 
     IEnumerator OuchSpriteAnimation() {

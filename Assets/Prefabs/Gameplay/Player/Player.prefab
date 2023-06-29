@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5764347161440750338}
   - component: {fileID: 5629525596810780055}
   - component: {fileID: 3615789120543624423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,12 +57,14 @@ MonoBehaviour:
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
   _changeLivesEvent: {fileID: 11400000, guid: 9efa6eb12e562524880617418cf739c0, type: 2}
+  _JumpEndEvent: {fileID: 11400000, guid: c0c9b407da0bb454c8dbeac900c9521a, type: 2}
   _CoinIdContainer: {fileID: 11400000, guid: 4d39dbc5d02dbcc4994579983899b8cc, type: 2}
   _BombIdContainer: {fileID: 11400000, guid: 0219032d3a6bd274ca1a14c900c0f014, type: 2}
   _FlagIdContainer: {fileID: 11400000, guid: 8e93025e09b8e2448a3c3a3f5255e9a9, type: 2}
   _RunningSprite: {fileID: 0}
   _OuchSprite: {fileID: 0}
   _PlayerLife: 6
+  _JumpController: {fileID: 0}
 --- !u!61 &5629525596810780055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7627014771504281033}
   - component: {fileID: 683665790995741736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stickman
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Ramp : HittableObject
 {
+    // 0 = nothing
+    // 1 = easy
+    // 2 = medium
+    // 3 = hard
     protected int _difficulty = 0;
     protected override void Update()
     {

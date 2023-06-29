@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5882161336610709388
+--- !u!1 &6500101466352939798
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6649292101444652352}
-  - component: {fileID: -3788898169177920946}
-  m_Layer: 6
-  m_Name: MoovableObject
+  - component: {fileID: 3878921886047855273}
+  - component: {fileID: 8268681097825696393}
+  m_Layer: 0
+  m_Name: JumpController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6649292101444652352
+--- !u!4 &3878921886047855273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5882161336610709388}
+  m_GameObject: {fileID: 6500101466352939798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,18 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3788898169177920946
+--- !u!114 &8268681097825696393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5882161336610709388}
+  m_GameObject: {fileID: 6500101466352939798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12a0e14944fe4af4c947e84de8cdec92, type: 3}
+  m_Script: {fileID: 11500000, guid: e6be0fffb89156c41ba691eb9bb49b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
-  _ObjectIdContainer: {fileID: 0}
-  _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
+  _TimeForJump: 5
+  _TimeDifferenceForDifficulty: 0.5
+  _MinTimeJump: 0.5
+  _MaxTimeJump: 10
+  _TimeScaleDuringJump: 0.5
+  _JumpStartEvent: {fileID: 11400000, guid: dbd0c37b77c149846a9e6a1d6aba3845, type: 2}
+  _JumpEndEvent: {fileID: 11400000, guid: c0c9b407da0bb454c8dbeac900c9521a, type: 2}
