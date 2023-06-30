@@ -249,7 +249,7 @@ MonoBehaviour:
   _EffectsSource: {fileID: 1299190039}
   _CoinSound: {fileID: 8300000, guid: 30629791a7810424aa14659092f8f0d9, type: 3}
   _BombSound: {fileID: 8300000, guid: fa3a6a2425d553649ae187e1159328b7, type: 3}
-  _TreeSound: {fileID: 8300000, guid: 06cfe0d6d350df34996421ae5076270e, type: 3}
+  _TreeSound: {fileID: 8300000, guid: 1d0a572e674033d4aae609d1945adf2d, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1285,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1c152a42e4d04884592b4431d5e34a42, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.509
+  m_Volume: 0.158
   m_Pitch: 1
   Loop: 1
   Mute: 0
