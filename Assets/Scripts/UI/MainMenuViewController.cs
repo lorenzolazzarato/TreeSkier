@@ -27,7 +27,8 @@ public class MainMenuViewController : MonoBehaviour
 
     public void OpenCredits()
     {
-
+        if (_creditsViewController) return;
+        _creditsViewController = Instantiate(_CreditsViewPrefab);
     }
 
     public void QuitGame()
