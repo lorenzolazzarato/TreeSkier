@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour {
     public bool AreEffectsPlaying() {
         return _AreEffectsPlaying;
     }
-
+    
     public void PlaySoundEffect(IdContainer id) {
         switch(id.Id) {
             case "bomb":
@@ -56,6 +56,9 @@ public class AudioManager : MonoBehaviour {
                 break;
             case "coin":
                 _EffectsSource.PlayOneShot(_CoinSound);
+                break;
+            case "tree1": case "tree2": case "tree3":
+                _EffectsSource.PlayOneShot(_TreeSound);
                 break;
         }
     }

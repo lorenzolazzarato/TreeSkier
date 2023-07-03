@@ -16,4 +16,9 @@ public class TreeScript : HittableObject
     {
         base.Setup();
     }
+
+    public override void HitObject() {
+        base.HitObject();
+        AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
+    }
 }
