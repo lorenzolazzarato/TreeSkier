@@ -49,5 +49,5 @@ MonoBehaviour:
   _MinTimeJump: 0.5
   _MaxTimeJump: 10
   _TimeScaleDuringJump: 0.5
-  _JumpStartEvent: {fileID: 11400000, guid: dbd0c37b77c149846a9e6a1d6aba3845, type: 2}
-  _JumpEndEvent: {fileID: 11400000, guid: c0c9b407da0bb454c8dbeac900c9521a, type: 2}
+  _JumpMinigameStartEvent: {fileID: 11400000, guid: dbd0c37b77c149846a9e6a1d6aba3845, type: 2}
+  _JumpMinigameEndEvent: {fileID: 11400000, guid: c0c9b407da0bb454c8dbeac900c9521a, type: 2}

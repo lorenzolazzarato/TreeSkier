@@ -47,10 +47,13 @@ public class CharacterController : MonoBehaviour
     private IdContainerGameEvent _GatherEvent;
 
     [SerializeField]
-    private ChangeLivesEvent _changeLivesEvent;
+    private ChangeLivesEvent _ChangeLivesEvent;
 
     [SerializeField]
     private IdContainerGameEvent _JumpEndEvent;
+
+    [SerializeField]
+    private RampHitEvent _RampHitEvent;
 
     [Header("Gatherable Containers")]
     [SerializeField]
@@ -82,6 +85,12 @@ public class CharacterController : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    [Header("Jump attributes")]
+
+    [Tooltip("Maximum time the player has to jump when encountering a ramp")]
+    [SerializeField]
+    private float _JumpAcceptanceDuration = 1;
+
 
 
     // Takes
@@ -100,6 +109,14 @@ public class CharacterController : MonoBehaviour
 
     // Need the camera to calculate where the touch is
     private ICinemachineCamera _camera;
+
+    // Variable used to handle the minigame start
+    private bool _canMinigameStart = false;
+
+    private bool _canJump = true;
+
+    private int _jumpDifficulty = 0;
+
 
     private void Awake()
     {
@@ -181,6 +198,7 @@ public class CharacterController : MonoBehaviour
         _HitEvent.Subscribe(HitCharacter);
         _GatherEvent.Subscribe(GatherObject);
         _JumpEndEvent.Subscribe(OnJumpEnd);
+        _RampHitEvent.Subscribe(OnRampHitEvent);
 
     }
     private void OnDisable()
@@ -194,6 +212,7 @@ public class CharacterController : MonoBehaviour
         _GatherEvent.Unsubscribe(GatherObject);
 
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
+        _RampHitEvent.Unsubscribe(OnRampHitEvent);
 
     }
 
@@ -201,9 +220,13 @@ public class CharacterController : MonoBehaviour
     {
         Debug.Log("JUMP");
 
-        gameObject.layer = LayerMask.NameToLayer("Air");
+        if (_canJump)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Air");
 
-        _JumpController.StartJump(1);
+            _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
+        }
+
     }
 
     private void MoveCharacter(Vector2 value)
@@ -289,8 +312,8 @@ public class CharacterController : MonoBehaviour
 
         // remove half heart and check game over
         _PlayerLife -= 1;
-        _changeLivesEvent.numberOfLives = _PlayerLife;
-        _changeLivesEvent.Invoke();
+        _ChangeLivesEvent.numberOfLives = _PlayerLife;
+        _ChangeLivesEvent.Invoke();
 
         if (_PlayerLife <= 0) {
             Debug.Log("GAME OVER");
@@ -335,8 +358,31 @@ public class CharacterController : MonoBehaviour
 
     private void OnJumpEnd(GameEvent evt)
     {
-        Debug.Log("Jump ended from player controller");
+        //Debug.Log("Jump ended from player controller");
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
+        _canJump = true;
+    }
+
+    private void OnRampHitEvent(GameEvent evt)
+    {
+        //Debug.Log("Ramp hit event from player");
+        RampHitEvent rampEvent = (RampHitEvent)evt;
+        if (rampEvent != null)
+        {
+            _jumpDifficulty = rampEvent.difficulty;
+        }
+        StartCoroutine(HandleTimeToJump());
+        
+    }
+
+    // Function to handle the jump acceptance
+    IEnumerator HandleTimeToJump()
+    {
+        _canMinigameStart = true;
+        yield return new WaitForSeconds(_JumpAcceptanceDuration);
+        _canMinigameStart = false;
+        _jumpDifficulty = 0;
+
     }
 
     IEnumerator OuchSpriteAnimation() {

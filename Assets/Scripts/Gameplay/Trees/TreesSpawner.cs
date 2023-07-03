@@ -19,7 +19,7 @@ public class TreesSpawner : Spawner
     {
         //Debug.Log("spawned tree from tree spawner");
         MoovableObject spawned = null;
-        switch (UnityEngine.Random.Range(1, 3))
+        switch (UnityEngine.Random.Range(1, 4))
         {
             case 1:
                 spawned = _poolManager.GetPoolableObject<MoovableObject>();

@@ -17,7 +17,7 @@ public class RampSpawner : Spawner
     public override MoovableObject Spawn()
     {
         MoovableObject spawned = null;
-        switch (UnityEngine.Random.Range(1, 3))
+        switch (UnityEngine.Random.Range(1, 4))
         {
             case 1:
                 spawned = _poolManager.GetPoolableObject<MoovableObject>();

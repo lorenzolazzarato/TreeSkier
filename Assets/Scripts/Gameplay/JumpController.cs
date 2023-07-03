@@ -10,32 +10,18 @@ public class JumpController : MonoBehaviour
     // Time for jumping
     [Tooltip("How much time the jump lasts")]
     [SerializeField]
-    private float _TimeForJump;
-
-    // How much time gets removed for the difficulty
-    [Tooltip("How much time gets removed for the difficulty of the jump")]
-    [SerializeField]
-    private float _TimeDifferenceForDifficulty = 1;
-
-    // Min time the player has when jumping (ignores difficulty)
-    [Tooltip("The minimum time the player has when jumping")]
-    [SerializeField]
-    private float _MinTimeJump = 0.5f;
-
-    // Max time the player has when jumping (ignores difficulty)
-    [Tooltip("The maximum time the player has when jumping")]
-    [SerializeField]
-    private float _MaxTimeJump = 10f;
+    private float _TimeForJump = 4;
 
     [SerializeField]
-    private float _TimeScaleDuringJump = 0.5f;
+    [Tooltip("The time reduction for each difficulty")]
+    private float _TimeReductionJump = 1f;
 
     [Header("Events")]
     [SerializeField]
-    private IdContainerGameEvent _JumpStartEvent;
+    private IdContainerGameEvent _JumpMinigameStartEvent;
 
     [SerializeField]
-    private IdContainerGameEvent _JumpEndEvent;
+    private IdContainerGameEvent _JumpMinigameEndEvent;
 
 
     private int _difficulty;
@@ -43,28 +29,30 @@ public class JumpController : MonoBehaviour
     // Jump initiation
     private void JumpInit()
     {
-
-        Time.timeScale = _TimeScaleDuringJump;
-        _JumpStartEvent.Invoke();
-        StartCoroutine(Jumping());
+        
+        Time.timeScale = ((_TimeForJump - (4 - _difficulty * _TimeReductionJump)) * 100 / _TimeForJump) / 100;
+        _JumpMinigameStartEvent.Invoke();
+        StartCoroutine(JumpCoroutine());
     }
 
     // Jump finished
     private void JumpFinish()
     {
         Debug.Log("JumpFinished");
-        _JumpEndEvent.Invoke();
+        _JumpMinigameEndEvent.Invoke();
         Time.timeScale = 1;
     }
 
-    // During jump
-    private IEnumerator Jumping()
+    // During jump from a Ramp (time slows and minigame start)
+    private IEnumerator JumpCoroutine()
     {
-        float timeToWait = Mathf.Clamp(_TimeForJump - (_difficulty * _TimeDifferenceForDifficulty), _MinTimeJump, _MaxTimeJump);
+        // Reduce the jump time based on the difficulty of the jump
+        // float timeToReduce = (_difficulty * _TimeDifferenceForDifficulty);
+        // float timeToWait = Mathf.Clamp(_TimeForJump - timeToReduce, _MinTimeJump, _MaxTimeJump);
 
         // The player is jumping
 
-        yield return new WaitForSecondsRealtime(timeToWait);
+        yield return new WaitForSeconds(_TimeForJump);
 
         // The player is not jumping anymore
 
@@ -72,9 +60,19 @@ public class JumpController : MonoBehaviour
     }
 
     // Start jump
-    public void StartJump(int difficulty = 0)
+    public void StartJump(int difficulty = 0, bool minigame = false)
     {
-        _difficulty = difficulty;
-        JumpInit();
+        // If we need to start the minigame, call jump init
+        if (minigame)
+        {
+            _difficulty = difficulty;
+            JumpInit();
+        }
+        else
+        {
+            // If there is no minigame, don't slow time
+            _difficulty = 4;
+            StartCoroutine(JumpCoroutine());
+        }
     }
 }
