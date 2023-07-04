@@ -231,7 +231,7 @@ Transform:
   - {fileID: 2146724137}
   - {fileID: 1299190040}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &642535302
 MonoBehaviour:
@@ -920,6 +920,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4534390953725069212, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4583339726978956039, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
       propertyPath: m_text
       value: 
@@ -1038,7 +1042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422636796340349283, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6422636796340349283, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
       propertyPath: m_AnchorMax.x
