@@ -326,6 +326,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpController
       objectReference: {fileID: 0}
+    - target: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+      propertyPath: _TimeForJump
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+      propertyPath: _TimeReductionJump
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+      propertyPath: _EasyJumpMaxAcceptanceTime
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+      propertyPath: _EasyJumpMinAcceptanceTime
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
 --- !u!114 &688433869 stripped
@@ -935,6 +951,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2667062048221322235, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048221322235, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048221322235, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048221322235, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048221322235, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048627327361, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048627327361, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048627327361, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048627327361, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667062048627327361, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5642247013993059236, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1026,6 +1082,22 @@ PrefabInstance:
     - target: {fileID: 5642247013993059257, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
       propertyPath: m_Name
       value: UI Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642247014192670304, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642247014192670304, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642247014192670304, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642247014192670304, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}

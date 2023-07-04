@@ -115,6 +115,8 @@ public class CharacterController : MonoBehaviour
 
     private bool _canJump = true;
 
+    private bool _isJumping = false;
+
     private int _jumpDifficulty = 0;
 
 
@@ -222,30 +224,37 @@ public class CharacterController : MonoBehaviour
 
         if (_canJump)
         {
+            _canJump = false;
+            _isJumping = true;
+
             gameObject.layer = LayerMask.NameToLayer("Air");
 
             _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
+
+            StartCoroutine(JumpAnimationStart());
         }
 
     }
 
     private void MoveCharacter(Vector2 value)
     {
-        // Select the correct direction of the movement
-        if (value.x < Screen.width / 2)
+        if (_isJumping)
         {
-            _direction = MovementDirection.LEFT;
+            _JumpController.CheckPositionTouched(value);
         }
         else
         {
-            _direction = MovementDirection.RIGHT;
+            // Select the correct direction of the movement
+            if (value.x < Screen.width / 2)
+            {
+                _direction = MovementDirection.LEFT;
+            }
+            else
+            {
+                _direction = MovementDirection.RIGHT;
+            }
         }
 
-    }
-
-    private void MoveCharacterCanceled(Vector2 value)
-    {
-        //Debug.Log("Move canceled");
     }
 
     private void StartTouch(Vector2 value)
@@ -358,9 +367,9 @@ public class CharacterController : MonoBehaviour
 
     private void OnJumpEnd(GameEvent evt)
     {
+        _isJumping = false;
         //Debug.Log("Jump ended from player controller");
-        gameObject.layer = LayerMask.NameToLayer("Ground-Air");
-        _canJump = true;
+        StartCoroutine(JumpAnimationEnd());
     }
 
     private void OnRampHitEvent(GameEvent evt)
@@ -389,5 +398,26 @@ public class CharacterController : MonoBehaviour
         _spriteRenderer.sprite = _OuchSprite;
         yield return new WaitForSeconds(2);
         _spriteRenderer.sprite = _RunningSprite;
+    }
+
+    IEnumerator JumpAnimationStart()
+    {
+        
+        for (int i = 0; i < 100; ++i)
+        {
+            transform.Translate(0, 0, -1f/100f);
+            yield return new WaitForSeconds(1f/100f);
+        }
+        
+    }
+    IEnumerator JumpAnimationEnd()
+    {
+        for (int i = 0; i < 100; ++i)
+        {
+            transform.Translate(0, 0, 1f/100f);
+            yield return new WaitForSeconds(1f/100f);
+        }
+        gameObject.layer = LayerMask.NameToLayer("Ground-Air");
+        _canJump = true;
     }
 }

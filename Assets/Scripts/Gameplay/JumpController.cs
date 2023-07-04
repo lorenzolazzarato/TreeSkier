@@ -10,11 +10,11 @@ public class JumpController : MonoBehaviour
     // Time for jumping
     [Tooltip("How much time the jump lasts")]
     [SerializeField]
-    private float _TimeForJump = 4;
+    private float _TimeForJump = 2;
 
     [SerializeField]
     [Tooltip("The time reduction for each difficulty")]
-    private float _TimeReductionJump = 1f;
+    private float _TimeReductionJump = .4f;
 
     [Header("Events")]
     [SerializeField]
@@ -23,16 +23,41 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private IdContainerGameEvent _JumpMinigameEndEvent;
 
+    [Header("Easy Jump")]
+    [SerializeField]
+    private float _EasyJumpMinAcceptanceTime;
+
+    [SerializeField]
+    private float _EasyJumpMaxAcceptanceTime;
 
     private int _difficulty;
 
-    // Jump initiation
+    private bool _hasTouched;
+
+    private bool _isMinigameStarted = false;
+
+    private bool _easyMode = true;
+
+    private bool _minigamePassed = false;
+
+    private void OnEnable()
+    {
+        _EasyJumpMaxAcceptanceTime = Mathf.Clamp(_EasyJumpMaxAcceptanceTime, _EasyJumpMinAcceptanceTime, _TimeForJump);
+    }
+
+    // Jump initiation for the minigame
     private void JumpInit()
     {
-        
-        Time.timeScale = ((_TimeForJump - (4 - _difficulty * _TimeReductionJump)) * 100 / _TimeForJump) / 100;
+        _hasTouched = false;
+        Time.timeScale = ((_TimeForJump - (_TimeForJump - _difficulty * _TimeReductionJump)) * 100 / _TimeForJump) / 100;
         _JumpMinigameStartEvent.Invoke();
+        _isMinigameStarted = true;
         StartCoroutine(JumpCoroutine());
+        if (_easyMode)
+        {
+            EasyJump();
+        }
+        
     }
 
     // Jump finished
@@ -40,6 +65,7 @@ public class JumpController : MonoBehaviour
     {
         Debug.Log("JumpFinished");
         _JumpMinigameEndEvent.Invoke();
+        _isMinigameStarted = false;
         Time.timeScale = 1;
     }
 
@@ -73,6 +99,44 @@ public class JumpController : MonoBehaviour
             // If there is no minigame, don't slow time
             _difficulty = 4;
             StartCoroutine(JumpCoroutine());
+        }
+    }
+
+    public void CheckPositionTouched(Vector2 position)
+    {
+
+        // Easy mode
+        if (!_hasTouched && _isMinigameStarted && _easyMode)
+        {
+            _hasTouched = true;
+            Debug.Log("Touched screen while minigame active");
+            
+        }
+
+        // Based on the type of minigame, do different things
+    }
+
+    private void EasyJump()
+    {
+        StartCoroutine(EasyJumpCoroutine());
+    }
+
+    // Coroutine that checks if the player has touched at the right time
+    IEnumerator EasyJumpCoroutine()
+    {
+        for (float timePassed = 0; timePassed < _TimeForJump; timePassed += .1f)
+        {
+
+            if (_hasTouched)
+            {
+                _minigamePassed = timePassed > _EasyJumpMinAcceptanceTime && timePassed < _EasyJumpMaxAcceptanceTime;
+                Debug.Log("minigame ended for touch");
+                Debug.Log(_minigamePassed);
+                break;
+            }
+
+            yield return new WaitForSeconds(.1f);
+
         }
     }
 }
