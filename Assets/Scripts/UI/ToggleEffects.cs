@@ -4,23 +4,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleEffects : MonoBehaviour {
-    Toggle m_Toggle;
+public class ToggleEffects : ToggleController {
 
-    void Awake() {
-        //Fetch the Toggle GameObject
-        m_Toggle = GetComponent<Toggle>();
+    protected override void Awake() {
+        base.Awake();
         if (!AudioManager.Instance.AreEffectsPlaying()) {
-            m_Toggle.isOn = false;
+            _toggle.isOn = false;
         }
-        //Add listener for when the state of the Toggle changes, to take action
-        m_Toggle.onValueChanged.AddListener(delegate {
-            ToggleValueChanged(m_Toggle);
-        });
+        
     }
 
     //Output the new state of the Toggle into Text
     void ToggleValueChanged(Toggle change) {
-        AudioManager.Instance.ToggleEffects();
+        //AudioManager.Instance.ToggleEffects();
+    }
+
+    public override void OnSwitch(bool isOn) {
+        base.OnSwitch(isOn);
+        AudioManager.Instance.EnableEffects(isOn);
+    }
+
+    protected override void OnDestroy() {
+        _toggle.onValueChanged.RemoveListener(OnSwitch);
     }
 }

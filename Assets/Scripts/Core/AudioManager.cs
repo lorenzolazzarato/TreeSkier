@@ -31,14 +31,14 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void ToggleBGM() {
-        _BGMSource.mute = !_BGMSource.mute;
-        _IsBGMPlaying = !_IsBGMPlaying;
+    public void EnableBGM(bool value) {
+        _BGMSource.mute = !value;
+        _IsBGMPlaying = value;
     }
 
-    public void ToggleEffects() {
-        _EffectsSource.mute = !_EffectsSource.mute;
-        _AreEffectsPlaying = !_AreEffectsPlaying;
+    public void EnableEffects(bool value) {
+        _EffectsSource.mute = !value;
+        _AreEffectsPlaying = value;
     }
 
     public bool IsBGMPlaying() {
