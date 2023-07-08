@@ -14,6 +14,6 @@ public class PauseViewController : MonoBehaviour {
     }
 
     public void QuitGame() {
-
+        TravelSystem.Instance.SceneLoad("MainMenu");
     }
 }
