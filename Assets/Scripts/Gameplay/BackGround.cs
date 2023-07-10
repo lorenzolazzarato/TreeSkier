@@ -44,7 +44,7 @@ public class BackGround : MonoBehaviour
 
         _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
         
-        _spriteHeight = _bgSprite.GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y;
+        _spriteHeight = _bgSprite.GetComponentInChildren<SpriteRenderer>().sprite.bounds.size.y - .1f;
 
         _bgSprite.transform.position = new Vector3(_StartingSpawnLocation.transform.position.x,
         _StartingSpawnLocation.transform.position.y + _spriteHeight * 2,
@@ -52,8 +52,8 @@ public class BackGround : MonoBehaviour
 
         _queue.Enqueue(_bgSprite);
 
-        // Create 3 background sprite and move the in the right position
-        for (int i = 1; i > -2; --i)
+        // Create some background sprite and move them in the right position
+        for (int i = 1; i > -5; --i)
         {
             _bgSprite = _poolManager.GetPoolableObject<BackGroundSprite>();
 

@@ -45,9 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TimeForJump: 5
-  _TimeDifferenceForDifficulty: 0.5
-  _MinTimeJump: 0.5
-  _MaxTimeJump: 10
-  _TimeScaleDuringJump: 0.5
+  _TimeReductionJump: 0.4
   _JumpMinigameStartEvent: {fileID: 11400000, guid: dbd0c37b77c149846a9e6a1d6aba3845, type: 2}
   _JumpMinigameEndEvent: {fileID: 11400000, guid: c0c9b407da0bb454c8dbeac900c9521a, type: 2}
+  _EasyJumpScriptable: {fileID: 11400000, guid: 9301339408a8de942bfb6481e91b22e0, type: 2}
