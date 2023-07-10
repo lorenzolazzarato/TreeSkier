@@ -47,6 +47,9 @@ public class CharacterController : MonoBehaviour
     private IdContainerGameEvent _GatherEvent;
 
     [SerializeField]
+    private IdContainerGameEvent _PauseEvent;
+
+    [SerializeField]
     private ChangeLivesEvent _changeLivesEvent;
 
     [Header("Gatherable Containers")]

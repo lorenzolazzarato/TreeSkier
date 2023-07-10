@@ -600,6 +600,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: be0588f2d819e05478d0843ca81d69ba, type: 3}
     - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _PauseEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 70332f3cb9d67b047b23ac14efad13a6, type: 2}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _RunningSprite
       value: 
       objectReference: {fileID: 21300000, guid: e8869a84db0cbfe4eb6ef9e34d4db656, type: 3}

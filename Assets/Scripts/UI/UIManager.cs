@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _score.SetText(ScoreManager.Instance.GetScore().ToString());
+        _score.SetText(ScoreManager.Instance.GetScore().ToString("#,##0"));
         //DrawHearts(6);
     }
 
