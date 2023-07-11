@@ -5,8 +5,7 @@ public class PauseViewController : MonoBehaviour {
     [SerializeField]
     private OptionsViewController _optionsViewPrefab;
     public void ResumeGame() {
-        Time.timeScale = 1;
-        Destroy(gameObject);
+        FlowSystem.Instance.TriggerFSMEvent("PAUSE_END");
     }
 
     public void OpenOptions() {
@@ -14,6 +13,9 @@ public class PauseViewController : MonoBehaviour {
     }
 
     public void QuitGame() {
-        TravelSystem.Instance.SceneLoad("MainMenu");
+        //TravelSystem.Instance.SceneLoad("MainMenu");
+        FlowSystem.Instance.TriggerFSMEvent("TO_MAINMENU");
     }
+
+    
 }
