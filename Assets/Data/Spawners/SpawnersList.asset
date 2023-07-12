@@ -21,3 +21,5 @@ MonoBehaviour:
     Probability: 5
   - SpawnerObject: {fileID: 8327422620940662468, guid: 76a34b9c578c1374688ff63047dcca26, type: 3}
     Probability: 5
+  - SpawnerObject: {fileID: -7982183509897871598, guid: b834f2871e0fc11459c0d992d0131481, type: 3}
+    Probability: 80
