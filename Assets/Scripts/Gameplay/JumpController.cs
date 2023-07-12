@@ -8,13 +8,9 @@ public class JumpController : MonoBehaviour
     [Header("Jump Info")]
 
     // Time for jumping
-    [Tooltip("How much time the jump lasts")]
-    [SerializeField]
-    private float _TimeForJump = 2;
 
     [SerializeField]
-    [Tooltip("The time reduction for each difficulty")]
-    private float _TimeReductionJump = .4f;
+    private BaseJumpScriptable _BaseJumpScriptable;
 
     [Header("Events")]
     [SerializeField]
@@ -26,6 +22,9 @@ public class JumpController : MonoBehaviour
     [Header("Easy Jump")]
     [SerializeField]
     private EasyJumpScriptable _EasyJumpScriptable;
+
+    [SerializeField]
+    private EasyJump _EasyJumpPrefab;
 
     private int _difficulty;
 
@@ -41,13 +40,20 @@ public class JumpController : MonoBehaviour
 
     private float _easyJumpMaxAcceptanceTime;
 
+    private float _timeForJump;
+
+    private float _timeReductionJump;
+
     private void OnEnable()
     {
+        _timeForJump = _BaseJumpScriptable._InitialTimeForJump;
+        _timeReductionJump = _BaseJumpScriptable._TimeReductionForDifficulty;
+
         _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
         _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
 
         // Max acceptance time must be >= than Min acceptance time
-        _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _TimeForJump);
+        _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _timeForJump);
     }
 
     // Jump initiation for the minigame
@@ -64,7 +70,12 @@ public class JumpController : MonoBehaviour
          * So the jump get slowed in a way that the player has more time to complete the minigame
          * If the difficulty is harder, the time scale is closer to 1 and the player has less time to complete the minigame
          */
-        Time.timeScale = ((_TimeForJump - (_TimeForJump - _difficulty * _TimeReductionJump)) * 100 / _TimeForJump) / 100;
+
+        //Debug.Log("Time for jump " + _timeForJump);
+        _BaseJumpScriptable._TimeForJump = _timeForJump - _timeReductionJump * _difficulty;
+        //Time.timeScale = ((_timeForJump - (_timeForJump - _difficulty * _timeReductionJump)) * 100 / _timeForJump) / 100;
+
+        Debug.Log("Time for jump " + _BaseJumpScriptable._TimeForJump);
         _JumpMinigameStartEvent.Invoke();
         _isMinigameStarted = true;
         StartCoroutine(JumpCoroutine());
@@ -94,7 +105,7 @@ public class JumpController : MonoBehaviour
 
         // The player is jumping
 
-        yield return new WaitForSeconds(_TimeForJump);
+        yield return new WaitForSeconds(_timeForJump);
 
         // The player is not jumping anymore
 
@@ -134,6 +145,7 @@ public class JumpController : MonoBehaviour
 
     private void EasyJump()
     {
+        Instantiate(_EasyJumpPrefab);
         StartCoroutine(EasyJumpCoroutine());
     }
 
@@ -141,7 +153,7 @@ public class JumpController : MonoBehaviour
     // (Considering easy jump as the circle that closes)
     IEnumerator EasyJumpCoroutine()
     {
-        for (float timePassed = 0; timePassed < _TimeForJump; timePassed += .1f)
+        for (float timePassed = 0; timePassed < _timeForJump; timePassed += Time.deltaTime)
         {
 
             if (_hasTouched)
@@ -152,7 +164,7 @@ public class JumpController : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(.1f);
+            yield return null;
 
         }
     }
