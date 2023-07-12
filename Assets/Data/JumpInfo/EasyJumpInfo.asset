@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97390296987403a43b2fd4e40fc7b72d, type: 3}
   m_Name: EasyJumpInfo
   m_EditorClassIdentifier: 
-  _EasyJumpMinAcceptanceTime: 2
-  _EasyJumpMaxAcceptanceTime: 3
+  _EasyJumpMinAcceptanceTime: 1
+  _EasyJumpMaxAcceptanceTime: 1.1

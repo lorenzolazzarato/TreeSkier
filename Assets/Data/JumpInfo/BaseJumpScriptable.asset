@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36dd2b5d9e8058949b66c96c2ba21ead, type: 3}
   m_Name: BaseJumpScriptable
   m_EditorClassIdentifier: 
-  _TimeForJump: 5
+  _InitialTimeForJump: 3
+  _TimeForJump: 1.8
   _TimeReductionForDifficulty: 0.4
