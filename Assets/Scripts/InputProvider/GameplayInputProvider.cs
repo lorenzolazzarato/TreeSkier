@@ -70,6 +70,4 @@ public class GameplayInputProvider : InputProvider
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnEndTouch?.Invoke(_positionTouch);
     }
-
-
 }

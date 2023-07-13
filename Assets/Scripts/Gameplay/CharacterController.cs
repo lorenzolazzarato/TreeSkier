@@ -50,13 +50,7 @@ public class CharacterController : MonoBehaviour
     private IdContainerGameEvent _PauseEvent;
 
     [SerializeField]
-    private ChangeLivesEvent _ChangeLivesEvent;
-
-    [SerializeField]
-    private IdContainerGameEvent _JumpEndEvent;
-
-    [SerializeField]
-    private RampHitEvent _RampHitEvent;
+    private ChangeLivesEvent _changeLivesEvent;
 
     [Header("Gatherable Containers")]
     [SerializeField]
@@ -81,18 +75,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private int _PlayerLife = 6;
 
-    [Header("Jump Controller")]
-
-    [SerializeField]
-    private JumpController _JumpController;
-
     private SpriteRenderer _spriteRenderer;
-
-    [Header("Jump attributes")]
-
-    [Tooltip("Maximum time the player has to jump when encountering a ramp")]
-    [SerializeField]
-    private float _JumpAcceptanceDuration = 1;
 
 
 
@@ -112,16 +95,6 @@ public class CharacterController : MonoBehaviour
 
     // Need the camera to calculate where the touch is
     private ICinemachineCamera _camera;
-
-    // Variable used to handle the minigame start
-    private bool _canMinigameStart = false;
-
-    private bool _canJump = true;
-
-    private bool _isJumping = false;
-
-    private int _jumpDifficulty = 0;
-
 
     private void Awake()
     {
@@ -202,8 +175,6 @@ public class CharacterController : MonoBehaviour
 
         _HitEvent.Subscribe(CharacterHit);
         _GatherEvent.Subscribe(GatherObject);
-        _JumpEndEvent.Subscribe(OnJumpEnd);
-        _RampHitEvent.Subscribe(OnRampHitEvent);
 
     }
     private void OnDisable()
@@ -216,48 +187,30 @@ public class CharacterController : MonoBehaviour
         _HitEvent.Unsubscribe(CharacterHit);
         _GatherEvent.Unsubscribe(GatherObject);
 
-        _JumpEndEvent.Unsubscribe(OnJumpEnd);
-        _RampHitEvent.Unsubscribe(OnRampHitEvent);
-
     }
 
     private void JumpCharacter()
     {
         Debug.Log("JUMP");
-
-        if (_canJump)
-        {
-            _canJump = false;
-            _isJumping = true;
-
-            gameObject.layer = LayerMask.NameToLayer("Air");
-
-            _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
-
-            StartCoroutine(JumpAnimationStart());
-        }
-
     }
 
     private void MoveCharacter(Vector2 value)
     {
-        if (_isJumping)
+        // Select the correct direction of the movement
+        if (value.x < Screen.width / 2)
         {
-            _JumpController.CheckPositionTouched(value);
+            _direction = MovementDirection.LEFT;
         }
         else
         {
-            // Select the correct direction of the movement
-            if (value.x < Screen.width / 2)
-            {
-                _direction = MovementDirection.LEFT;
-            }
-            else
-            {
-                _direction = MovementDirection.RIGHT;
-            }
+            _direction = MovementDirection.RIGHT;
         }
 
+    }
+
+    private void MoveCharacterCanceled(Vector2 value)
+    {
+        //Debug.Log("Move canceled");
     }
 
     private void StartTouch(Vector2 value)
@@ -325,8 +278,8 @@ public class CharacterController : MonoBehaviour
 
         // remove half heart and check game over
         _PlayerLife -= 1;
-        _ChangeLivesEvent.numberOfLives = _PlayerLife;
-        _ChangeLivesEvent.Invoke();
+        _changeLivesEvent.numberOfLives = _PlayerLife;
+        _changeLivesEvent.Invoke();
 
         if (_PlayerLife <= 0) {
             Debug.Log("GAME OVER");
@@ -369,59 +322,9 @@ public class CharacterController : MonoBehaviour
         //CharacterHit(evt);
     }
 
-    private void OnJumpEnd(GameEvent evt)
-    {
-        _isJumping = false;
-        //Debug.Log("Jump ended from player controller");
-        StartCoroutine(JumpAnimationEnd());
-    }
-
-    private void OnRampHitEvent(GameEvent evt)
-    {
-        //Debug.Log("Ramp hit event from player");
-        RampHitEvent rampEvent = (RampHitEvent)evt;
-        if (rampEvent != null)
-        {
-            _jumpDifficulty = rampEvent.difficulty;
-        }
-        StartCoroutine(HandleTimeToJump());
-        
-    }
-
-    // Function to handle the jump acceptance
-    IEnumerator HandleTimeToJump()
-    {
-        _canMinigameStart = true;
-        yield return new WaitForSeconds(_JumpAcceptanceDuration);
-        _canMinigameStart = false;
-        _jumpDifficulty = 0;
-
-    }
-
     IEnumerator OuchSpriteAnimation() {
         _spriteRenderer.sprite = _OuchSprite;
         yield return new WaitForSeconds(2);
         _spriteRenderer.sprite = _RunningSprite;
-    }
-
-    IEnumerator JumpAnimationStart()
-    {
-        
-        for (int i = 0; i < 100; ++i)
-        {
-            transform.Translate(0, 0, -1f/100f);
-            yield return new WaitForSeconds(1f/100f);
-        }
-        
-    }
-    IEnumerator JumpAnimationEnd()
-    {
-        for (int i = 0; i < 100; ++i)
-        {
-            transform.Translate(0, 0, 1f/100f);
-            yield return new WaitForSeconds(1f/100f);
-        }
-        gameObject.layer = LayerMask.NameToLayer("Ground-Air");
-        _canJump = true;
     }
 }
