@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class GameplayInputProvider : InputProvider
@@ -46,7 +47,9 @@ public class GameplayInputProvider : InputProvider
 
     private void MovePerfomed(InputAction.CallbackContext obj)
     {
-
+        if (!IsPointerOverGameObject()) {
+            return;
+        }
 
         Vector2 value = obj.action.ReadValue<Vector2>();
         _positionTouch = value;
@@ -58,16 +61,35 @@ public class GameplayInputProvider : InputProvider
     private void StartTouch(InputAction.CallbackContext obj)
     {
         //Debug.Log("Started touch");
-
+        if (!IsPointerOverGameObject()) {
+            return;
+        }
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnStartTouch?.Invoke(_positionTouch);
+        
     }
 
-    private void EndTouch(InputAction.CallbackContext obj)
+    public void EndTouch(InputAction.CallbackContext obj)
     {
         //Debug.Log("Ended touch");
-
+        if (!IsPointerOverGameObject()) {
+            return;
+        }
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnEndTouch?.Invoke(_positionTouch);
+    }
+
+    public static bool IsPointerOverGameObject() {
+        //check mouse
+        if (EventSystem.current.IsPointerOverGameObject())
+            return true;
+
+        //check touch
+        if (Input.touchCount > 0 && Input.touches[0].phase == UnityEngine.TouchPhase.Began) {
+            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+                return true;
+        }
+
+        return false;
     }
 }

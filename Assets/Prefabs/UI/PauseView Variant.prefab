@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 228350069}
   - component: {fileID: 228350071}
   - component: {fileID: 228350070}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BGOpacity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 302020589}
   - component: {fileID: 302020591}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 491367599}
   - component: {fileID: 491367601}
   - component: {fileID: 491367600}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 950076532}
   - component: {fileID: 950076533}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139615671}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,6 +935,14 @@ PrefabInstance:
     - target: {fileID: 2552453974298120516, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
       propertyPath: m_Name
       value: PauseView Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552453974298120516, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785071180351806089, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5860348298328026629, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
       propertyPath: m_Pivot.x

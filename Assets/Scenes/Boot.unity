@@ -176,11 +176,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
       propertyPath: _Priority
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
+      propertyPath: _PauseEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 70332f3cb9d67b047b23ac14efad13a6, type: 2}
     - target: {fileID: 1274629024207578293, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
       propertyPath: m_Name
-      value: PlayerController
+      value: InputSystem
       objectReference: {fileID: 0}
     - target: {fileID: 1274629025164210719, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
       propertyPath: _IsTouching
@@ -517,6 +521,10 @@ PrefabInstance:
     - target: {fileID: 7456764141625065499, guid: 27ec2eb944309c94285d5582dada2af6, type: 3}
       propertyPath: m_Name
       value: GameEventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456764141625065502, guid: 27ec2eb944309c94285d5582dada2af6, type: 3}
+      propertyPath: _Priority
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7456764141625065503, guid: 27ec2eb944309c94285d5582dada2af6, type: 3}
       propertyPath: m_RootOrder

@@ -26,7 +26,7 @@ public class DestroyPauseMenu : Unit
         PauseScript p = arg.GetValue<PauseScript>(PauseMenuPrefab);
         if (p != null)
         {
-            p.DestroyPause();
+            //p.DestroyPause();
         }
         else
         {

@@ -98,7 +98,7 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
-        _gameplayInputProvider = PlayerController.Instance.GetInput<GameplayInputProvider>(_IdProvider.Id);
+        _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_IdProvider.Id);
     }
 
     private void Start()
@@ -206,6 +206,14 @@ public class CharacterController : MonoBehaviour
             _direction = MovementDirection.RIGHT;
         }
 
+
+        // flip sprite if not facing current direction
+        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
+            _spriteRenderer.flipX = true;
+        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
+            _spriteRenderer.flipX = false;
+        }
+
     }
 
     private void MoveCharacterCanceled(Vector2 value)
@@ -215,17 +223,10 @@ public class CharacterController : MonoBehaviour
 
     private void StartTouch(Vector2 value)
     {
-        //Debug.LogFormat("Started touching {0}", value);
+        Debug.LogFormat("Started touching {0}", value);
         MoveCharacter(value);
         _position = value;
         _timeStart = Time.time;
-
-        // flip sprite if not facing current direction
-        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
-            _spriteRenderer.flipX = true;
-        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
-            _spriteRenderer.flipX = false;
-        }
     }
 
     private void EndTouch(Vector2 value)
@@ -233,7 +234,7 @@ public class CharacterController : MonoBehaviour
         // Stop the player movement
         _direction = MovementDirection.STILL;
 
-        //Debug.LogFormat("Ended touching {0}", value);
+        Debug.LogFormat("Ended touching {0}", value);
         float endTime = Time.time;
 
         CheckSwipe(_position, value, endTime - _timeStart);

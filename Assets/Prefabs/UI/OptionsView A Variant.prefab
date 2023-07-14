@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5810069322024910547}
   - component: {fileID: 6424064936991572635}
   - component: {fileID: 8902462723756214762}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1848493361409088044}
   - component: {fileID: 9181812248240186795}
   - component: {fileID: 756449049336118462}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,6 +990,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGM Toggle
       objectReference: {fileID: 0}
+    - target: {fileID: 5482648995121581860, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482766760065136626, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482973700960987426, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5585863709421633308, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
       propertyPath: handleOffset
       value: 4
@@ -1261,6 +1273,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionsView A Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2552453974298120516, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785071180351806089, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5860348298328026629, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1379,6 +1399,18 @@ PrefabInstance:
     - target: {fileID: 5482648995121581860, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
       propertyPath: m_Name
       value: Effects Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482648995121581860, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482766760065136626, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482973700960987426, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5585863709421633308, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
       propertyPath: isOn
