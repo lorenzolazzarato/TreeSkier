@@ -280,6 +280,11 @@ public class CharacterController : MonoBehaviour
         //Debug.LogFormat("Ended touching {0}", value);
         float endTime = Time.time;
 
+        if (_isJumping)
+        {
+            _JumpController.TouchEnded();
+        }
+
         CheckSwipe(_position, value, endTime - _timeStart);
     }
 

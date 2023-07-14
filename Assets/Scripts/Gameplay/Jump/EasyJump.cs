@@ -28,7 +28,7 @@ public class EasyJump : MonoBehaviour
 
     private void OnEnable()
     {
-        _jumpTime = _BaseJumpInfo._TimeForJump;
+        _jumpTime = _BaseJumpInfo.TimeForJump;
 
         _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTime;
         _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTime;

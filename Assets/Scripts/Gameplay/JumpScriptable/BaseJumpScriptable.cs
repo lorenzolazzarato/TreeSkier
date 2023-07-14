@@ -5,9 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BaseJumpScriptable", menuName = "JumpScriptable/BaseJumpScriptable", order = 1)]
 public class BaseJumpScriptable : ScriptableObject
 {
-    public float _InitialTimeForJump = 5;
+    public float InitialTimeForJump = 5;
     
-    public float _TimeForJump = 5;
+    public float TimeForJump = 5;
 
-    public float _TimeReductionForDifficulty = 0.4f;
+    public float TimeReductionForDifficulty = 0.4f;
+
+    public bool EasyMode = true;
 }

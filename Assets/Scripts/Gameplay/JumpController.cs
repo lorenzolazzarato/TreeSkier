@@ -26,6 +26,14 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private EasyJump _EasyJumpPrefab;
 
+    [Header("Hard Jump")]
+    [SerializeField]
+    private HardJumpScriptable _HardJumpScriptable;
+
+    [SerializeField]
+    private HardJump _HardJumpPrefab;
+
+
     private int _difficulty;
 
     private bool _hasTouched;
@@ -44,10 +52,14 @@ public class JumpController : MonoBehaviour
 
     private float _timeReductionJump;
 
+    private HardJump _myHardJumpPrefab;
+
     private void OnEnable()
     {
-        _timeForJump = _BaseJumpScriptable._InitialTimeForJump;
-        _timeReductionJump = _BaseJumpScriptable._TimeReductionForDifficulty;
+        _easyMode = _BaseJumpScriptable.EasyMode;
+
+        _timeForJump = _BaseJumpScriptable.InitialTimeForJump;
+        _timeReductionJump = _BaseJumpScriptable.TimeReductionForDifficulty;
 
         _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
         _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
@@ -72,10 +84,10 @@ public class JumpController : MonoBehaviour
          */
 
         //Debug.Log("Time for jump " + _timeForJump);
-        _BaseJumpScriptable._TimeForJump = _timeForJump - _timeReductionJump * _difficulty;
+        _BaseJumpScriptable.TimeForJump = _timeForJump - _timeReductionJump * _difficulty;
         //Time.timeScale = ((_timeForJump - (_timeForJump - _difficulty * _timeReductionJump)) * 100 / _timeForJump) / 100;
 
-        Debug.Log("Time for jump " + _BaseJumpScriptable._TimeForJump);
+        Debug.Log("Time for jump " + _BaseJumpScriptable.TimeForJump);
         _JumpMinigameStartEvent.Invoke();
         _isMinigameStarted = true;
         StartCoroutine(JumpCoroutine());
@@ -83,6 +95,11 @@ public class JumpController : MonoBehaviour
         {
             EasyJump();
         }
+        else
+        {
+            HardJump();
+        }
+
         
     }
 
@@ -139,9 +156,28 @@ public class JumpController : MonoBehaviour
             Debug.Log("Touched screen while minigame active");
             
         }
+        // Hard mode
+        else if (_isMinigameStarted)
+        {
+            //Debug.Log("Checking hard minigame position " + position);
+            _myHardJumpPrefab.CheckPosition(position);
+        }
+
+        
 
         // Based on the type of minigame, do different things
     }
+
+    public void TouchEnded()
+    {
+
+        Debug.Log("TouchEnded");
+        if (!_easyMode && _myHardJumpPrefab != null)
+        {
+            _myHardJumpPrefab.ResetSnowflakes();
+        }
+    }
+
 
     private void EasyJump()
     {
@@ -167,5 +203,26 @@ public class JumpController : MonoBehaviour
             yield return null;
 
         }
+        _minigamePassed = false;
+    }
+
+    private void HardJump()
+    {
+        _myHardJumpPrefab = Instantiate(_HardJumpPrefab);
+        _myHardJumpPrefab.Init(_difficulty);
+        StartCoroutine(HardJumpCoroutine());
+    }
+
+    IEnumerator HardJumpCoroutine()
+    {
+        for (float timePassed = 0; timePassed < _timeForJump; timePassed += Time.deltaTime)
+        {
+
+
+            yield return null;
+
+        }
+        _minigamePassed = false;
+        
     }
 }
