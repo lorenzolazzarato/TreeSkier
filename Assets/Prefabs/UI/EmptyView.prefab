@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5355008057805654077}
   - component: {fileID: 3258969100691546644}
   - component: {fileID: 1213418391754756638}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EmptyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2748767055146669290}
   - component: {fileID: 2418879358136237852}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

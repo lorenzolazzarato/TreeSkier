@@ -182,6 +182,14 @@ PrefabInstance:
       propertyPath: _PauseEvent
       value: 
       objectReference: {fileID: 11400000, guid: 70332f3cb9d67b047b23ac14efad13a6, type: 2}
+    - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
+      propertyPath: _PauseEnable
+      value: 
+      objectReference: {fileID: 11400000, guid: 70332f3cb9d67b047b23ac14efad13a6, type: 2}
+    - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
+      propertyPath: _PauseDisable
+      value: 
+      objectReference: {fileID: 11400000, guid: e078a5f43e9a4734a89e00a6815fe8d3, type: 2}
     - target: {fileID: 1274629024207578293, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
       propertyPath: m_Name
       value: InputSystem

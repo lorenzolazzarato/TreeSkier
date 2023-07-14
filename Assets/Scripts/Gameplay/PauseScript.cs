@@ -5,9 +5,9 @@ using UnityEngine;
 public class PauseScript : MonoBehaviour
 {
     [SerializeField]
-    private PauseViewController _pauseViewPrefab;
+    private GameOverViewController _pauseViewPrefab;
 
-    private PauseViewController _pauseObject;
+    private GameOverViewController _pauseObject;
 
     public void PauseGame() {
         FlowSystem.Instance.TriggerFSMEvent("PAUSE_START");

@@ -21,6 +21,12 @@ public class InputSystem : Singleton<InputSystem>, ISystem
     [SerializeField]
     private IdContainerGameEvent _PauseDisable;
 
+    [SerializeField]
+    private IdContainerGameEvent _GameOver;
+
+    [SerializeField]
+    private IdContainerGameEvent _ExitGame;
+
     private Dictionary<string, InputProvider> _providerDictionary;
 
     public void EnablePause(GameEvent evt) {
@@ -69,6 +75,8 @@ public class InputSystem : Singleton<InputSystem>, ISystem
         }
         _PauseEnable.Subscribe(EnablePause);
         _PauseDisable.Subscribe(DisablePause);
+        _GameOver.Subscribe(EnablePause);
+        _ExitGame.Subscribe(DisablePause);
         SystemCoordinator.Instance.FinishSystemSetup(this);
     }
 
