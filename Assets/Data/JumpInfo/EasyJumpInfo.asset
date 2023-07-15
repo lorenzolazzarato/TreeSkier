@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EasyJumpInfo
   m_EditorClassIdentifier: 
   _EasyJumpMinAcceptanceTime: 1
-  _EasyJumpMaxAcceptanceTime: 1.1
+  _EasyJumpMaxAcceptanceTime: 3
