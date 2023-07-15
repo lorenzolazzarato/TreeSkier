@@ -10,8 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private ChangeLivesEvent _changeLivesEvent;
 
+    [SerializeField]
+    private IntSO _playerStartingLife;
+
     private TMP_Text _score;
-    private HeartScript[] _healthBar;
+    private HealthBarScript _healthBar;
 
     
 
@@ -26,34 +29,22 @@ public class UIManager : MonoBehaviour
 
     void Start() {
         _score = GetComponentInChildren<TMP_Text>();
-        //populate health bar list
-        _healthBar = GetComponentsInChildren<HeartScript>();
-        //Debug.Log("List size is " + _healthBar.Length);
+        
+        _healthBar = GetComponentInChildren<HealthBarScript>();
+
+        _healthBar.ClearHearts();
+        for (int i = 0; i < _playerStartingLife.value; i+=2) {
+            _healthBar.CreateNewHeart();
+        }
     }
     // Update is called once per frame
     void Update()
     {
         _score.SetText(ScoreManager.Instance.GetScore().ToString("#,##0"));
-        //DrawHearts(6);
     }
 
-    private void DrawHearts(float health) {
-
-        // a full heart is 2, half is 1, empty is 0. So 9 health = 4 and a half hearts.
-        int i;
-        int wholeHearts = (int) health / 2;
-
-        for (i = 0; i < wholeHearts; i++) {
-            _healthBar[i].ChangeSprite(HeartValue.Full);
-        }
-        if(health % 2 == 1) {
-            _healthBar[i].ChangeSprite(HeartValue.Half);
-            i++;
-        }
-        for (; i < _healthBar.Length; i++) {
-            _healthBar[i].ChangeSprite(HeartValue.Empty);
-        }
-
+    private void UpdateHealth(float health) {
+        _healthBar.DrawHearts(health);
     }
 
     private void OnChangeLives(GameEvent evt) 
@@ -64,7 +55,7 @@ public class UIManager : MonoBehaviour
 
         if (changeLivesEvt != null)
         {
-            DrawHearts(changeLivesEvt.numberOfLives);
+            UpdateHealth(changeLivesEvt.numberOfLives);
         }
     }
 }

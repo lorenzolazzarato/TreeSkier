@@ -11,6 +11,12 @@ public class CharacterController : MonoBehaviour {
     [SerializeField]
     private IdContainer _IdProvider;
 
+
+    [Header("Player Lives")]
+
+    [SerializeField]
+    private IntSO _PlayerMaxLife;
+
     [Header("Swipe")]
 
     [SerializeField]
@@ -62,11 +68,6 @@ public class CharacterController : MonoBehaviour {
     [SerializeField]
     private Sprite _OuchSprite;
 
-    [Header("Player Lives")]
-
-    [SerializeField]
-    private int _PlayerLife = 6;
-
     private SpriteRenderer _spriteRenderer;
 
 
@@ -87,6 +88,8 @@ public class CharacterController : MonoBehaviour {
 
     // Need the camera to calculate where the touch is
     private ICinemachineCamera _camera;
+
+    private int _playerLife;
 
     private void Awake() {
         _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_IdProvider.Id);
@@ -116,6 +119,7 @@ public class CharacterController : MonoBehaviour {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
+        _playerLife = _PlayerMaxLife.value;
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
         //Debug.LogFormat("Value of slow: {0}", _SlowRatio);
@@ -230,12 +234,12 @@ public class CharacterController : MonoBehaviour {
         StartCoroutine(OuchSpriteAnimation());
 
         // remove half heart and check game over
-        _PlayerLife -= 1;
-        _changeLivesEvent.numberOfLives = _PlayerLife;
+        _playerLife -= 1;
+        _changeLivesEvent.numberOfLives = _playerLife;
         _changeLivesEvent.Invoke();
 
         // game over
-        if (_PlayerLife <= 0) {
+        if (_playerLife <= 0) {
             Debug.Log("GAME OVER");
             FlowSystem.Instance.TriggerFSMEvent("GAMEOVER");
         }

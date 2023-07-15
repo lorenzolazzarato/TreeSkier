@@ -175,6 +175,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
+      propertyPath: _ExitGame
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c7ce7c5568b2c7479ca16e49933ebe8, type: 2}
+    - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
+      propertyPath: _GameOver
+      value: 
+      objectReference: {fileID: 11400000, guid: 09759049dee5b9243907cb18042f39a8, type: 2}
+    - target: {fileID: 1274629024207578292, guid: be6233ca352028b498c46ff4554ae1f2, type: 3}
       propertyPath: _Priority
       value: 60
       objectReference: {fileID: 0}
