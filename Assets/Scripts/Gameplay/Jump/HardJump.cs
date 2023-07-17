@@ -14,6 +14,9 @@ public class HardJump : MonoBehaviour
     [SerializeField]
     private HardJumpScriptable _HardJumpInfo;
 
+    [SerializeField]
+    private EndMinigameEvent _EndMinigameEvent;
+
 
     private int _difficulty;
 
@@ -141,6 +144,9 @@ public class HardJump : MonoBehaviour
             }
             yield return null;
         }
+
+        _EndMinigameEvent.minigamePassed = _minigamePassed;
+        _EndMinigameEvent.Invoke();
 
         foreach (HardJumpSnowflake sn in _snowflakes)
         {

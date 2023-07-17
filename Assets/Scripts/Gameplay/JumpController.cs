@@ -19,6 +19,9 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private IdContainerGameEvent _JumpMinigameEndEvent;
 
+    [SerializeField]
+    private EndMinigameEvent _FinishMinigameEvent;
+
     [Header("Easy Jump")]
     [SerializeField]
     private EasyJumpScriptable _EasyJumpScriptable;
@@ -54,6 +57,8 @@ public class JumpController : MonoBehaviour
 
     private HardJump _myHardJumpPrefab;
 
+    private EasyJump _myEasyJumpPrefab;
+
     private void OnEnable()
     {
         _easyMode = _BaseJumpScriptable.EasyMode;
@@ -63,6 +68,8 @@ public class JumpController : MonoBehaviour
 
         _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
         _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
+
+        _FinishMinigameEvent.Subscribe(EndMinigame);
 
         // Max acceptance time must be >= than Min acceptance time
         _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _timeForJump);
@@ -90,7 +97,7 @@ public class JumpController : MonoBehaviour
         Debug.Log("Time for jump " + _BaseJumpScriptable.TimeForJump);
         _JumpMinigameStartEvent.Invoke();
         _isMinigameStarted = true;
-        StartCoroutine(JumpCoroutine());
+        //StartCoroutine(JumpCoroutine());
         if (_easyMode)
         {
             EasyJump();
@@ -153,7 +160,8 @@ public class JumpController : MonoBehaviour
         if (!_hasTouched && _isMinigameStarted && _easyMode)
         {
             _hasTouched = true;
-            Debug.Log("Touched screen while minigame active");
+            //Debug.Log("Touched screen while minigame active");
+            _myEasyJumpPrefab.Touched();
             
         }
         // Hard mode
@@ -181,48 +189,31 @@ public class JumpController : MonoBehaviour
 
     private void EasyJump()
     {
-        Instantiate(_EasyJumpPrefab);
-        StartCoroutine(EasyJumpCoroutine());
+        _myEasyJumpPrefab = Instantiate(_EasyJumpPrefab);
+        
     }
 
-    // Coroutine that checks if the player has touched at the right time
-    // (Considering easy jump as the circle that closes)
-    IEnumerator EasyJumpCoroutine()
-    {
-        for (float timePassed = 0; timePassed < _timeForJump; timePassed += Time.deltaTime)
-        {
-
-            if (_hasTouched)
-            {
-                _minigamePassed = timePassed > _easyJumpMinAcceptanceTime && timePassed < _easyJumpMaxAcceptanceTime;
-                Debug.Log("minigame ended for touch");
-                Debug.Log(_minigamePassed);
-                break;
-            }
-
-            yield return null;
-
-        }
-        _minigamePassed = false;
-    }
+    
 
     private void HardJump()
     {
         _myHardJumpPrefab = Instantiate(_HardJumpPrefab);
         _myHardJumpPrefab.Init(_difficulty);
-        StartCoroutine(HardJumpCoroutine());
+        
     }
 
-    IEnumerator HardJumpCoroutine()
+    
+    private void EndMinigame(GameEvent evt)
     {
-        for (float timePassed = 0; timePassed < _timeForJump; timePassed += Time.deltaTime)
+        EndMinigameEvent ev = (EndMinigameEvent)evt;
+
+        if (ev != null)
         {
-
-
-            yield return null;
-
+            _minigamePassed = ev.minigamePassed;
         }
-        _minigamePassed = false;
-        
+
+        Debug.Log("Minigame passed: " + _minigamePassed);
+
+        JumpFinish();
     }
 }

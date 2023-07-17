@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36dd2b5d9e8058949b66c96c2ba21ead, type: 3}
-  m_Name: BaseJumpScriptable
+  m_Script: {fileID: 11500000, guid: fe68362d8b1712a4f8040ec31145c947, type: 3}
+  m_Name: EndMinigameEvent
   m_EditorClassIdentifier: 
-  InitialTimeForJump: 5
-  TimeForJump: 4.6
-  TimeReductionForDifficulty: 0.4
-  EasyMode: 1
+  idContainer: {fileID: 0}
+  minigamePassed: 0

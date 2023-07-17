@@ -128,6 +128,7 @@ MonoBehaviour:
   _BaseJumpInfo: {fileID: 11400000, guid: e998187b7683d474fa35238c69e72350, type: 2}
   _TargetCircle: {fileID: 2668356422569645496}
   _MoovingCircle: {fileID: 4374021720226371770}
+  _EndMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}
   _MoovingStartingRadius: 3
 --- !u!1001 &241052804676804702
 PrefabInstance:

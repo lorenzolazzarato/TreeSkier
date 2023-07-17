@@ -17,6 +17,9 @@ public class EasyJump : MonoBehaviour
     private EasyJumpCircleDrawer _MoovingCircle;
 
     [SerializeField]
+    private EndMinigameEvent _EndMinigameEvent;
+
+    [SerializeField]
     private float _MoovingStartingRadius = 3;
 
     private float _jumpTime;
@@ -24,7 +27,11 @@ public class EasyJump : MonoBehaviour
     private float _minAcceptanceTime;
     private float _maxAcceptanceTime;
 
-    
+    private bool _minigameEnded = false;
+
+    private bool _minigamePassed = false;
+
+    private bool _hasTouched = false;
 
     private void OnEnable()
     {
@@ -61,12 +68,33 @@ public class EasyJump : MonoBehaviour
         for (float t = 0; t < _jumpTime; t += Time.deltaTime)
         {
 
+            if (_hasTouched)
+            {
+                _minigamePassed = t > _minAcceptanceTime && t < _maxAcceptanceTime;
+                //Debug.Log("minigame ended for touch");
+                //Debug.Log(_minigamePassed);
+                break;
+            }
             _MoovingCircle.radius = Mathf.Lerp(_MoovingStartingRadius - _MoovingCircle.circleRenderer.startWidth, 0, t / _jumpTime);
             
             _MoovingCircle.Draw();
             yield return null;
         }
+
+        _EndMinigameEvent.minigamePassed = _minigamePassed;
+        _EndMinigameEvent.Invoke();
+
         Destroy(gameObject);
+    }
+
+    public void EndMinigame()
+    {
+        _minigameEnded = true;
+    }
+
+    public void Touched()
+    {
+        _hasTouched = true;
     }
 
 }

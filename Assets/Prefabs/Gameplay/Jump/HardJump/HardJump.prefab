@@ -77,3 +77,4 @@ MonoBehaviour:
   _Snowflake: {fileID: 8091426908771630141, guid: 226dc726e1f5a6347b378c6042e5cac6, type: 3}
   _BaseJumpInfo: {fileID: 11400000, guid: e998187b7683d474fa35238c69e72350, type: 2}
   _HardJumpInfo: {fileID: 11400000, guid: b3247532de99dbb49a87c7408c176c9a, type: 2}
+  _EndMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}
