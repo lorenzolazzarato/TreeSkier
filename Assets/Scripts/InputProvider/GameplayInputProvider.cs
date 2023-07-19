@@ -22,10 +22,16 @@ public class GameplayInputProvider : InputProvider
 
     private Vector2 _positionTouch;
 
-    private void OnEnable()
+    private void Start()
     {
         _Move.action.Enable();
         _IsTouching.action.Enable();
+    }
+
+    private void OnEnable()
+    {
+        //_Move.action.Enable();
+        //_IsTouching.action.Enable();
 
         _Move.action.performed += MovePerfomed;
         _IsTouching.action.started += StartTouch;
@@ -34,22 +40,27 @@ public class GameplayInputProvider : InputProvider
 
     private void OnDisable()
     {
-        _Move.action.Disable();
-        _IsTouching.action.Disable();
+        //_Move.action.Disable();
+        //_IsTouching.action.Disable();
         
 
         _Move.action.performed -= MovePerfomed;
 
         _IsTouching.action.started -= StartTouch;
         _IsTouching.action.canceled -= EndTouch;
+
+        //InputReset();
+
     }
 
     private void MovePerfomed(InputAction.CallbackContext obj)
     {
-
+        //Debug.Log("Move performed gameplay");
 
         Vector2 value = obj.action.ReadValue<Vector2>();
         _positionTouch = value;
+
+        //Debug.Log(_positionTouch);
 
         OnMove?.Invoke(value);
     }
@@ -57,7 +68,7 @@ public class GameplayInputProvider : InputProvider
 
     private void StartTouch(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Started touch");
+        //Debug.Log("Started touch gameplay" + _positionTouch);
 
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnStartTouch?.Invoke(_positionTouch);
@@ -65,11 +76,12 @@ public class GameplayInputProvider : InputProvider
 
     private void EndTouch(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Ended touch");
+        //Debug.Log("Ended touch gameplay" + _positionTouch);
 
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnEndTouch?.Invoke(_positionTouch);
     }
 
+    
 
 }

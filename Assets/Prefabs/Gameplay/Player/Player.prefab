@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa944bfbbbf5c7b439be9684edb4e633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _IdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
+  _GameplayIdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
+  _MinigameIdProvider: {fileID: 11400000, guid: 5618a6c9199a40a4ba31ebc9451b87b6, type: 2}
   _MaxTimeToSwipeInSeconds: 3
   _VerticalDistanceForSwipe: 50
   _HorizontalDistanceForSwipe: 50

@@ -14,7 +14,10 @@ public enum MovementDirection
 public class CharacterController : MonoBehaviour
 {
     [SerializeField]
-    private IdContainer _IdProvider;
+    private IdContainer _GameplayIdProvider;
+
+    [SerializeField]
+    private IdContainer _MinigameIdProvider;
 
     [Header("Swipe")]
 
@@ -100,6 +103,7 @@ public class CharacterController : MonoBehaviour
 
 
     private GameplayInputProvider _gameplayInputProvider;
+    private MinigameInputProvider _minigameInputProvider;
 
     // Position saved when the touching starts
     private Vector2 _position;
@@ -122,7 +126,10 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
-        _gameplayInputProvider = PlayerController.Instance.GetInput<GameplayInputProvider>(_IdProvider.Id);
+        _gameplayInputProvider = PlayerController.Instance.GetInput<GameplayInputProvider>(_GameplayIdProvider.Id);
+        _minigameInputProvider = PlayerController.Instance.GetInput<MinigameInputProvider>(_MinigameIdProvider.Id);
+
+        PlayerController.Instance.DisableInputProvider(_MinigameIdProvider.Id);
     }
 
     private void Start()
@@ -192,10 +199,17 @@ public class CharacterController : MonoBehaviour
 
     private void OnEnable()
     {
+        //Gameplay
         _gameplayInputProvider.OnMove += MoveCharacter;
 
         _gameplayInputProvider.OnStartTouch += StartTouch;
         _gameplayInputProvider.OnEndTouch += EndTouch;
+
+        //Minigame
+        _minigameInputProvider.OnMove += MoveCharacter;
+
+        _minigameInputProvider.OnStartTouch += StartTouch;
+        _minigameInputProvider.OnEndTouch += EndTouch;
 
         _HitEvent.Subscribe(HitCharacter);
         _GatherEvent.Subscribe(GatherObject);
@@ -220,16 +234,17 @@ public class CharacterController : MonoBehaviour
 
     private void JumpCharacter()
     {
-        Debug.Log("JUMP");
+        //Debug.Log("JUMP");
 
         if (_canJump)
         {
-            _canJump = false;
-            _isJumping = true;
 
             gameObject.layer = LayerMask.NameToLayer("Air");
 
             _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
+            
+            _canJump = false;
+            _isJumping = true;
 
             StartCoroutine(JumpAnimationStart());
         }
@@ -238,9 +253,12 @@ public class CharacterController : MonoBehaviour
 
     private void MoveCharacter(Vector2 value)
     {
+        //Debug.Log("move character");
         if (_isJumping)
         {
+            
             _JumpController.CheckPositionTouched(value);
+                                                                    
         }
         else
         {
@@ -274,6 +292,8 @@ public class CharacterController : MonoBehaviour
 
     private void EndTouch(Vector2 value)
     {
+        //Debug.Log("End touch");
+
         // Stop the player movement
         _direction = MovementDirection.STILL;
 
@@ -373,6 +393,7 @@ public class CharacterController : MonoBehaviour
     private void OnJumpEnd(GameEvent evt)
     {
         _isJumping = false;
+        _direction = MovementDirection.STILL;
         //Debug.Log("Jump ended from player controller");
         StartCoroutine(JumpAnimationEnd());
     }

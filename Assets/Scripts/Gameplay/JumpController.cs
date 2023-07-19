@@ -36,6 +36,13 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private HardJump _HardJumpPrefab;
 
+    [Header("Input Providers")]
+    [SerializeField]
+    private IdContainer _MinigameProviderContainer;
+
+    [SerializeField]
+    private IdContainer _GameplayProviderContainer;
+
 
     private int _difficulty;
 
@@ -78,18 +85,12 @@ public class JumpController : MonoBehaviour
     // Jump initiation for the minigame
     private void JumpInit()
     {
-        _hasTouched = false;
-        // Set the time scale to the correct value
-        /*
-         * The formula is the following:
-         * Time for jump indicates how long does the jump last normally with
-         * The time scale then gets reduced based on the difficulty of the jump
-         * And finally it gets put in percentage
-         * Example -> time to jump is 4 seconds, difficulty is easy (1)
-         * So the jump get slowed in a way that the player has more time to complete the minigame
-         * If the difficulty is harder, the time scale is closer to 1 and the player has less time to complete the minigame
-         */
 
+        PlayerController.Instance.DisableInputProvider(_GameplayProviderContainer.Id);
+        PlayerController.Instance.EnableInputProvider(_MinigameProviderContainer.Id);
+
+        _hasTouched = false;
+        
         //Debug.Log("Time for jump " + _timeForJump);
         _BaseJumpScriptable.TimeForJump = _timeForJump - _timeReductionJump * _difficulty;
         //Time.timeScale = ((_timeForJump - (_timeForJump - _difficulty * _timeReductionJump)) * 100 / _timeForJump) / 100;
@@ -118,9 +119,11 @@ public class JumpController : MonoBehaviour
         _JumpMinigameEndEvent.Invoke();
         _isMinigameStarted = false;
         Time.timeScale = 1;
+        PlayerController.Instance.DisableInputProvider(_MinigameProviderContainer.Id);
+        PlayerController.Instance.EnableInputProvider(_GameplayProviderContainer.Id);
     }
 
-    // During jump from a Ramp (time slows and minigame start)
+    // During jump from a Ramp
     private IEnumerator JumpCoroutine()
     {
         // Reduce the jump time based on the difficulty of the jump
@@ -139,6 +142,8 @@ public class JumpController : MonoBehaviour
     // Start jump and call the right function based on the jump type
     public void StartJump(int difficulty = 0, bool minigame = false)
     {
+        Debug.Log("Jump started");
+
         // If we need to start the minigame, call jump init
         if (minigame)
         {
@@ -155,6 +160,7 @@ public class JumpController : MonoBehaviour
 
     public void CheckPositionTouched(Vector2 position)
     {
+        Debug.Log("Checking position touched");
 
         // Easy mode
         if (!_hasTouched && _isMinigameStarted && _easyMode)

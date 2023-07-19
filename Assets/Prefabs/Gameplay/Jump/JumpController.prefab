@@ -52,3 +52,5 @@ MonoBehaviour:
   _EasyJumpPrefab: {fileID: 2450031833320992028, guid: b49263758cea34d45b75eec879470402, type: 3}
   _HardJumpScriptable: {fileID: 11400000, guid: b3247532de99dbb49a87c7408c176c9a, type: 2}
   _HardJumpPrefab: {fileID: 3672245582064693691, guid: 1e073dbd988516b428fd8eddd269ce81, type: 3}
+  _MinigameProviderContainer: {fileID: 11400000, guid: 5618a6c9199a40a4ba31ebc9451b87b6, type: 2}
+  _GameplayProviderContainer: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}

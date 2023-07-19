@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe68362d8b1712a4f8040ec31145c947, type: 3}
   m_Name: EndMinigameEvent
   m_EditorClassIdentifier: 
-  idContainer: {fileID: 0}
-  minigamePassed: 0
+  idContainer: {fileID: 11400000, guid: 46cebeccce834424c8b4b16ae618a469, type: 2}
+  minigamePassed: 1
