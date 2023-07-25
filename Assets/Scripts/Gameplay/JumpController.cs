@@ -132,7 +132,15 @@ public class JumpController : MonoBehaviour
 
         // The player is jumping
 
-        yield return new WaitForSeconds(_timeForJump);
+        if (_difficulty == 4)
+        {
+            yield return new WaitForSeconds(_BaseJumpScriptable.JumpDurationWithoutMinigame / 2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(_timeForJump);
+        }
+
 
         // The player is not jumping anymore
 
@@ -142,7 +150,7 @@ public class JumpController : MonoBehaviour
     // Start jump and call the right function based on the jump type
     public void StartJump(int difficulty = 0, bool minigame = false)
     {
-        Debug.Log("Jump started");
+        Debug.Log("Jump started " + difficulty);
 
         // If we need to start the minigame, call jump init
         if (minigame)
@@ -152,7 +160,6 @@ public class JumpController : MonoBehaviour
         }
         else
         {
-            // If there is no minigame, don't slow time
             _difficulty = 4;
             StartCoroutine(JumpCoroutine());
         }

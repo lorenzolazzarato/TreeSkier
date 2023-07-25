@@ -94,6 +94,12 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _JumpAcceptanceDuration = 1;
 
+    [SerializeField]
+    private BaseJumpScriptable _BaseJumpScriptable;
+
+    [SerializeField]
+    private float _JumpHeight = 2f;
+
 
 
     // Takes
@@ -260,7 +266,7 @@ public class CharacterController : MonoBehaviour
             _JumpController.CheckPositionTouched(value);
                                                                     
         }
-        else
+        
         {
             // Select the correct direction of the movement
             if (value.x < Screen.width / 2)
@@ -428,20 +434,21 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator JumpAnimationStart()
     {
-        
-        for (int i = 0; i < 100; ++i)
+        float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
+        for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
-            transform.Translate(0, 0, -1f/100f);
-            yield return new WaitForSeconds(1f/100f);
+            transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
+            yield return null;
         }
         
     }
     IEnumerator JumpAnimationEnd()
     {
-        for (int i = 0; i < 100; ++i)
+        float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
+        for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
-            transform.Translate(0, 0, 1f/100f);
-            yield return new WaitForSeconds(1f/100f);
+            transform.Translate(0, 0, Time.deltaTime * _JumpHeight);
+            yield return null;
         }
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
         _canJump = true;

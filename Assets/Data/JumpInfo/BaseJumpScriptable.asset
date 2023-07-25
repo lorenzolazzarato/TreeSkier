@@ -15,4 +15,4 @@ MonoBehaviour:
   InitialTimeForJump: 5
   TimeForJump: 4.6
   TimeReductionForDifficulty: 0.4
-  EasyMode: 1
+  EasyMode: 0

@@ -68,6 +68,7 @@ MonoBehaviour:
   _PlayerLife: 6
   _JumpController: {fileID: 0}
   _JumpAcceptanceDuration: 1
+  _BaseJumpScriptable: {fileID: 11400000, guid: e998187b7683d474fa35238c69e72350, type: 2}
 --- !u!61 &5629525596810780055
 BoxCollider2D:
   m_ObjectHideFlags: 0

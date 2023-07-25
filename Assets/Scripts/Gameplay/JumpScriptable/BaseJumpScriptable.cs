@@ -12,4 +12,6 @@ public class BaseJumpScriptable : ScriptableObject
     public float TimeReductionForDifficulty = 0.4f;
 
     public bool EasyMode = true;
+
+    public float JumpDurationWithoutMinigame = 1f;
 }
