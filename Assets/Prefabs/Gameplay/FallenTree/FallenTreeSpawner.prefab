@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4759672978769351836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6664049241894733014}
+  - component: {fileID: 5737543022108322977}
+  m_Layer: 0
+  m_Name: FallenTreeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6664049241894733014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4759672978769351836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5737543022108322977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4759672978769351836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15e274c9d73524ab35742a0a393134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _StartingSpawnLocation: {fileID: 2133252820343675481, guid: 82a5ba4649594ef429a25aaf1fb2fa8c, type: 3}
+  _SpriteIdContainer: {fileID: 11400000, guid: 66f6e3be22f68e54faa7d066281fc1b9, type: 2}
+  _TreeIdContainer2: {fileID: 11400000, guid: ee032bf3961ad0649b335dabdc0091f5, type: 2}
+  _TreeIdContainer3: {fileID: 11400000, guid: def56b97795395348ab6f41610d36cc6, type: 2}
