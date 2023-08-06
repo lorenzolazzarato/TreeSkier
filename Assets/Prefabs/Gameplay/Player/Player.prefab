@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _GameplayIdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
   _MinigameIdProvider: {fileID: 11400000, guid: 5618a6c9199a40a4ba31ebc9451b87b6, type: 2}
+  _PlayerMaxLife: {fileID: 11400000, guid: bd1c154b15ae85147908a5b3f8b0a38b, type: 2}
   _MaxTimeToSwipeInSeconds: 3
   _VerticalDistanceForSwipe: 50
   _HorizontalDistanceForSwipe: 50
@@ -65,7 +66,6 @@ MonoBehaviour:
   _FlagIdContainer: {fileID: 11400000, guid: 8e93025e09b8e2448a3c3a3f5255e9a9, type: 2}
   _RunningSprite: {fileID: 0}
   _OuchSprite: {fileID: 0}
-  _PlayerLife: 6
   _JumpController: {fileID: 0}
   _JumpAcceptanceDuration: 1
   _BaseJumpScriptable: {fileID: 0}

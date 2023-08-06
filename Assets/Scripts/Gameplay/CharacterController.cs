@@ -13,11 +13,17 @@ public enum MovementDirection
 
 public class CharacterController : MonoBehaviour
 {
+    [Header("Input providers")]
     [SerializeField]
     private IdContainer _GameplayIdProvider;
 
     [SerializeField]
     private IdContainer _MinigameIdProvider;
+
+    [Header("Player Lives")]
+
+    [SerializeField]
+    private IntSO _PlayerMaxLife;
 
     [Header("Swipe")]
 
@@ -76,11 +82,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private Sprite _OuchSprite;
 
-    [Header("Player Lives")]
-
-    [SerializeField]
-    private int _PlayerLife = 6;
-
     [Header("Jump Controller")]
 
     [SerializeField]
@@ -129,6 +130,8 @@ public class CharacterController : MonoBehaviour
 
     private int _jumpDifficulty = 0;
 
+    private int _playerLife;
+
 
     private void Awake()
     {
@@ -142,6 +145,8 @@ public class CharacterController : MonoBehaviour
     {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        _playerLife = _PlayerMaxLife.value;
 
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
@@ -218,7 +223,6 @@ public class CharacterController : MonoBehaviour
         _minigameInputProvider.OnEndTouch += EndTouch;
 
         _HitEvent.Subscribe(HitCharacter);
-        _GatherEvent.Subscribe(GatherObject);
         _JumpEndEvent.Subscribe(OnJumpEnd);
         _RampHitEvent.Subscribe(OnRampHitEvent);
 
@@ -231,7 +235,6 @@ public class CharacterController : MonoBehaviour
         _gameplayInputProvider.OnEndTouch -= EndTouch;
 
         _HitEvent.Unsubscribe(HitCharacter);
-        _GatherEvent.Unsubscribe(GatherObject);
 
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
         _RampHitEvent.Unsubscribe(OnRampHitEvent);
@@ -266,17 +269,20 @@ public class CharacterController : MonoBehaviour
             _JumpController.CheckPositionTouched(value);
                                                                     
         }
-        
-        {
-            // Select the correct direction of the movement
-            if (value.x < Screen.width / 2)
-            {
-                _direction = MovementDirection.LEFT;
-            }
-            else
-            {
-                _direction = MovementDirection.RIGHT;
-            }
+
+        // Select the correct direction of the movement
+        if (value.x < Screen.width / 2) {
+            _direction = MovementDirection.LEFT;
+        } else {
+            _direction = MovementDirection.RIGHT;
+        }
+
+
+        // flip sprite if not facing current direction
+        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
+            _spriteRenderer.flipX = true;
+        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
+            _spriteRenderer.flipX = false;
         }
 
     }
@@ -287,13 +293,6 @@ public class CharacterController : MonoBehaviour
         MoveCharacter(value);
         _position = value;
         _timeStart = Time.time;
-
-        // flip sprite if not facing current direction
-        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
-            _spriteRenderer.flipX = true;
-        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
-            _spriteRenderer.flipX = false;
-        }
     }
 
     private void EndTouch(Vector2 value)
@@ -351,49 +350,14 @@ public class CharacterController : MonoBehaviour
         StartCoroutine(OuchSpriteAnimation());
 
         // remove half heart and check game over
-        _PlayerLife -= 1;
-        _ChangeLivesEvent.numberOfLives = _PlayerLife;
+        _playerLife -= 1;
+        _ChangeLivesEvent.numberOfLives = _playerLife;
         _ChangeLivesEvent.Invoke();
 
-        if (_PlayerLife <= 0) {
+        if (_playerLife <= 0) {
             Debug.Log("GAME OVER");
-            // TO DO: Add Event Game Over <----------------------------------------------------
+            FlowSystem.Instance.TriggerFSMEvent("GAMEOVER");
         }
-    }
-
-    // Function called when an object is gathered
-    private void GatherObject(GameEvent evt)
-    {
-        //Debug.Log("Gathered object");
-        GatherableEvent gEvt = (GatherableEvent)evt;
-
-        if (gEvt != null)
-        {
-            //Debug.Log(gEvt.gatheredObject._ObjectIdContainer);
-            if (gEvt.gatheredObject == _CoinIdContainer)
-                CoinGathered();
-            else if (gEvt.gatheredObject == _BombIdContainer)
-                BombGathered(evt);
-        }
-        else
-        {
-            Debug.Log("Event is not a gatherable event");
-            return;
-        }
-
-
-    }
-
-    private void CoinGathered()
-    {
-        //Debug.Log("Coin Gathered");
-        //ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
-    }
-
-    private void BombGathered(GameEvent evt)
-    {
-        //Debug.Log("Bomb Gathered");
-        HitCharacter(evt);
     }
 
     private void OnJumpEnd(GameEvent evt)
