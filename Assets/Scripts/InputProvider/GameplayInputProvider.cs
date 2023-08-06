@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class GameplayInputProvider : InputProvider
@@ -23,10 +22,16 @@ public class GameplayInputProvider : InputProvider
 
     private Vector2 _positionTouch;
 
-    private void OnEnable()
+    private void Start()
     {
         _Move.action.Enable();
         _IsTouching.action.Enable();
+    }
+
+    private void OnEnable()
+    {
+        //_Move.action.Enable();
+        //_IsTouching.action.Enable();
 
         _Move.action.performed += MovePerfomed;
         _IsTouching.action.started += StartTouch;
@@ -35,24 +40,27 @@ public class GameplayInputProvider : InputProvider
 
     private void OnDisable()
     {
-        _Move.action.Disable();
-        _IsTouching.action.Disable();
+        //_Move.action.Disable();
+        //_IsTouching.action.Disable();
         
 
         _Move.action.performed -= MovePerfomed;
 
         _IsTouching.action.started -= StartTouch;
         _IsTouching.action.canceled -= EndTouch;
+
+        //InputReset();
+
     }
 
     private void MovePerfomed(InputAction.CallbackContext obj)
     {
-        if (!IsPointerOverGameObject()) {
-            return;
-        }
+        //Debug.Log("Move performed gameplay");
 
         Vector2 value = obj.action.ReadValue<Vector2>();
         _positionTouch = value;
+
+        //Debug.Log(_positionTouch);
 
         OnMove?.Invoke(value);
     }
@@ -60,36 +68,20 @@ public class GameplayInputProvider : InputProvider
 
     private void StartTouch(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Started touch");
-        if (!IsPointerOverGameObject()) {
-            return;
-        }
+        //Debug.Log("Started touch gameplay" + _positionTouch);
+
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnStartTouch?.Invoke(_positionTouch);
-        
     }
 
-    public void EndTouch(InputAction.CallbackContext obj)
+    private void EndTouch(InputAction.CallbackContext obj)
     {
-        //Debug.Log("Ended touch");
-        if (!IsPointerOverGameObject()) {
-            return;
-        }
+        //Debug.Log("Ended touch gameplay" + _positionTouch);
+
         //Vector2 value = obj.action.ReadValue<Vector2>();
         OnEndTouch?.Invoke(_positionTouch);
     }
 
-    public static bool IsPointerOverGameObject() {
-        //check mouse
-        if (EventSystem.current.IsPointerOverGameObject())
-            return true;
+    
 
-        //check touch
-        if (Input.touchCount > 0 && Input.touches[0].phase == UnityEngine.TouchPhase.Began) {
-            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
-                return true;
-        }
-
-        return false;
-    }
 }

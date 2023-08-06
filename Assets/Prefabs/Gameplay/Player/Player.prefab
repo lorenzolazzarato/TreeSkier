@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa944bfbbbf5c7b439be9684edb4e633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _IdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
-  _MaxTimeToSwipeInSeconds: 1
+  _GameplayIdProvider: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
+  _MinigameIdProvider: {fileID: 11400000, guid: 5618a6c9199a40a4ba31ebc9451b87b6, type: 2}
+  _MaxTimeToSwipeInSeconds: 3
   _VerticalDistanceForSwipe: 50
   _HorizontalDistanceForSwipe: 50
   _SlowRatio: 0.3
@@ -56,13 +57,19 @@ MonoBehaviour:
   _MaxSpeed: 10
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
-  _changeLivesEvent: {fileID: 11400000, guid: 9efa6eb12e562524880617418cf739c0, type: 2}
+  _ChangeLivesEvent: {fileID: 11400000, guid: 9efa6eb12e562524880617418cf739c0, type: 2}
+  _JumpEndEvent: {fileID: 11400000, guid: bfad60b201f2f73429c1129c12794e80, type: 2}
+  _RampHitEvent: {fileID: 11400000, guid: cf2ce420a941fba46975239090d3439d, type: 2}
   _CoinIdContainer: {fileID: 11400000, guid: 4d39dbc5d02dbcc4994579983899b8cc, type: 2}
   _BombIdContainer: {fileID: 11400000, guid: 0219032d3a6bd274ca1a14c900c0f014, type: 2}
   _FlagIdContainer: {fileID: 11400000, guid: 8e93025e09b8e2448a3c3a3f5255e9a9, type: 2}
   _RunningSprite: {fileID: 0}
   _OuchSprite: {fileID: 0}
   _PlayerLife: 6
+  _JumpController: {fileID: 0}
+  _JumpAcceptanceDuration: 1
+  _BaseJumpScriptable: {fileID: 0}
+  _JumpHeight: 2
 --- !u!61 &5629525596810780055
 BoxCollider2D:
   m_ObjectHideFlags: 0

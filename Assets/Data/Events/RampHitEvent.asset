@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6645c3fd0cfd72a4aac9890ac13877b2, type: 3}
-  m_Name: EnemySkierId
+  m_Script: {fileID: 11500000, guid: 9aef13c23677e2f4084a25a83a451ce5, type: 3}
+  m_Name: RampHitEvent
   m_EditorClassIdentifier: 
-  Id: enemyskier
+  idContainer: {fileID: 11400000, guid: 916419273cf564645a06d2ff703dd598, type: 2}
+  difficulty: 0

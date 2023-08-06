@@ -1,21 +1,23 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public enum MovementDirection {
+public enum MovementDirection
+{
     RIGHT, LEFT, STILL
 }
 
-public class CharacterController : MonoBehaviour {
+public class CharacterController : MonoBehaviour
+{
     [SerializeField]
-    private IdContainer _IdProvider;
-
-
-    [Header("Player Lives")]
+    private IdContainer _GameplayIdProvider;
 
     [SerializeField]
-    private IntSO _PlayerMaxLife;
+    private IdContainer _MinigameIdProvider;
 
     [Header("Swipe")]
 
@@ -45,10 +47,16 @@ public class CharacterController : MonoBehaviour {
     private IdContainerGameEvent _HitEvent;
 
     [SerializeField]
-    private IdContainerGameEvent _PauseEvent;
+    private IdContainerGameEvent _GatherEvent;
 
     [SerializeField]
-    private ChangeLivesEvent _changeLivesEvent;
+    private ChangeLivesEvent _ChangeLivesEvent;
+
+    [SerializeField]
+    private IdContainerGameEvent _JumpEndEvent;
+
+    [SerializeField]
+    private RampHitEvent _RampHitEvent;
 
     [Header("Gatherable Containers")]
     [SerializeField]
@@ -68,7 +76,29 @@ public class CharacterController : MonoBehaviour {
     [SerializeField]
     private Sprite _OuchSprite;
 
+    [Header("Player Lives")]
+
+    [SerializeField]
+    private int _PlayerLife = 6;
+
+    [Header("Jump Controller")]
+
+    [SerializeField]
+    private JumpController _JumpController;
+
     private SpriteRenderer _spriteRenderer;
+
+    [Header("Jump attributes")]
+
+    [Tooltip("Maximum time the player has to jump when encountering a ramp")]
+    [SerializeField]
+    private float _JumpAcceptanceDuration = 1;
+
+    [SerializeField]
+    private BaseJumpScriptable _BaseJumpScriptable;
+
+    [SerializeField]
+    private float _JumpHeight = 2f;
 
 
 
@@ -79,6 +109,7 @@ public class CharacterController : MonoBehaviour {
 
 
     private GameplayInputProvider _gameplayInputProvider;
+    private MinigameInputProvider _minigameInputProvider;
 
     // Position saved when the touching starts
     private Vector2 _position;
@@ -89,63 +120,66 @@ public class CharacterController : MonoBehaviour {
     // Need the camera to calculate where the touch is
     private ICinemachineCamera _camera;
 
-    private int _playerLife;
+    // Variable used to handle the minigame start
+    private bool _canMinigameStart = false;
 
-    private void Awake() {
-        _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_IdProvider.Id);
-    }
-    
-    private void OnEnable() {
-        _gameplayInputProvider.OnMove += MoveCharacter;
+    private bool _canJump = true;
 
-        _gameplayInputProvider.OnStartTouch += StartTouch;
-        _gameplayInputProvider.OnEndTouch += EndTouch;
+    private bool _isJumping = false;
 
-        _HitEvent.Subscribe(CharacterHit);
+    private int _jumpDifficulty = 0;
 
-    }
 
-    private void OnDisable() {
-        _gameplayInputProvider.OnMove -= MoveCharacter;
+    private void Awake()
+    {
+        _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_GameplayIdProvider.Id);
+        _minigameInputProvider = InputSystem.Instance.GetInput<MinigameInputProvider>(_MinigameIdProvider.Id);
 
-        _gameplayInputProvider.OnStartTouch -= StartTouch;
-        _gameplayInputProvider.OnEndTouch -= EndTouch;
-
-        _HitEvent.Unsubscribe(CharacterHit);
-
+        InputSystem.Instance.DisableInputProvider(_MinigameIdProvider.Id);
     }
 
-    private void Start() {
+    private void Start()
+    {
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        _playerLife = _PlayerMaxLife.value;
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
         //Debug.LogFormat("Value of slow: {0}", _SlowRatio);
     }
 
-    private void Update() {
+    private void Update()
+    {
         // Calculate how much the player is moving
-        if (_direction != MovementDirection.STILL) {
+        if (_direction != MovementDirection.STILL)
+        {
             //Debug.Log("Character moving");
             // Add to the speed the acceleration in the correct direction
             _xSpeed += _AccelerationRatio * (_direction == MovementDirection.RIGHT ? 1 : -1);
-        } else {
+        }
+        else
+        {
             //Debug.Log("Character not moving");
             // Else, the speed gradually comes back to zero
-            if (_xSpeed > 0) {
+            if (_xSpeed > 0)
+            {
                 _xSpeed -= _SlowRatio;
-            } else if (_xSpeed < 0) {
+            }
+            else if (_xSpeed < 0)
+            {
                 _xSpeed += _SlowRatio;
             }
         }
 
+
+
         // Clamp the speed between 2 value
         _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, _MaxSpeed);
 
+
         // Set the speed to 0 if is less then the AccelerationRatio
-        if (Math.Abs(_xSpeed) < _AccelerationRatio) {
+        if (Math.Abs(_xSpeed) < _AccelerationRatio)
+        {
             _xSpeed = 0;
         }
         //Debug.Log(_xSpeed);
@@ -153,28 +187,106 @@ public class CharacterController : MonoBehaviour {
         // Translate the character by the correct amount
         transform.Translate(_xSpeed * Time.deltaTime, 0, 0);
 
+
         // Check if the character is out of the screen, in case teleport it to the other side
-        if (transform.position.x < -4) {
+        if (transform.position.x < -4)
+        {
             transform.position = new Vector3(4, transform.position.y, transform.position.z);
-        } else if (transform.position.x > 4) {
+        }
+        else if (transform.position.x > 4)
+        {
             transform.position = new Vector3(-4, transform.position.y, transform.position.z);
         }
+
+
 
         //Debug.LogFormat("Transform Position {0}", transform.position.x);
     }
 
-    private void JumpCharacter() {
-        Debug.Log("JUMP");
+    private void OnEnable()
+    {
+        //Gameplay
+        _gameplayInputProvider.OnMove += MoveCharacter;
+
+        _gameplayInputProvider.OnStartTouch += StartTouch;
+        _gameplayInputProvider.OnEndTouch += EndTouch;
+
+        //Minigame
+        _minigameInputProvider.OnMove += MoveCharacter;
+
+        _minigameInputProvider.OnStartTouch += StartTouch;
+        _minigameInputProvider.OnEndTouch += EndTouch;
+
+        _HitEvent.Subscribe(HitCharacter);
+        _GatherEvent.Subscribe(GatherObject);
+        _JumpEndEvent.Subscribe(OnJumpEnd);
+        _RampHitEvent.Subscribe(OnRampHitEvent);
+
+    }
+    private void OnDisable()
+    {
+        _gameplayInputProvider.OnMove -= MoveCharacter;
+
+        _gameplayInputProvider.OnStartTouch -= StartTouch;
+        _gameplayInputProvider.OnEndTouch -= EndTouch;
+
+        _HitEvent.Unsubscribe(HitCharacter);
+        _GatherEvent.Unsubscribe(GatherObject);
+
+        _JumpEndEvent.Unsubscribe(OnJumpEnd);
+        _RampHitEvent.Unsubscribe(OnRampHitEvent);
+
     }
 
-    private void MoveCharacter(Vector2 value) {
-        // Select the correct direction of the movement
-        if (value.x < Screen.width / 2) {
-            _direction = MovementDirection.LEFT;
-        } else {
-            _direction = MovementDirection.RIGHT;
+    private void JumpCharacter()
+    {
+        //Debug.Log("JUMP");
+
+        if (_canJump)
+        {
+
+            gameObject.layer = LayerMask.NameToLayer("Air");
+
+            _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
+            
+            _canJump = false;
+            _isJumping = true;
+
+            StartCoroutine(JumpAnimationStart());
         }
 
+    }
+
+    private void MoveCharacter(Vector2 value)
+    {
+        //Debug.Log("move character");
+        if (_isJumping)
+        {
+            
+            _JumpController.CheckPositionTouched(value);
+                                                                    
+        }
+        
+        {
+            // Select the correct direction of the movement
+            if (value.x < Screen.width / 2)
+            {
+                _direction = MovementDirection.LEFT;
+            }
+            else
+            {
+                _direction = MovementDirection.RIGHT;
+            }
+        }
+
+    }
+
+    private void StartTouch(Vector2 value)
+    {
+        //Debug.LogFormat("Started touching {0}", value);
+        MoveCharacter(value);
+        _position = value;
+        _timeStart = Time.time;
 
         // flip sprite if not facing current direction
         if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
@@ -182,72 +294,163 @@ public class CharacterController : MonoBehaviour {
         } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
             _spriteRenderer.flipX = false;
         }
-
     }
 
-    private void StartTouch(Vector2 value) {
-        //Debug.LogFormat("Started touching {0}", value);
-        MoveCharacter(value);
-        _position = value;
-        _timeStart = Time.time;
-    }
-
-    private void EndTouch(Vector2 value) {
-        //Debug.LogFormat("Ended touching {0}", value);
+    private void EndTouch(Vector2 value)
+    {
+        //Debug.Log("End touch");
 
         // Stop the player movement
         _direction = MovementDirection.STILL;
 
+        //Debug.LogFormat("Ended touching {0}", value);
         float endTime = Time.time;
+
+        if (_isJumping)
+        {
+            _JumpController.TouchEnded();
+        }
 
         CheckSwipe(_position, value, endTime - _timeStart);
     }
 
     // Check the direction of a swipe
-    private void CheckSwipe(Vector2 start, Vector2 finish, float time) {
+    private void CheckSwipe(Vector2 start, Vector2 finish, float time)
+    {
         // Count the swipe only if the y change is high enough (ignore little swipe)
         // And if the swipe is fast enough
 
         //Debug.LogFormat("Checking the swipe, time for the swipe {0}", time);
 
-        if (Math.Abs(start.y - finish.y) > _VerticalDistanceForSwipe && Math.Abs(start.x - finish.x) < _HorizontalDistanceForSwipe && time < _MaxTimeToSwipeInSeconds) {
+        if (Math.Abs(start.y - finish.y) > _VerticalDistanceForSwipe && Math.Abs(start.x - finish.x) < _HorizontalDistanceForSwipe && time < _MaxTimeToSwipeInSeconds)
+        {
             //Debug.Log("Swipe Counts");
 
             // Calculating the direction of the swipe
-            if (start.y - finish.y < 0) {
+            if (start.y - finish.y < 0)
+            {
                 //Debug.Log("Swipe up");
                 JumpCharacter();
-            } else {
+            }
+            else
+            {
 
                 //Debug.Log("Swipe down");
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         collision.GetComponentInParent<MovableObject>().HitObject();
     }
 
-    // called when the player takes damage (tree, bomb, failed jump etc)
-    private void CharacterHit(GameEvent evt) {
+    private void HitCharacter(GameEvent evt)
+    {
         //Debug.Log("Character hit");
         StartCoroutine(OuchSpriteAnimation());
 
         // remove half heart and check game over
-        _playerLife -= 1;
-        _changeLivesEvent.numberOfLives = _playerLife;
-        _changeLivesEvent.Invoke();
+        _PlayerLife -= 1;
+        _ChangeLivesEvent.numberOfLives = _PlayerLife;
+        _ChangeLivesEvent.Invoke();
 
-        // game over
-        if (_playerLife <= 0) {
+        if (_PlayerLife <= 0) {
             Debug.Log("GAME OVER");
-            FlowSystem.Instance.TriggerFSMEvent("GAMEOVER");
+            // TO DO: Add Event Game Over <----------------------------------------------------
         }
+    }
+
+    // Function called when an object is gathered
+    private void GatherObject(GameEvent evt)
+    {
+        //Debug.Log("Gathered object");
+        GatherableEvent gEvt = (GatherableEvent)evt;
+
+        if (gEvt != null)
+        {
+            //Debug.Log(gEvt.gatheredObject._ObjectIdContainer);
+            if (gEvt.gatheredObject == _CoinIdContainer)
+                CoinGathered();
+            else if (gEvt.gatheredObject == _BombIdContainer)
+                BombGathered(evt);
+        }
+        else
+        {
+            Debug.Log("Event is not a gatherable event");
+            return;
+        }
+
+
+    }
+
+    private void CoinGathered()
+    {
+        //Debug.Log("Coin Gathered");
+        //ScoreManager.Instance.AddScore(100); // we could set a Coin.Value on coin
+    }
+
+    private void BombGathered(GameEvent evt)
+    {
+        //Debug.Log("Bomb Gathered");
+        HitCharacter(evt);
+    }
+
+    private void OnJumpEnd(GameEvent evt)
+    {
+        _isJumping = false;
+        _direction = MovementDirection.STILL;
+        //Debug.Log("Jump ended from player controller");
+        StartCoroutine(JumpAnimationEnd());
+    }
+
+    private void OnRampHitEvent(GameEvent evt)
+    {
+        //Debug.Log("Ramp hit event from player");
+        RampHitEvent rampEvent = (RampHitEvent)evt;
+        if (rampEvent != null)
+        {
+            _jumpDifficulty = rampEvent.difficulty;
+        }
+        StartCoroutine(HandleTimeToJump());
+        
+    }
+
+    // Function to handle the jump acceptance
+    IEnumerator HandleTimeToJump()
+    {
+        _canMinigameStart = true;
+        yield return new WaitForSeconds(_JumpAcceptanceDuration);
+        _canMinigameStart = false;
+        _jumpDifficulty = 0;
+
     }
 
     IEnumerator OuchSpriteAnimation() {
         _spriteRenderer.sprite = _OuchSprite;
         yield return new WaitForSeconds(2);
         _spriteRenderer.sprite = _RunningSprite;
+    }
+
+    IEnumerator JumpAnimationStart()
+    {
+        float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
+        for (float t = 0; t < maxTime; t += Time.deltaTime)
+        {
+            transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
+            yield return null;
+        }
+        
+    }
+    IEnumerator JumpAnimationEnd()
+    {
+        float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
+        for (float t = 0; t < maxTime; t += Time.deltaTime)
+        {
+            transform.Translate(0, 0, Time.deltaTime * _JumpHeight);
+            yield return null;
+        }
+        gameObject.layer = LayerMask.NameToLayer("Ground-Air");
+        _canJump = true;
     }
 }

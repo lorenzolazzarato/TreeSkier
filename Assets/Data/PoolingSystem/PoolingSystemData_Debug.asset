@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: PoolingSystemData_Debug
   m_EditorClassIdentifier: 
   PoolManagerBindings:
-  - SceneName: MainMenu
-    poolManagersList:
-    - {fileID: 8070445538123262702, guid: 8c1cf2928ba548e48a9fffb627784776, type: 3}
   - SceneName: Gameplay
     poolManagersList:
     - {fileID: -2938336586434087318, guid: 1cc05c3d788cf43459117a8156a23a83, type: 3}

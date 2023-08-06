@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6645c3fd0cfd72a4aac9890ac13877b2, type: 3}
-  m_Name: EnemySkierId
+  m_Script: {fileID: 11500000, guid: 52b36141cd494b8478fd70b1902d0d8a, type: 3}
+  m_Name: JumpEndEvent
   m_EditorClassIdentifier: 
-  Id: enemyskier
+  idContainer: {fileID: 11400000, guid: a1f9a3aef3be3384b8a2fc39fcb5b356, type: 2}
