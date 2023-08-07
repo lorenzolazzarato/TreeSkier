@@ -86,8 +86,8 @@ public class JumpController : MonoBehaviour
     private void JumpInit()
     {
 
-        PlayerController.Instance.DisableInputProvider(_GameplayProviderContainer.Id);
-        PlayerController.Instance.EnableInputProvider(_MinigameProviderContainer.Id);
+        InputSystem.Instance.DisableInputProvider(_GameplayProviderContainer.Id);
+        InputSystem.Instance.EnableInputProvider(_MinigameProviderContainer.Id);
 
         _hasTouched = false;
         
@@ -119,8 +119,9 @@ public class JumpController : MonoBehaviour
         _JumpMinigameEndEvent.Invoke();
         _isMinigameStarted = false;
         Time.timeScale = 1;
-        PlayerController.Instance.DisableInputProvider(_MinigameProviderContainer.Id);
-        PlayerController.Instance.EnableInputProvider(_GameplayProviderContainer.Id);
+        //Debug.Log(InputSystem.Instance.name);
+        InputSystem.Instance.DisableInputProvider(_MinigameProviderContainer.Id);
+        InputSystem.Instance.EnableInputProvider(_GameplayProviderContainer.Id);
     }
 
     // During jump from a Ramp

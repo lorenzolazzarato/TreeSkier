@@ -56,6 +56,7 @@ public class TravelSystem : Singleton<TravelSystem>, ISystem
     }
 
     public void Setup() {
+        //Debug.Log("Started Setup of travel system");
         _currentScene = SceneManager.GetActiveScene().name;
         SystemCoordinator.Instance.FinishSystemSetup(this);
     }

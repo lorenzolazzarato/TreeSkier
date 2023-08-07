@@ -43,11 +43,12 @@ public class PlayerController : Singleton<PlayerController>, ISystem
     }
 
     public void Setup() {
-
+        //Debug.Log("Started setup of input controller");
         _providerDictionary = new Dictionary<string, InputProvider>();
 
         foreach (InputProvider provider in _ProviderList) {
             _providerDictionary.Add(provider.Id.Id, provider);
+            Debug.Log("Added provider: " +  provider.Id.Id);
         }
 
         SystemCoordinator.Instance.FinishSystemSetup(this);
