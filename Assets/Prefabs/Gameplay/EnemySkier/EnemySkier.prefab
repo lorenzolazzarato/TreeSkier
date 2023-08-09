@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8104219184710053497}
   - component: {fileID: 480019257979412838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemySkier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,9 @@ MonoBehaviour:
   _ObjectIdContainer: {fileID: 11400000, guid: a455bd6a67b655143bdf115d26bf1123, type: 2}
   _FinishPosition: {fileID: 6087849376674330921, guid: 75f06a6ea290f394b9bd06d09b22111a, type: 3}
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
+  _MinXSpeed: -1
+  _MaxXSpeed: 1
+  _MovementSpeed: 3
 --- !u!1 &6701201730402464794
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ GameObject:
   - component: {fileID: 2503330501731746426}
   - component: {fileID: 7340506290370397850}
   - component: {fileID: 1652783851885382720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stickman
   m_TagString: Untagged
   m_Icon: {fileID: 0}

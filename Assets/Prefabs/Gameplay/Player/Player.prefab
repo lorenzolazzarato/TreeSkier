@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5764347161440750338}
   - component: {fileID: 5629525596810780055}
   - component: {fileID: 3615789120543624423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7627014771504281033}
   - component: {fileID: 683665790995741736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stickman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
