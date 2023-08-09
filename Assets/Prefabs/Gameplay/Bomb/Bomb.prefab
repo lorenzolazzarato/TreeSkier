@@ -152,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 5882161336610709388, guid: f76151621aea8cb49bca995284b6c772, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6649292101444652352, guid: f76151621aea8cb49bca995284b6c772, type: 3}
       propertyPath: m_RootOrder
       value: 0
