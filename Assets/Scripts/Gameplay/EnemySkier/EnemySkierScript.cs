@@ -41,7 +41,7 @@ public class EnemySkierScript : HittableObject
         xSpeed = 0;
     }
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
         transform.Translate(Vector3.right * xSpeed * Time.deltaTime * _MovementSpeed);

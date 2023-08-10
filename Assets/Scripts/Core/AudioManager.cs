@@ -58,6 +58,9 @@ public class AudioManager : MonoBehaviour {
                 _EffectsSource.PlayOneShot(_CoinSound);
                 break;
             case "tree1": case "tree2": case "tree3":
+            case "FallenTree1":
+            case "FallenTree2":
+            case "FallenTree3":
                 _EffectsSource.PlayOneShot(_TreeSound);
                 break;
         }
