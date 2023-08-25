@@ -49,18 +49,23 @@ public class CharacterController : MonoBehaviour
 
     [Header("Events")]
 
+    [Tooltip("Hit event for the player")]
     [SerializeField]
     private IdContainerGameEvent _HitEvent;
 
+    [Tooltip("Gather event for the player")]
     [SerializeField]
     private IdContainerGameEvent _GatherEvent;
 
+    [Tooltip("Change lives event")]
     [SerializeField]
     private ChangeLivesEvent _ChangeLivesEvent;
 
+    [Tooltip("Event triggered when the jump starts from the jump controller")]
     [SerializeField]
     private IdContainerGameEvent _JumpStartEvent;
 
+    [Tooltip("Event triggered when the jump ends from the jump controller")]
     [SerializeField]
     private IdContainerGameEvent _JumpEndEvent;
 
