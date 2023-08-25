@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseJumpScriptable
   m_EditorClassIdentifier: 
   InitialTimeForJump: 5
-  TimeForJump: 4.2
+  TimeForJump: 4.6
   TimeReductionForDifficulty: 0.4
-  EasyMode: 1
+  EasyMode: 0
   JumpDurationWithoutMinigame: 1

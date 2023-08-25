@@ -151,7 +151,7 @@ public class JumpController : MonoBehaviour
     // Start jump and call the right function based on the jump type
     public void StartJump(int difficulty = 0, bool minigame = false)
     {
-        Debug.Log("Jump started " + difficulty);
+        //Debug.Log("Jump started " + difficulty);
 
         // If we need to start the minigame, call jump init
         if (minigame)

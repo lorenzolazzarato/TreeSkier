@@ -59,7 +59,11 @@ public class CharacterController : MonoBehaviour
     private ChangeLivesEvent _ChangeLivesEvent;
 
     [SerializeField]
+    private IdContainerGameEvent _JumpStartEvent;
+
+    [SerializeField]
     private IdContainerGameEvent _JumpEndEvent;
+
 
     [SerializeField]
     private RampHitEvent _RampHitEvent;
@@ -224,6 +228,7 @@ public class CharacterController : MonoBehaviour
 
         _HitEvent.Subscribe(HitCharacter);
         _JumpEndEvent.Subscribe(OnJumpEnd);
+        _JumpStartEvent.Subscribe(OnMinigameStart);
         _RampHitEvent.Subscribe(OnRampHitEvent);
 
     }
@@ -237,6 +242,7 @@ public class CharacterController : MonoBehaviour
         _HitEvent.Unsubscribe(HitCharacter);
 
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
+        _JumpStartEvent.Unsubscribe(OnMinigameStart);
         _RampHitEvent.Unsubscribe(OnRampHitEvent);
 
     }
@@ -269,20 +275,22 @@ public class CharacterController : MonoBehaviour
             _JumpController.CheckPositionTouched(value);
                                                                     
         }
+        else
+        {
+            // Select the correct direction of the movement
+            if (value.x < Screen.width / 2) {
+                _direction = MovementDirection.LEFT;
+            } else {
+                _direction = MovementDirection.RIGHT;
+            }
 
-        // Select the correct direction of the movement
-        if (value.x < Screen.width / 2) {
-            _direction = MovementDirection.LEFT;
-        } else {
-            _direction = MovementDirection.RIGHT;
-        }
 
-
-        // flip sprite if not facing current direction
-        if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
-            _spriteRenderer.flipX = true;
-        } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
-            _spriteRenderer.flipX = false;
+            // flip sprite if not facing current direction
+            if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
+                _spriteRenderer.flipX = true;
+            } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
+                _spriteRenderer.flipX = false;
+            }
         }
 
     }
@@ -366,6 +374,11 @@ public class CharacterController : MonoBehaviour
         _direction = MovementDirection.STILL;
         //Debug.Log("Jump ended from player controller");
         StartCoroutine(JumpAnimationEnd());
+    }
+
+    private void OnMinigameStart(GameEvent evt)
+    {
+        gameObject.layer = LayerMask.NameToLayer("Minigame");
     }
 
     private void OnRampHitEvent(GameEvent evt)

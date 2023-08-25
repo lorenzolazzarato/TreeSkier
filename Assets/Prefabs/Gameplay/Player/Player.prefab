@@ -59,6 +59,7 @@ MonoBehaviour:
   _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _GatherEvent: {fileID: 11400000, guid: d4d717979c67cef4ea4353655c2af845, type: 2}
   _ChangeLivesEvent: {fileID: 11400000, guid: 9efa6eb12e562524880617418cf739c0, type: 2}
+  _JumpStartEvent: {fileID: 11400000, guid: f30e15f0d00d2a24c89587cbf853b526, type: 2}
   _JumpEndEvent: {fileID: 11400000, guid: bfad60b201f2f73429c1129c12794e80, type: 2}
   _RampHitEvent: {fileID: 11400000, guid: 47b48c80f7f7e7c4c8fae492e3140904, type: 2}
   _CoinIdContainer: {fileID: 11400000, guid: 4d39dbc5d02dbcc4994579983899b8cc, type: 2}
