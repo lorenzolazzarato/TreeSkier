@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6646289192843748305
+--- !u!1 &6500101466352939798
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9099004642501440735}
-  - component: {fileID: 3482723568243696331}
+  - component: {fileID: 3878921886047855273}
+  - component: {fileID: 8268681097825696393}
   m_Layer: 0
   m_Name: JumpController
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9099004642501440735
+--- !u!4 &3878921886047855273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6646289192843748305}
+  m_GameObject: {fileID: 6500101466352939798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3482723568243696331
+--- !u!114 &8268681097825696393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6646289192843748305}
+  m_GameObject: {fileID: 6500101466352939798}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6be0fffb89156c41ba691eb9bb49b43, type: 3}
@@ -49,8 +49,8 @@ MonoBehaviour:
   _JumpMinigameEndEvent: {fileID: 11400000, guid: bfad60b201f2f73429c1129c12794e80, type: 2}
   _FinishMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}
   _EasyJumpScriptable: {fileID: 11400000, guid: ef69260f06672554783ceeaa02f49f2a, type: 2}
-  _EasyJumpPrefab: {fileID: -3514371273697800295, guid: 98a5c5452e2af9040ae78728eeb4d98e, type: 3}
+  _EasyJumpPrefab: {fileID: 2450031833320992028, guid: b49263758cea34d45b75eec879470402, type: 3}
   _HardJumpScriptable: {fileID: 11400000, guid: ae6b00448a9db02439288464ba373edd, type: 2}
-  _HardJumpPrefab: {fileID: 4178907621057990523, guid: 1dc95535e99bcb646b4816e1c68cfa64, type: 3}
+  _HardJumpPrefab: {fileID: 3672245582064693691, guid: 1e073dbd988516b428fd8eddd269ce81, type: 3}
   _MinigameProviderContainer: {fileID: 11400000, guid: 5618a6c9199a40a4ba31ebc9451b87b6, type: 2}
   _GameplayProviderContainer: {fileID: 11400000, guid: 0f14869acbd69274d9b9c22ab72acd22, type: 2}
