@@ -48,6 +48,7 @@ MonoBehaviour:
   _JumpMinigameStartEvent: {fileID: 11400000, guid: f30e15f0d00d2a24c89587cbf853b526, type: 2}
   _JumpMinigameEndEvent: {fileID: 11400000, guid: bfad60b201f2f73429c1129c12794e80, type: 2}
   _FinishMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}
+  _HitEvent: {fileID: 11400000, guid: 6fb452b74156307459c023eb78601323, type: 2}
   _EasyJumpScriptable: {fileID: 11400000, guid: ef69260f06672554783ceeaa02f49f2a, type: 2}
   _EasyJumpPrefab: {fileID: 2450031833320992028, guid: b49263758cea34d45b75eec879470402, type: 3}
   _HardJumpScriptable: {fileID: 11400000, guid: ae6b00448a9db02439288464ba373edd, type: 2}

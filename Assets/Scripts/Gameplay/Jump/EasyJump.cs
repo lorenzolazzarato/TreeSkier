@@ -27,7 +27,6 @@ public class EasyJump : MonoBehaviour
     private float _minAcceptanceTime;
     private float _maxAcceptanceTime;
 
-    private bool _minigameEnded = false;
 
     private bool _minigamePassed = false;
 
@@ -89,7 +88,7 @@ public class EasyJump : MonoBehaviour
 
     public void EndMinigame()
     {
-        _minigameEnded = true;
+
     }
 
     public void Touched()

@@ -147,15 +147,20 @@ public class CharacterController : MonoBehaviour
         _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_GameplayIdProvider.Id);
         _minigameInputProvider = InputSystem.Instance.GetInput<MinigameInputProvider>(_MinigameIdProvider.Id);
 
+        InputSystem.Instance.EnableInputProvider(_GameplayIdProvider.Id);
         InputSystem.Instance.DisableInputProvider(_MinigameIdProvider.Id);
+
+        
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Debug.Log("Sprite renderer loaded");
+
+        _playerLife = _PlayerMaxLife.value;
     }
 
     private void Start()
     {
+        //Debug.Log("Character controller start method");
         _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-        _playerLife = _PlayerMaxLife.value;
 
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
@@ -236,6 +241,7 @@ public class CharacterController : MonoBehaviour
         _JumpStartEvent.Subscribe(OnMinigameStart);
         _RampHitEvent.Subscribe(OnRampHitEvent);
 
+
     }
     private void OnDisable()
     {
@@ -264,6 +270,8 @@ public class CharacterController : MonoBehaviour
             _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
             
             _canJump = false;
+
+            Debug.Log("Jump started");
             _isJumping = true;
 
             StartCoroutine(JumpAnimationStart());
@@ -282,6 +290,7 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
+
             // Select the correct direction of the movement
             if (value.x < Screen.width / 2) {
                 _direction = MovementDirection.LEFT;
@@ -375,9 +384,9 @@ public class CharacterController : MonoBehaviour
 
     private void OnJumpEnd(GameEvent evt)
     {
+        Debug.Log("Jump end ------------------------------------------");
         _isJumping = false;
         _direction = MovementDirection.STILL;
-        //Debug.Log("Jump ended from player controller");
         StartCoroutine(JumpAnimationEnd());
     }
 

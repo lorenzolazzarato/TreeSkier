@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
     [ContextMenu("Spawn")]
     public virtual MovableObject Spawn()
     {
-        Debug.LogFormat("Spawned {0} from normal spawn", _SpriteIdContainer);
+        //Debug.LogFormat("Spawned {0} from normal spawn", _SpriteIdContainer);
 
         MovableObject spawned = _poolManager.GetPoolableObject<MovableObject>();
 

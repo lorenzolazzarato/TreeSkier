@@ -21,7 +21,7 @@ public class Ramp : HittableObject
 
     public override void HitObject()
     {
-        Debug.Log("colpita rampa");
+        //Debug.Log("colpita rampa");
         RampHitEvent rampHitEvent = (RampHitEvent)_HitEvent;
 
         if (rampHitEvent != null)
