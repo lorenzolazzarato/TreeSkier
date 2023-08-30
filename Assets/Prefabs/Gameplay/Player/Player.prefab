@@ -68,6 +68,7 @@ MonoBehaviour:
   _RunningSprite: {fileID: 0}
   _OuchSprite: {fileID: 0}
   _JumpController: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+  _SpriteRenderer: {fileID: 683665790995741736}
   _JumpAcceptanceDuration: 1
   _BaseJumpScriptable: {fileID: 11400000, guid: 04f8a7368a2669c41889c66b83385feb, type: 2}
   _JumpHeight: 2

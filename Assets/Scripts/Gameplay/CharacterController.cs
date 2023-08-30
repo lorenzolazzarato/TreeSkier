@@ -96,7 +96,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private JumpController _JumpController;
 
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private SpriteRenderer _SpriteRenderer;
 
     [Header("Jump attributes")]
 
@@ -151,8 +152,8 @@ public class CharacterController : MonoBehaviour
         InputSystem.Instance.DisableInputProvider(_MinigameIdProvider.Id);
 
         
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        Debug.Log("Sprite renderer loaded");
+        //_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        //Debug.Log("Sprite renderer loaded");
 
         _playerLife = _PlayerMaxLife.value;
     }
@@ -250,8 +251,13 @@ public class CharacterController : MonoBehaviour
         _gameplayInputProvider.OnStartTouch -= StartTouch;
         _gameplayInputProvider.OnEndTouch -= EndTouch;
 
-        _HitEvent.Unsubscribe(HitCharacter);
+        _minigameInputProvider.OnMove -= MoveCharacter;
 
+        _minigameInputProvider.OnStartTouch -= StartTouch;
+        _minigameInputProvider.OnEndTouch -= EndTouch;
+
+
+        _HitEvent.Unsubscribe(HitCharacter);
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
         _JumpStartEvent.Unsubscribe(OnMinigameStart);
         _RampHitEvent.Unsubscribe(OnRampHitEvent);
@@ -300,10 +306,10 @@ public class CharacterController : MonoBehaviour
 
 
             // flip sprite if not facing current direction
-            if (_direction == MovementDirection.RIGHT && !_spriteRenderer.flipX) {
-                _spriteRenderer.flipX = true;
-            } else if (_direction == MovementDirection.LEFT && _spriteRenderer.flipX) {
-                _spriteRenderer.flipX = false;
+            if (_direction == MovementDirection.RIGHT && !_SpriteRenderer.flipX) {
+                _SpriteRenderer.flipX = true;
+            } else if (_direction == MovementDirection.LEFT && _SpriteRenderer.flipX) {
+                _SpriteRenderer.flipX = false;
             }
         }
 
@@ -418,9 +424,9 @@ public class CharacterController : MonoBehaviour
     }
 
     IEnumerator OuchSpriteAnimation() {
-        _spriteRenderer.sprite = _OuchSprite;
+        _SpriteRenderer.sprite = _OuchSprite;
         yield return new WaitForSeconds(2);
-        _spriteRenderer.sprite = _RunningSprite;
+        _SpriteRenderer.sprite = _RunningSprite;
     }
 
     IEnumerator JumpAnimationStart()
