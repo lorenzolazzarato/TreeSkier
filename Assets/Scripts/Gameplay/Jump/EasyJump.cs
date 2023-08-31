@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EasyJump : MonoBehaviour
@@ -9,6 +10,9 @@ public class EasyJump : MonoBehaviour
 
     [SerializeField]
     private BaseJumpScriptable _BaseJumpInfo;
+
+    [SerializeField]
+    private JumpBase _JumpBaseScript;
 
     [SerializeField]
     private EasyJumpCircleDrawer _TargetCircle;
@@ -34,7 +38,14 @@ public class EasyJump : MonoBehaviour
 
     private void OnEnable()
     {
-        _jumpTime = _BaseJumpInfo.TimeForJump;
+        
+    }
+
+    public void InitEasyJump(float jumpTime)
+    {
+        _jumpTime = jumpTime;
+
+        _JumpBaseScript.InitBaseJump(_jumpTime);
 
         _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTime;
         _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTime;

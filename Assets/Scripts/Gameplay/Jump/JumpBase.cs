@@ -16,7 +16,12 @@ public class JumpBase : MonoBehaviour
 
     private void OnEnable()
     {
-        _jumpTime = _JumpInfo.TimeForJump;
+        
+    }
+
+    public void InitBaseJump(float jumpTime)
+    {
+        _jumpTime = jumpTime;
         StartCoroutine(SliderReduction());
     }
 

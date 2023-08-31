@@ -8,6 +8,7 @@ public class GameEvent : ScriptableObject
 {
     private event Action<GameEvent> _onEventTriggered;
 
+    [ContextMenu("Invoke")]
     public void Invoke()
     {
         _onEventTriggered?.Invoke(this);

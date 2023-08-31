@@ -7,8 +7,6 @@ public class BaseJumpScriptable : ScriptableObject
 {
     public float InitialTimeForJump = 5;
     
-    public float TimeForJump = 5;
-
     public float TimeReductionForDifficulty = 0.4f;
 
     public bool EasyMode = true;

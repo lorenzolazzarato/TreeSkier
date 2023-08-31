@@ -390,7 +390,7 @@ public class CharacterController : MonoBehaviour
 
     private void OnJumpEnd(GameEvent evt)
     {
-        Debug.Log("Jump end ------------------------------------------");
+        Debug.Log("Jump end event called");
         _isJumping = false;
         _direction = MovementDirection.STILL;
         StartCoroutine(JumpAnimationEnd());
@@ -431,16 +431,20 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator JumpAnimationStart()
     {
+        Debug.Log("current z: " + transform.position.z);
+        
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
             transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
             yield return null;
         }
-        
+        Debug.Log("final z: " + transform.position.z);
+
     }
     IEnumerator JumpAnimationEnd()
     {
+        Debug.Log("current z: " + transform.position.z);
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
@@ -449,5 +453,6 @@ public class CharacterController : MonoBehaviour
         }
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
         _canJump = true;
+        Debug.Log("final z: " + transform.position.z);
     }
 }

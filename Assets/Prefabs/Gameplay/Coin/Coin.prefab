@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3613175061093805833}
   - component: {fileID: 2122921726384387773}
   - component: {fileID: 1105347478144915883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,6 +151,10 @@ PrefabInstance:
     - target: {fileID: 5882161336610709388, guid: f76151621aea8cb49bca995284b6c772, type: 3}
       propertyPath: m_Name
       value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5882161336610709388, guid: f76151621aea8cb49bca995284b6c772, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6649292101444652352, guid: f76151621aea8cb49bca995284b6c772, type: 3}
       propertyPath: m_RootOrder
