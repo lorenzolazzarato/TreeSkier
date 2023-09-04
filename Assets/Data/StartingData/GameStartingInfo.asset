@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ded6eea279a504d889227bf2d37417, type: 3}
   m_Name: GameStartingInfo
   m_EditorClassIdentifier: 
-  startingSpeed: 2
-  easyMode: 1
+  startingSpeed: 10
+  speedRatio: 0.05
+  easyMode: 0
