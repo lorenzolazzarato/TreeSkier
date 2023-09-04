@@ -53,6 +53,10 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainerGameEvent _HitEvent;
 
+    [Tooltip("Life up event for the player")]
+    [SerializeField]
+    private IdContainerGameEvent _LifeUpEvent;
+
     [Tooltip("Gather event for the player")]
     [SerializeField]
     private IdContainerGameEvent _GatherEvent;
@@ -241,6 +245,7 @@ public class CharacterController : MonoBehaviour
         _JumpEndEvent.Subscribe(OnJumpEnd);
         _JumpStartEvent.Subscribe(OnMinigameStart);
         _RampHitEvent.Subscribe(OnRampHitEvent);
+        _LifeUpEvent.Subscribe(LifeUp);
 
 
     }
@@ -261,6 +266,7 @@ public class CharacterController : MonoBehaviour
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
         _JumpStartEvent.Unsubscribe(OnMinigameStart);
         _RampHitEvent.Unsubscribe(OnRampHitEvent);
+        _LifeUpEvent.Unsubscribe(LifeUp);
 
     }
 
@@ -386,6 +392,16 @@ public class CharacterController : MonoBehaviour
             Debug.Log("GAME OVER");
             FlowSystem.Instance.TriggerFSMEvent("GAMEOVER");
         }
+    }
+
+    private void LifeUp(GameEvent evt) {
+        // add half heart
+        if( _playerLife < _PlayerMaxLife.value) {
+            _playerLife += 1;
+            _ChangeLivesEvent.numberOfLives = _playerLife;
+            _ChangeLivesEvent.Invoke();
+        }
+        
     }
 
     private void OnJumpEnd(GameEvent evt)
