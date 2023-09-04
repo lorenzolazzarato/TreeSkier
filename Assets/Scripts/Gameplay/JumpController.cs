@@ -70,7 +70,7 @@ public class JumpController : MonoBehaviour
 
     private void OnEnable()
     {
-        _easyMode = _BaseJumpScriptable.EasyMode;
+        _easyMode = FlowSystem.Instance.GetFSMVariable<bool>("EasyMode");
 
         _timeForJump = _BaseJumpScriptable.InitialTimeForJump;
         _timeReductionJump = _BaseJumpScriptable.TimeReductionForDifficulty;

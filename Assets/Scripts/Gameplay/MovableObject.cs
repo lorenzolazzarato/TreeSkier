@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovableObject : PoolableObject
+public class MovableObject : PoolableObject, IMoovableObject
 {
+    
+    
+    private float _speed = 10;
 
+    public float Speed { get => _speed; }
     [SerializeField]
     public IdContainer _ObjectIdContainer;
 
@@ -19,6 +23,8 @@ public class MovableObject : PoolableObject
 
     protected virtual void Update()
     {
+        _speed = FlowSystem.Instance.GetFSMVariable<float>("Speed");
+
         Move();
         // Checks if the sprite is out of the screen. In case it is, call an event
         // Use an object to check the Y coordinate
