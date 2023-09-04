@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _img: {fileID: 1572321377}
-  _speed: 0.1
+  _speed: 0.238
 --- !u!1 &1694174044
 GameObject:
   m_ObjectHideFlags: 0
