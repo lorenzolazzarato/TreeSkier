@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameStartingInfo : ScriptableObject
 {
     public float startingSpeed = 2f;
+    public float maxSpeed = 15f;
     public float speedRatio = 1f;
     public bool easyMode = true;
 }

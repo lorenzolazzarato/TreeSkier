@@ -5,12 +5,23 @@ using UnityEngine.UI;
 
 public class ToggleHardMode : ToggleController
 {
+    [SerializeField]
+    private IdContainer _toggleEventIdContainer;
+
+
     protected override void Awake() {
         base.Awake();
         if (!AudioManager.Instance.IsBGMPlaying()) {
             _toggle.isOn = false;
         }
 
+    }
+    private void OnEnable()
+    {
+        if (FlowSystem.Instance.GetFSMVariable<bool>("EasyMode"))
+        {
+            _toggle.isOn = false;
+        }
     }
 
     //Output the new state of the Toggle into Text
@@ -20,7 +31,8 @@ public class ToggleHardMode : ToggleController
 
     public override void OnSwitch(bool isOn) {
         base.OnSwitch(isOn);
-        AudioManager.Instance.EnableBGM(isOn);
+        //AudioManager.Instance.EnableBGM(isOn);
+        FlowSystem.Instance.SetFSMVariable("EasyMode", !FlowSystem.Instance.GetFSMVariable<bool>("EasyMode"));
     }
 
     protected override void OnDestroy() {

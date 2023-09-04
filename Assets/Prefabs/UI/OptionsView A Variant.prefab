@@ -1533,6 +1533,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3977361183117078713}
     m_Modifications:
+    - target: {fileID: 714486501408014240, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 714486501408014240, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 714486501408014240, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4762746733517057403}
+    - target: {fileID: 714486501408014240, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 714486501408014240, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5482648995121581860, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
       propertyPath: m_Name
       value: Toggle
@@ -1661,7 +1681,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5482648995121581860, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
   m_PrefabInstance: {fileID: 4692095377722259181}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4557893287152019467
+--- !u!114 &8252126028288357015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1670,13 +1690,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 940095449446808009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b39d93e3e1b8d3f4d864806e3e511c97, type: 3}
+  m_Script: {fileID: 11500000, guid: 58d1c08afdb3ca94a9a41c08f9691b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onColorBg: {r: 0.15294118, g: 0.4862745, b: 0.7254902, a: 1}
-  offColorBg: {r: 0.5882353, g: 0.7254902, b: 0.8235294, a: 1}
+  onColorBg: {r: 0.15294118, g: 0.48627454, b: 0.7254902, a: 1}
+  offColorBg: {r: 0.5882353, g: 0.7254902, b: 0.8235295, a: 1}
   _handle: {fileID: 1014807525282676629}
   speed: 0
+  _toggleEventIdContainer: {fileID: 11400000, guid: d31eb4b4dfabcd648abfd422c5ffac2d, type: 2}
 --- !u!224 &1014351429015542631 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5696517666936892810, guid: 5eb9858885cb8a946ba8c2a47302d5c3, type: 3}
