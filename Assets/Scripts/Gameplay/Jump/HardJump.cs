@@ -12,6 +12,9 @@ public class HardJump : MonoBehaviour
     private BaseJumpScriptable _BaseJumpInfo;
 
     [SerializeField]
+    private JumpBase _JumpBaseScript;
+
+    [SerializeField]
     private HardJumpScriptable _HardJumpInfo;
 
     [SerializeField]
@@ -40,12 +43,15 @@ public class HardJump : MonoBehaviour
     }
 
     [ContextMenu("InitStart")]
-    public void Init(int difficulty = 1)
+    public void Init(float jumpTime, int difficulty = 1)
     {
         //Debug.Log("initialized hard jump");
         _difficulty = difficulty;
         _baseSnowflakesNumber = _HardJumpInfo.BaseSnowflakesNumber;
-        _jumpTime = _BaseJumpInfo.TimeForJump;
+        _jumpTime = jumpTime;
+
+        _JumpBaseScript.InitBaseJump(_jumpTime);
+
         _camera = Camera.main;
         
 
@@ -136,6 +142,7 @@ public class HardJump : MonoBehaviour
     }
     private IEnumerator MinigameStart()
     {
+        Debug.Log("minigame started");
         for (float t = 0; t < _jumpTime; t += Time.deltaTime)
         {
             if (_minigamePassed)

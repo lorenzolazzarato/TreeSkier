@@ -65,6 +65,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
+--- !u!114 &1018699737735056306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1932211638568773438, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
+  m_PrefabInstance: {fileID: 1509759468693302412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8082147706353641183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0151cbec9485a684eace8662dddece4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8082147706353641183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7267174516769245779, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
@@ -84,5 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Snowflake: {fileID: 8091426908771630141, guid: 226dc726e1f5a6347b378c6042e5cac6, type: 3}
   _BaseJumpInfo: {fileID: 11400000, guid: 04f8a7368a2669c41889c66b83385feb, type: 2}
+  _JumpBaseScript: {fileID: 1018699737735056306}
   _HardJumpInfo: {fileID: 11400000, guid: ae6b00448a9db02439288464ba373edd, type: 2}
   _EndMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}

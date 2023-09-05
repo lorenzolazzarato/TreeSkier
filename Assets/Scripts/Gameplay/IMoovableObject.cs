@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IMoovableObject
 {
-    public int Speed { get; }
+    public float Speed { get; }
 }

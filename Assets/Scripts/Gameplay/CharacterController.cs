@@ -53,6 +53,10 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainerGameEvent _HitEvent;
 
+    [Tooltip("Life up event for the player")]
+    [SerializeField]
+    private IdContainerGameEvent _LifeUpEvent;
+
     [Tooltip("Gather event for the player")]
     [SerializeField]
     private IdContainerGameEvent _GatherEvent;
@@ -246,6 +250,7 @@ public class CharacterController : MonoBehaviour
         _JumpEndEvent.Subscribe(OnJumpEnd);
         _JumpStartEvent.Subscribe(OnMinigameStart);
         _RampHitEvent.Subscribe(OnRampHitEvent);
+        _LifeUpEvent.Subscribe(LifeUp);
 
 
     }
@@ -266,6 +271,7 @@ public class CharacterController : MonoBehaviour
         _JumpEndEvent.Unsubscribe(OnJumpEnd);
         _JumpStartEvent.Unsubscribe(OnMinigameStart);
         _RampHitEvent.Unsubscribe(OnRampHitEvent);
+        _LifeUpEvent.Unsubscribe(LifeUp);
 
     }
 
@@ -393,9 +399,19 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    private void LifeUp(GameEvent evt) {
+        // add half heart
+        if( _playerLife < _PlayerMaxLife.value) {
+            _playerLife += 1;
+            _ChangeLivesEvent.numberOfLives = _playerLife;
+            _ChangeLivesEvent.Invoke();
+        }
+        
+    }
+
     private void OnJumpEnd(GameEvent evt)
     {
-        Debug.Log("Jump end ------------------------------------------");
+        Debug.Log("Jump end event called");
         _isJumping = false;
         _direction = MovementDirection.STILL;
         StartCoroutine(JumpAnimationEnd());
@@ -436,13 +452,15 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator JumpAnimationStart()
     {
+        Debug.Log("current z: " + transform.position.z);
+        
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
             transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
             yield return null;
         }
-        Debug.Log("Ramp hit ID: " + _RampHitEvent.idContainer.Id.ToString());
+        Debug.Log("final z: " + transform.position.z);
 
     }
 
@@ -461,6 +479,6 @@ public class CharacterController : MonoBehaviour
         }
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
         _canJump = true;
-
+        Debug.Log("final z: " + transform.position.z);
     }
 }

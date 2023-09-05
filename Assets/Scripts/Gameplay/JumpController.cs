@@ -70,7 +70,7 @@ public class JumpController : MonoBehaviour
 
     private void OnEnable()
     {
-        _easyMode = _BaseJumpScriptable.EasyMode;
+        _easyMode = FlowSystem.Instance.GetFSMVariable<bool>("EasyMode");
 
         _timeForJump = _BaseJumpScriptable.InitialTimeForJump;
         _timeReductionJump = _BaseJumpScriptable.TimeReductionForDifficulty;
@@ -84,6 +84,11 @@ public class JumpController : MonoBehaviour
         _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _timeForJump);
     }
 
+    private void OnDisable()
+    {
+        _FinishMinigameEvent.Unsubscribe(EndMinigame);
+    }
+
     // Jump initiation for the minigame
     private void JumpInit()
     {
@@ -93,18 +98,18 @@ public class JumpController : MonoBehaviour
 
         _hasTouched = false;
         
-        _BaseJumpScriptable.TimeForJump = _timeForJump - _timeReductionJump * _difficulty;
+        float jumpTime = _timeForJump - _timeReductionJump * _difficulty;
 
         _JumpMinigameStartEvent.Invoke();
         _isMinigameStarted = true;
         //StartCoroutine(JumpCoroutine());
         if (_easyMode)
         {
-            EasyJump();
+            EasyJump(jumpTime);
         }
         else
         {
-            HardJump();
+            HardJump(jumpTime);
         }
 
         
@@ -113,7 +118,7 @@ public class JumpController : MonoBehaviour
     // Jump finished
     private void JumpFinish()
     {
-        // The jump is finished, the time scale gets reset to 1 and invoke the event
+        // The jump is finished
         Debug.Log("JumpFinished");
         _JumpMinigameEndEvent.Invoke();
         _isMinigameStarted = false;
@@ -195,18 +200,18 @@ public class JumpController : MonoBehaviour
     }
 
 
-    private void EasyJump()
+    private void EasyJump(float jumpTime)
     {
         _myEasyJumpPrefab = Instantiate(_EasyJumpPrefab);
-        
+        _myEasyJumpPrefab.InitEasyJump(jumpTime);
     }
 
     
 
-    private void HardJump()
+    private void HardJump(float jumpTime)
     {
         _myHardJumpPrefab = Instantiate(_HardJumpPrefab);
-        _myHardJumpPrefab.Init(_difficulty);
+        _myHardJumpPrefab.Init(jumpTime, _difficulty);
         
     }
 

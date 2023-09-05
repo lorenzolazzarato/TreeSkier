@@ -102,6 +102,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
+--- !u!114 &1749734420458046331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1932211638568773438, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
+  m_PrefabInstance: {fileID: 187134749505578053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368705551265705494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0151cbec9485a684eace8662dddece4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1801227963787362166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1902745940350130995, guid: 3139edbac7ca2a644b6e963736ce4a55, type: 3}
@@ -126,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _EasyJumpInfo: {fileID: 11400000, guid: ef69260f06672554783ceeaa02f49f2a, type: 2}
   _BaseJumpInfo: {fileID: 11400000, guid: 04f8a7368a2669c41889c66b83385feb, type: 2}
+  _JumpBaseScript: {fileID: 1749734420458046331}
   _TargetCircle: {fileID: 2668356422569645496}
   _MoovingCircle: {fileID: 4374021720226371770}
   _EndMinigameEvent: {fileID: 11400000, guid: 6229229e28f51384196ab7cdadddf894, type: 2}
