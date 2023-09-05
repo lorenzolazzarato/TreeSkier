@@ -2090,10 +2090,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -2101,7 +2105,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1894447838007622815}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1894447838007622815}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -2109,11 +2121,23 @@ PrefabInstance:
       value: CloseCreditsView
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CreditsViewController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CreditsViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7564536906172677465, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -2693,6 +2717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cb77622a18451488c4bec4f4ee0a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _BackButtonId: {fileID: 11400000, guid: 7c6b99f58ce98f74ba7f65689f5fdf85, type: 2}
 --- !u!224 &9078517152905692853 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2748767055146669290, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}

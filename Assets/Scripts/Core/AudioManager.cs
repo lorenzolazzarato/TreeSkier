@@ -22,10 +22,8 @@ public class AudioManager : MonoBehaviour {
     [Header("Audio clips")]
     [SerializeField]
     private AudioClip _CoinSound;
-    //[SerializeField]
-    //private AudioClip _BombSound;
-    //[SerializeField]
-    //private AudioClip _TreeSound;
+    [SerializeField]
+    private AudioClip _HeartDropSound;
     [SerializeField]
     private AudioClip _EnemySkierSound;
     [SerializeField]
@@ -44,6 +42,12 @@ public class AudioManager : MonoBehaviour {
     private AudioClip _BombSound1;
     [SerializeField]
     private AudioClip _BombSound2;
+
+    [Header("UI Audio clips")]
+    [SerializeField]
+    private AudioClip _ButtonSound;
+    [SerializeField]
+    private AudioClip _ButtonBackSound;
 
     private bool _IsBGMPlaying = true;
     private bool _AreEffectsPlaying = true;
@@ -129,6 +133,9 @@ public class AudioManager : MonoBehaviour {
             case "flag":
                 _EffectsSource.PlayOneShot(_FlagSound);
                 break;
+            case "heartdrop":
+                _EffectsSource.PlayOneShot(_HeartDropSound);
+                break;
             case "easyRamp":
             case "mediumRamp":
             case "hardRamp":
@@ -143,6 +150,12 @@ public class AudioManager : MonoBehaviour {
                         _RampHitSourceNumber = 1;
                         break;
                 }
+                break;
+            case "button":
+                _EffectsSource.PlayOneShot(_ButtonSound);
+                break;
+            case "buttonback":
+                _EffectsSource.PlayOneShot(_ButtonBackSound);
                 break;
         }
     }

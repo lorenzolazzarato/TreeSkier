@@ -16,7 +16,8 @@ public class UIManager : MonoBehaviour
     private TMP_Text _score;
     private HealthBarScript _healthBar;
 
-    
+    [SerializeField]
+    private IdContainer _ButtonId;
 
     void OnEnable() {
         _changeLivesEvent.Subscribe(OnChangeLives);
@@ -57,5 +58,9 @@ public class UIManager : MonoBehaviour
         {
             UpdateHealth(changeLivesEvt.numberOfLives);
         }
+    }
+    public void OnButtonClick()
+    {
+        AudioManager.Instance.PlaySoundEffect(_ButtonId);
     }
 }

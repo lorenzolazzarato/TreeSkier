@@ -14,6 +14,9 @@ public class MainMenuViewController : MonoBehaviour
 
     private CreditsViewController _creditsViewController;
 
+    [SerializeField]
+    private IdContainer _ButtonId;
+
     public void ChangeScene(string scene)
     {
         TravelSystem.Instance.SceneLoad(scene);
@@ -29,6 +32,11 @@ public class MainMenuViewController : MonoBehaviour
     {
         if (_creditsViewController) return;
         _creditsViewController = Instantiate(_CreditsViewPrefab);
+    }
+
+    public void OnButtonClick()
+    {
+        AudioManager.Instance.PlaySoundEffect(_ButtonId);
     }
 
     public void QuitGame()

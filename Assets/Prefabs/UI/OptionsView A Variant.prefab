@@ -1485,10 +1485,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -1496,7 +1500,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8647390568495168705}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: -8647390568495168705}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -1504,11 +1516,23 @@ PrefabInstance:
       value: CloseOptionsView
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OptionsViewController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OptionsViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400467228216435968, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7564536906172677465, guid: 64fa3645a126f0449bdfced50779d4cb, type: 3}
@@ -1968,6 +1992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb78133e9c3b64c876e5dfdfcba80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _BackButtonId: {fileID: 11400000, guid: 7c6b99f58ce98f74ba7f65689f5fdf85, type: 2}
 --- !u!224 &5138917943793232085 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2748767055146669290, guid: 1b34050278af2264d98ed00bc4bcd3ca, type: 3}
