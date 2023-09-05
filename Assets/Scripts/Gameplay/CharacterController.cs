@@ -111,6 +111,11 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _JumpHeight = 2f;
 
+    [Header("Animations")]
+    [SerializeField]
+    private Animator _PlayerAnimator;
+    [SerializeField]
+    private float _OuchTime;
 
 
     // Takes
@@ -424,9 +429,9 @@ public class CharacterController : MonoBehaviour
     }
 
     IEnumerator OuchSpriteAnimation() {
-        _SpriteRenderer.sprite = _OuchSprite;
-        yield return new WaitForSeconds(2);
-        _SpriteRenderer.sprite = _RunningSprite;
+        _PlayerAnimator.SetTrigger("OnOuchEnter");
+        yield return new WaitForSeconds(_OuchTime);
+        _PlayerAnimator.SetTrigger("OnOuchExit");
     }
 
     IEnumerator JumpAnimationStart()
@@ -437,10 +442,17 @@ public class CharacterController : MonoBehaviour
             transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
             yield return null;
         }
-        
+        Debug.Log("Ramp hit ID: " + _RampHitEvent.idContainer.Id.ToString());
+
     }
+
     IEnumerator JumpAnimationEnd()
     {
+        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump
+            _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
+        }
+        else _PlayerAnimator.SetTrigger("OnJumpEnter");
+
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
         {
@@ -449,5 +461,6 @@ public class CharacterController : MonoBehaviour
         }
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
         _canJump = true;
+
     }
 }

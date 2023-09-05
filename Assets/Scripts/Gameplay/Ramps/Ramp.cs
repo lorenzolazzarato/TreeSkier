@@ -26,6 +26,7 @@ public class Ramp : HittableObject
 
         if (rampHitEvent != null)
         {
+            AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
             rampHitEvent.difficulty = _difficulty;
             rampHitEvent.Invoke();
         }

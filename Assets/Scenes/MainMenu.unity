@@ -247,9 +247,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _BGMSource: {fileID: 2146724136}
   _EffectsSource: {fileID: 1299190039}
-  _CoinSound: {fileID: 8300000, guid: 30629791a7810424aa14659092f8f0d9, type: 3}
-  _BombSound: {fileID: 8300000, guid: fa3a6a2425d553649ae187e1159328b7, type: 3}
-  _TreeSound: {fileID: 8300000, guid: 1d0a572e674033d4aae609d1945adf2d, type: 3}
+  _BGMSourceVolume: 0.25
+  _EffectsSourceVolume: 1
+  _CoinSound: {fileID: 8300000, guid: a54293685e9c3ef4785b9e2dcd58dac2, type: 3}
+  _EnemySkierSound: {fileID: 8300000, guid: 8185543909741d54a8bc568387ad97c9, type: 3}
+  _FlagSound: {fileID: 8300000, guid: f053033bf6418544596a9547b180f0bd, type: 3}
+  _RampHitSound1: {fileID: 8300000, guid: 3706e30096f9e504089a2e9ee8f58d37, type: 3}
+  _RampHitSound2: {fileID: 8300000, guid: ccd809578c35ed2418cb5c4c6505c0e9, type: 3}
+  _DamageSound1: {fileID: 8300000, guid: 57b532b61b3c71249bd878975c4a785c, type: 3}
+  _DamageSound2: {fileID: 8300000, guid: c87a1c4a803a7734e8ef6e1183631af8, type: 3}
+  _DamageSound3: {fileID: 8300000, guid: f74fb3ba726a06242ad6414bf118b5e6, type: 3}
+  _BombSound1: {fileID: 8300000, guid: 977e5e2aadc4753418a9bf4da9d5d409, type: 3}
+  _BombSound2: {fileID: 8300000, guid: 88b69ab66bbb88c438e1402407965ed0, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1132,26 @@ PrefabInstance:
     - target: {fileID: 6422636796340349283, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 642535299}
+    - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MainMenuViewController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6538775279733700485, guid: aab912bfcc198c14ba137da039b57c70, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument

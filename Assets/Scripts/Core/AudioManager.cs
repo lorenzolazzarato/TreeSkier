@@ -11,16 +11,46 @@ public class AudioManager : MonoBehaviour {
     [SerializeField]
     private AudioSource _EffectsSource;
 
+    [Header("Audio volume")]
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float _BGMSourceVolume;
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float _EffectsSourceVolume;
+
     [Header("Audio clips")]
     [SerializeField]
     private AudioClip _CoinSound;
+    //[SerializeField]
+    //private AudioClip _BombSound;
+    //[SerializeField]
+    //private AudioClip _TreeSound;
     [SerializeField]
-    private AudioClip _BombSound;
+    private AudioClip _EnemySkierSound;
     [SerializeField]
-    private AudioClip _TreeSound;
+    private AudioClip _FlagSound;
+    [SerializeField]
+    private AudioClip _RampHitSound1;
+    [SerializeField]
+    private AudioClip _RampHitSound2;
+    [SerializeField]
+    private AudioClip _DamageSound1;
+    [SerializeField]
+    private AudioClip _DamageSound2;
+    [SerializeField]
+    private AudioClip _DamageSound3;
+    [SerializeField]
+    private AudioClip _BombSound1;
+    [SerializeField]
+    private AudioClip _BombSound2;
 
     private bool _IsBGMPlaying = true;
     private bool _AreEffectsPlaying = true;
+
+    private int _DamageSourceNumber = 1;
+    private int _BombSourceNumber = 1;
+    private int _RampHitSourceNumber = 1;
 
     private void Awake() {
         if (Instance == null) {
@@ -29,6 +59,12 @@ public class AudioManager : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        _BGMSource.volume = _BGMSourceVolume;
+        _EffectsSource.volume = _EffectsSourceVolume;
     }
 
     public void EnableBGM(bool value) {
@@ -52,7 +88,17 @@ public class AudioManager : MonoBehaviour {
     public void PlaySoundEffect(IdContainer id) {
         switch(id.Id) {
             case "bomb":
-                _EffectsSource.PlayOneShot(_BombSound);
+                switch (_BombSourceNumber)
+                {
+                    case 1:
+                        _EffectsSource.PlayOneShot(_BombSound1);
+                        _BombSourceNumber = 2;
+                        break;
+                    case 2:
+                        _EffectsSource.PlayOneShot(_BombSound2);
+                        _BombSourceNumber = 1;
+                        break;
+                }
                 break;
             case "coin":
                 _EffectsSource.PlayOneShot(_CoinSound);
@@ -61,7 +107,42 @@ public class AudioManager : MonoBehaviour {
             case "FallenTree1":
             case "FallenTree2":
             case "FallenTree3":
-                _EffectsSource.PlayOneShot(_TreeSound);
+                switch(_DamageSourceNumber)
+                {
+                    case 1:
+                        _EffectsSource.PlayOneShot(_DamageSound1);
+                        _DamageSourceNumber = 2;
+                        break;
+                    case 2:
+                        _EffectsSource.PlayOneShot(_DamageSound2);
+                        _DamageSourceNumber = 3;
+                        break;
+                    case 3:
+                        _EffectsSource.PlayOneShot(_DamageSound3);
+                        _DamageSourceNumber = 1;
+                        break;
+                }
+                break;
+            case "enemyskier":
+                _EffectsSource.PlayOneShot(_EnemySkierSound);
+                break;
+            case "flag":
+                _EffectsSource.PlayOneShot(_FlagSound);
+                break;
+            case "easyRamp":
+            case "mediumRamp":
+            case "hardRamp":
+                switch (_RampHitSourceNumber)
+                {
+                    case 1:
+                        _EffectsSource.PlayOneShot(_RampHitSound1);
+                        _RampHitSourceNumber = 2;
+                        break;
+                    case 2:
+                        _EffectsSource.PlayOneShot(_RampHitSound2);
+                        _RampHitSourceNumber = 1;
+                        break;
+                }
                 break;
         }
     }

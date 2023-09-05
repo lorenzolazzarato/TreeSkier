@@ -41,6 +41,12 @@ public class EnemySkierScript : HittableObject
         xSpeed = 0;
     }
 
+    public override void HitObject()
+    {
+        base.HitObject();
+        AudioManager.Instance.PlaySoundEffect(_ObjectIdContainer);
+    }
+
     protected override void Update()
     {
         base.Update();
