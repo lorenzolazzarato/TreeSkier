@@ -87,14 +87,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainer _FlagIdContainer;
 
-    // SPRITES
-    [Header("Sprites")]
-    [SerializeField]
-    private Sprite _RunningSprite;
-
-    [SerializeField]
-    private Sprite _OuchSprite;
-
     [Header("Jump Controller")]
 
     [SerializeField]
@@ -467,10 +459,13 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator JumpAnimationEnd()
     {
-        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump
+        Debug.Log("Difficolta rampHitEvent: " +_RampHitEvent.difficulty);
+        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump animation
             _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
         }
-        else _PlayerAnimator.SetTrigger("OnJumpEnter");
+        else if (_RampHitEvent.difficulty == 1 || _RampHitEvent.difficulty == 2) _PlayerAnimator.SetTrigger("OnJumpEnter"); // jump performed on an easy/medium ramp: jump animation
+
+        _RampHitEvent.difficulty = 0;
 
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
