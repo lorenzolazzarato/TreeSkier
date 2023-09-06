@@ -67,7 +67,7 @@ public class SpawnerManager : MonoBehaviour
     {
         int value = UnityEngine.Random.Range(0, totalProbability);
 
-        Spawner spawner = GetCorrectSpawner(value);
+        Spawner spawner = GetCorrectSpawner(value); 
 
         if(!spawner.SpawnWithPosition(UnityEngine.Random.Range(-4f, 4f)))
         {

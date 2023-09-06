@@ -87,14 +87,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private IdContainer _FlagIdContainer;
 
-    // SPRITES
-    [Header("Sprites")]
-    [SerializeField]
-    private Sprite _RunningSprite;
-
-    [SerializeField]
-    private Sprite _OuchSprite;
-
     [Header("Jump Controller")]
 
     [SerializeField]
@@ -137,8 +129,6 @@ public class CharacterController : MonoBehaviour
     // Time when the touching starts
     private float _timeStart;
 
-    // Need the camera to calculate where the touch is
-    private ICinemachineCamera _camera;
 
     // Variable used to handle the minigame start
     private bool _canMinigameStart = false;
@@ -152,6 +142,7 @@ public class CharacterController : MonoBehaviour
     private int _playerLife;
 
 
+
     private void Awake()
     {
         _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_GameplayIdProvider.Id);
@@ -160,6 +151,9 @@ public class CharacterController : MonoBehaviour
         InputSystem.Instance.EnableInputProvider(_GameplayIdProvider.Id);
         InputSystem.Instance.DisableInputProvider(_MinigameIdProvider.Id);
 
+
+        Debug.Log(Camera.main.WorldToScreenPoint(new Vector3(4.24f, 0, -2)));
+        Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 8)));
         
         //_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         //Debug.Log("Sprite renderer loaded");
@@ -169,8 +163,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("Character controller start method");
-        _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+
 
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
@@ -218,16 +211,16 @@ public class CharacterController : MonoBehaviour
         // Translate the character by the correct amount
         transform.Translate(_xSpeed * Time.deltaTime, 0, 0);
 
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
         // Check if the character is out of the screen, in case teleport it to the other side
-        if (transform.position.x < -4)
+        if (screenPos.x < 0 || screenPos.x > Screen.width)
         {
-            transform.position = new Vector3(4, transform.position.y, transform.position.z);
+            //Debug.Log(transform.position.x);
+            Debug.Log(Camera.main.ScreenToWorldPoint(screenPos));
+            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x > 4)
-        {
-            transform.position = new Vector3(-4, transform.position.y, transform.position.z);
-        }
+        
 
 
 
@@ -468,10 +461,13 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator JumpAnimationEnd()
     {
-        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump
+        Debug.Log("Difficolta rampHitEvent: " +_RampHitEvent.difficulty);
+        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump animation
             _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
         }
-        else _PlayerAnimator.SetTrigger("OnJumpEnter");
+        else if (_RampHitEvent.difficulty == 1 || _RampHitEvent.difficulty == 2) _PlayerAnimator.SetTrigger("OnJumpEnter"); // jump performed on an easy/medium ramp: jump animation
+
+        _RampHitEvent.difficulty = 0;
 
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
