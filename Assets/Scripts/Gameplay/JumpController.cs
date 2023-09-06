@@ -229,6 +229,13 @@ public class JumpController : MonoBehaviour
 
         if (_minigamePassed)
         {
+            /*
+            if (_MinigameProviderContainer.Id)
+            { // jump performed on a hard ramp: cool jump
+                _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
+            }
+            else _PlayerAnimator.SetTrigger("OnJumpEnter");
+            */
             int score;
             switch (_difficulty)
             {
