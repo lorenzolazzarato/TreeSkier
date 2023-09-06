@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -41,7 +42,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _score.SetText(ScoreManager.Instance.GetScore().ToString("#,##0"));
+        _score.SetText(string.Format(CultureInfo.GetCultureInfo("EN-en"), "{0:N0}", ScoreManager.Instance.GetScore()));
     }
 
     private void UpdateHealth(float health) {
