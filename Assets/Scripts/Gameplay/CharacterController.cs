@@ -159,6 +159,9 @@ public class CharacterController : MonoBehaviour
         //Debug.Log("Sprite renderer loaded");
 
         _playerLife = _PlayerMaxLife.value;
+
+        //Switching it from unity doesn't work, no time to try to fix it
+        transform.Translate(Vector3.down * 1);
     }
 
     private void Start()
