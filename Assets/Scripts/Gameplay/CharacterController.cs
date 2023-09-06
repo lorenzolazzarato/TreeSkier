@@ -39,13 +39,13 @@ public class CharacterController : MonoBehaviour
     [Header("Speed")]
 
     [SerializeField]
-    private float _SlowRatio = 0.0001f;
+    private float _SlowRatio = 3f;
 
     [SerializeField]
-    private float _AccelerationRatio = 0.0001f;
+    private float _AccelerationRatio = 3f;
 
     [SerializeField]
-    private float _MaxSpeed = 1f;
+    private float _MaxSpeed = 3f;
 
     [Header("Events")]
 
@@ -193,10 +193,12 @@ public class CharacterController : MonoBehaviour
             if (_xSpeed > 0)
             {
                 _xSpeed -= _SlowRatio;
+                _xSpeed = Math.Clamp(_xSpeed, 0, _MaxSpeed);
             }
             else if (_xSpeed < 0)
             {
                 _xSpeed += _SlowRatio;
+                _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, 0);
             }
         }
 

@@ -526,8 +526,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _MaxSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _OuchTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _SlowRatio
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _OuchSprite
@@ -561,6 +569,10 @@ PrefabInstance:
       propertyPath: _PlayerAnimator
       value: 
       objectReference: {fileID: 1315224994}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _AccelerationRatio
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _BaseJumpScriptable
       value: 
