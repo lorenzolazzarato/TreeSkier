@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ToggleHardMode : ToggleController
@@ -11,17 +12,15 @@ public class ToggleHardMode : ToggleController
 
     protected override void Awake() {
         base.Awake();
-        if (!AudioManager.Instance.IsBGMPlaying()) {
+        Debug.Log("Easy mode: " + FlowSystem.Instance.GetFSMVariable<bool>("EasyMode"));
+        if (FlowSystem.Instance.GetFSMVariable<bool>("EasyMode")) {
             _toggle.isOn = false;
         }
+        
+        if(SceneManager.GetActiveScene().name == "Gameplay") { 
+            _toggle.interactable = false;
+        } else _toggle.interactable = true;
 
-    }
-    private void OnEnable()
-    {
-        if (FlowSystem.Instance.GetFSMVariable<bool>("EasyMode"))
-        {
-            _toggle.isOn = false;
-        }
     }
 
     //Output the new state of the Toggle into Text
@@ -31,8 +30,12 @@ public class ToggleHardMode : ToggleController
 
     public override void OnSwitch(bool isOn) {
         base.OnSwitch(isOn);
-        //AudioManager.Instance.EnableBGM(isOn);
-        FlowSystem.Instance.SetFSMVariable("EasyMode", !FlowSystem.Instance.GetFSMVariable<bool>("EasyMode"));
+        if (isOn) {
+            FlowSystem.Instance.SetFSMVariable("EasyMode", false);
+        } else {
+            FlowSystem.Instance.SetFSMVariable("EasyMode", true);
+        }
+        
     }
 
     protected override void OnDestroy() {

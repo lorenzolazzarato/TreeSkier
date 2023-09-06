@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnerList:
   - SpawnerObject: {fileID: 5055021476016111654, guid: 7eaa39b8b6f04f64e96aa23717725a29, type: 3}
-    Probability: 10
+    Probability: 30
   - SpawnerObject: {fileID: 3126615272192832708, guid: 0c2855169c4f49a47b9396fef86bb198, type: 3}
-    Probability: 10
+    Probability: 20
   - SpawnerObject: {fileID: -2980627940623966084, guid: 619683752be23f34ea90275335b82262, type: 3}
     Probability: 5
   - SpawnerObject: {fileID: 8327422620940662468, guid: 76a34b9c578c1374688ff63047dcca26, type: 3}
     Probability: 5
   - SpawnerObject: {fileID: 5737543022108322977, guid: 8659ff7774705eb43ae57d71f797a4ec, type: 3}
-    Probability: 25
+    Probability: 10
   - SpawnerObject: {fileID: 3122182855318673818, guid: 30fe89bfaec14f349abacd1a0b6adf37, type: 3}
     Probability: 10
   - SpawnerObject: {fileID: -7982183509897871598, guid: b834f2871e0fc11459c0d992d0131481, type: 3}
-    Probability: 10
+    Probability: 15
   - SpawnerObject: {fileID: -5196041260251496719, guid: fdfbb08c18e8f984a9fbf8cdae22b71e, type: 3}
-    Probability: 10
+    Probability: 5

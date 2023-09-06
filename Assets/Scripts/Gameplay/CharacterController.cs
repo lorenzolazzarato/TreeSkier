@@ -39,13 +39,13 @@ public class CharacterController : MonoBehaviour
     [Header("Speed")]
 
     [SerializeField]
-    private float _SlowRatio = 0.0001f;
+    private float _SlowRatio = 3f;
 
     [SerializeField]
-    private float _AccelerationRatio = 0.0001f;
+    private float _AccelerationRatio = 3f;
 
     [SerializeField]
-    private float _MaxSpeed = 1f;
+    private float _MaxSpeed = 3f;
 
     [Header("Events")]
 
@@ -129,8 +129,6 @@ public class CharacterController : MonoBehaviour
     // Time when the touching starts
     private float _timeStart;
 
-    // Need the camera to calculate where the touch is
-    private ICinemachineCamera _camera;
 
     // Variable used to handle the minigame start
     private bool _canMinigameStart = false;
@@ -144,6 +142,7 @@ public class CharacterController : MonoBehaviour
     private int _playerLife;
 
 
+
     private void Awake()
     {
         _gameplayInputProvider = InputSystem.Instance.GetInput<GameplayInputProvider>(_GameplayIdProvider.Id);
@@ -152,6 +151,9 @@ public class CharacterController : MonoBehaviour
         InputSystem.Instance.EnableInputProvider(_GameplayIdProvider.Id);
         InputSystem.Instance.DisableInputProvider(_MinigameIdProvider.Id);
 
+
+        Debug.Log(Camera.main.WorldToScreenPoint(new Vector3(4.24f, 0, -2)));
+        Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 8)));
         
         //_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         //Debug.Log("Sprite renderer loaded");
@@ -161,8 +163,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("Character controller start method");
-        _camera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+
 
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
@@ -185,10 +186,12 @@ public class CharacterController : MonoBehaviour
             if (_xSpeed > 0)
             {
                 _xSpeed -= _SlowRatio;
+                _xSpeed = Math.Clamp(_xSpeed, 0, _MaxSpeed);
             }
             else if (_xSpeed < 0)
             {
                 _xSpeed += _SlowRatio;
+                _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, 0);
             }
         }
 
@@ -208,16 +211,16 @@ public class CharacterController : MonoBehaviour
         // Translate the character by the correct amount
         transform.Translate(_xSpeed * Time.deltaTime, 0, 0);
 
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
         // Check if the character is out of the screen, in case teleport it to the other side
-        if (transform.position.x < -4)
+        if (screenPos.x < 0 || screenPos.x > Screen.width)
         {
-            transform.position = new Vector3(4, transform.position.y, transform.position.z);
+            //Debug.Log(transform.position.x);
+            Debug.Log(Camera.main.ScreenToWorldPoint(screenPos));
+            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x > 4)
-        {
-            transform.position = new Vector3(-4, transform.position.y, transform.position.z);
-        }
+        
 
 
 

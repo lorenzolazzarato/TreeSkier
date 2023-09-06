@@ -24,6 +24,7 @@ public class MovableObject : PoolableObject, IMoovableObject
     protected virtual void Update()
     {
         _speed = FlowSystem.Instance.GetFSMVariable<float>("Speed");
+        Debug.Log(_speed);
 
         Move();
         // Checks if the sprite is out of the screen. In case it is, call an event

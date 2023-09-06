@@ -62,7 +62,9 @@ public class JumpController : MonoBehaviour
 
     private float _timeForJump;
 
-    private float _timeReductionJump;
+    private float _timeReductionJumpEasy;
+    private float _timeReductionJumpMedium;
+    private float _timeReductionJumpHard;
 
     private HardJump _myHardJumpPrefab;
 
@@ -73,7 +75,9 @@ public class JumpController : MonoBehaviour
         _easyMode = FlowSystem.Instance.GetFSMVariable<bool>("EasyMode");
 
         _timeForJump = _BaseJumpScriptable.InitialTimeForJump;
-        _timeReductionJump = _BaseJumpScriptable.TimeReductionForDifficulty;
+        _timeReductionJumpEasy = _BaseJumpScriptable.TimeReductionForEasy;
+        _timeReductionJumpMedium = _BaseJumpScriptable.TimeReductionForMedium;
+        _timeReductionJumpHard = _BaseJumpScriptable.TimeReductionForHard;
 
         _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
         _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
@@ -98,7 +102,25 @@ public class JumpController : MonoBehaviour
 
         _hasTouched = false;
         
-        float jumpTime = _timeForJump - _timeReductionJump * _difficulty;
+        float jumpTime = _timeForJump;
+
+        switch (_difficulty)
+        {
+            case 1:
+                jumpTime -= _timeReductionJumpEasy;
+                break;
+
+            case 2:
+                jumpTime -= _timeReductionJumpMedium;
+                break;
+            case 3:
+                jumpTime -= _timeReductionJumpHard;
+                break;
+
+            default:
+                break;
+        }
+
 
         _JumpMinigameStartEvent.Invoke();
         _isMinigameStarted = true;
