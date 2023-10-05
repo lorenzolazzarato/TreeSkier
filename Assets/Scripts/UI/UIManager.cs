@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     private ChangeLivesEvent _changeLivesEvent;
 
     [SerializeField]
+    private IdContainerGameEvent _scoreUpdatedEvent;
+
+    [SerializeField]
     private IntSO _playerStartingLife;
 
     private TMP_Text _score;
@@ -22,11 +25,13 @@ public class UIManager : MonoBehaviour
 
     void OnEnable() {
         _changeLivesEvent.Subscribe(OnChangeLives);
+        _scoreUpdatedEvent.Subscribe(UpdateScore);
     }
 
     void OnDisable()
     {
         _changeLivesEvent.Unsubscribe(OnChangeLives);
+        _scoreUpdatedEvent.Unsubscribe(UpdateScore);
     }
 
     void Start() {
@@ -39,12 +44,7 @@ public class UIManager : MonoBehaviour
             _healthBar.CreateNewHeart();
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        _score.SetText(string.Format(CultureInfo.GetCultureInfo("EN-en"), "{0:N0}", ScoreManager.Instance.GetScore()));
-    }
-
+    
     private void UpdateHealth(float health) {
         _healthBar.DrawHearts(health);
     }
@@ -59,6 +59,11 @@ public class UIManager : MonoBehaviour
         {
             UpdateHealth(changeLivesEvt.numberOfLives);
         }
+    }
+
+    private void UpdateScore(GameEvent evt)
+    {
+        _score.SetText(string.Format(CultureInfo.GetCultureInfo("EN-en"), "{0:N0}", ScoreManager.Instance.GetScore()));
     }
     public void OnButtonClick()
     {

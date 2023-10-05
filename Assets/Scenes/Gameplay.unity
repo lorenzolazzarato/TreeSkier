@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e41d539388f5241b48fcfda6894ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreUpdatedEvent: {fileID: 11400000, guid: 16bd0a635c85816459da4113e33ec7ff, type: 2}
 --- !u!4 &197300347
 Transform:
   m_ObjectHideFlags: 0
@@ -829,6 +830,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5642247013252864730, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642247013252864730, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
       propertyPath: m_fontSize
       value: 100
       objectReference: {fileID: 0}
@@ -948,6 +953,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5642247013993059238, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
+      propertyPath: _scoreUpdatedEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 16bd0a635c85816459da4113e33ec7ff, type: 2}
     - target: {fileID: 5642247013993059238, guid: 9771094767dbc724b80dd1d23ce89f13, type: 3}
       propertyPath: _playerStartingLife
       value: 
