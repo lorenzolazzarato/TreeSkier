@@ -10,7 +10,7 @@ public class EasyJumpCircleDrawer : MonoBehaviour
 
     public LineRenderer circleRenderer;
 
-    public int steps = 100;
+    public int steps = 200;
 
     public float radius = 1f;
 

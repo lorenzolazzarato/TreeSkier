@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpController : MonoBehaviour
@@ -16,7 +15,7 @@ public class JumpController : MonoBehaviour
     private IdContainerGameEvent _JumpMinigameStartEvent;
 
     [SerializeField]
-    private IdContainerGameEvent _JumpMinigameEndEvent;
+    private JumpEndEvent _JumpMinigameEndEvent;
 
     [SerializeField]
     private EndMinigameEvent _FinishMinigameEvent;
@@ -82,7 +81,7 @@ public class JumpController : MonoBehaviour
         _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
         _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
 
-        _FinishMinigameEvent.Subscribe(EndMinigame);
+        _FinishMinigameEvent.Subscribe(MinigameEnd);
 
         // Max acceptance time must be >= than Min acceptance time
         _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _timeForJump);
@@ -90,18 +89,35 @@ public class JumpController : MonoBehaviour
 
     private void OnDisable()
     {
-        _FinishMinigameEvent.Unsubscribe(EndMinigame);
+        _FinishMinigameEvent.Unsubscribe(MinigameEnd);
     }
 
-    // Jump initiation for the minigame
-    private void JumpInit()
+    // Start jumping and call either the minigame jump or the simple jump functions
+    public void StartJump(int difficulty = 0, bool minigame = false)
+    {
+        //Debug.Log("Jump started " + difficulty);
+
+        if (minigame)
+        {
+            _difficulty = difficulty;
+            MinigameStart();
+        }
+        else
+        {
+            _difficulty = 4;
+            StartCoroutine(SimpleJumpCoroutine());
+        }
+    }
+
+    // Jump initiation when jumping on a ramp
+    private void MinigameStart()
     {
         //Change input provider
         InputSystem.Instance.DisableInputProvider(_GameplayProviderContainer.Id);
         InputSystem.Instance.EnableInputProvider(_MinigameProviderContainer.Id);
 
         _hasTouched = false;
-        
+
         float jumpTime = _timeForJump;
 
         switch (_difficulty)
@@ -134,24 +150,22 @@ public class JumpController : MonoBehaviour
             HardJump(jumpTime);
         }
 
-        
     }
 
-    // Jump finished
-    private void JumpFinish()
+    // End the jump and restore gameplay provider
+    private void EndJump()
     {
-        // The jump is finished
-        Debug.Log("JumpFinished");
+        // Debug.Log("JumpFinished");
         _JumpMinigameEndEvent.Invoke();
         _isMinigameStarted = false;
         Time.timeScale = 1;
-        //Debug.Log(InputSystem.Instance.name);
+        // Debug.Log(InputSystem.Instance.name);
         InputSystem.Instance.DisableInputProvider(_MinigameProviderContainer.Id);
         InputSystem.Instance.EnableInputProvider(_GameplayProviderContainer.Id);
     }
 
     // During jump from a Ramp
-    private IEnumerator JumpCoroutine()
+    private IEnumerator SimpleJumpCoroutine()
     {
         // The player is jumping
 
@@ -166,27 +180,10 @@ public class JumpController : MonoBehaviour
 
 
         // The player is not jumping anymore
+        _JumpMinigameEndEvent.IsMinigame = false;
+        _JumpMinigameEndEvent.MinigamePassed = false;
 
-        JumpFinish();
-    }
-
-    // Start jump and call the right function based on the jump type
-    public void StartJump(int difficulty = 0, bool minigame = false)
-    {
-        //Debug.Log("Jump started " + difficulty);
-
-        // If we need to start the minigame, call jump init
-        if (minigame)
-        {
-            _difficulty = difficulty;
-            JumpInit();
-        }
-        //Otherwise just jump normally
-        else
-        {
-            _difficulty = 4;
-            StartCoroutine(JumpCoroutine());
-        }
+        EndJump();
     }
 
     public void CheckPositionTouched(Vector2 position)
@@ -198,7 +195,7 @@ public class JumpController : MonoBehaviour
             _hasTouched = true;
             //Debug.Log("Touched screen while minigame active");
             _myEasyJumpPrefab.Touched();
-            
+
         }
         // Hard mode
         else if (_isMinigameStarted)
@@ -221,59 +218,32 @@ public class JumpController : MonoBehaviour
         }
     }
 
-
-    private void EasyJump(float jumpTime)
-    {
-        _myEasyJumpPrefab = Instantiate(_EasyJumpPrefab);
-        _myEasyJumpPrefab.InitEasyJump(jumpTime);
-    }
-
-    
-
-    private void HardJump(float jumpTime)
-    {
-        _myHardJumpPrefab = Instantiate(_HardJumpPrefab);
-        _myHardJumpPrefab.Init(jumpTime, _difficulty);
-        
-    }
-
-    
-    private void EndMinigame(GameEvent evt)
+    private void MinigameEnd(GameEvent evt)
     {
         EndMinigameEvent ev = (EndMinigameEvent)evt;
-
         if (ev != null)
         {
             _minigamePassed = ev.minigamePassed;
         }
 
         //If minigame passed add the points
-
         if (_minigamePassed)
         {
-            /*
-            if (_MinigameProviderContainer.Id)
-            { // jump performed on a hard ramp: cool jump
-                _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
-            }
-            else _PlayerAnimator.SetTrigger("OnJumpEnter");
-            */
             int score;
             switch (_difficulty)
             {
                 case 1:
                     score = 300;
-                    //Difficulty easy
                     break;
-                
+
                 case 2:
                     score = 600;
                     break;
-            
+
                 case 3:
                     score = 1000;
                     break;
-                
+
                 default:
                     score = 300;
                     break;
@@ -281,15 +251,29 @@ public class JumpController : MonoBehaviour
 
             ScoreManager.Instance.AddScore(score);
 
+            _JumpMinigameEndEvent.MinigamePassed = true;
         }
         else
         {
+            _JumpMinigameEndEvent.MinigamePassed = false;
             //If the minigames is not passed, hit the player
-
             _HitEvent.Invoke();
         }
 
+        _JumpMinigameEndEvent.IsMinigame = true;
+        EndJump();
+    }
 
-        JumpFinish();
+    private void EasyJump(float jumpTime)
+    {
+        _myEasyJumpPrefab = Instantiate(_EasyJumpPrefab);
+        _myEasyJumpPrefab.InitEasyJump(jumpTime);
+    }
+
+    private void HardJump(float jumpTime)
+    {
+        _myHardJumpPrefab = Instantiate(_HardJumpPrefab);
+        _myHardJumpPrefab.Init(jumpTime, _difficulty);
+
     }
 }

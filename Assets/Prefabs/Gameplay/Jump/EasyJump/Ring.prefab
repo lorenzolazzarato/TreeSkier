@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516b758549ffeb44f960012757c066e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Color: {r: 0, g: 0, b: 0, a: 0}
   circleRenderer: {fileID: 5993378698599631129}
-  steps: 50
+  steps: 300
   radius: 1

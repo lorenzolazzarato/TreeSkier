@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour
 
     [Tooltip("Event triggered when the jump ends from the jump controller")]
     [SerializeField]
-    private IdContainerGameEvent _JumpEndEvent;
+    private JumpEndEvent _JumpEndEvent;
 
 
     [SerializeField]
@@ -164,10 +164,52 @@ public class CharacterController : MonoBehaviour
         transform.Translate(Vector3.down * 1);
     }
 
+    private void OnEnable()
+    {
+        // Gameplay
+        _gameplayInputProvider.OnMove += MoveCharacter;
+
+        _gameplayInputProvider.OnStartTouch += StartTouch;
+        _gameplayInputProvider.OnEndTouch += EndTouch;
+
+        // Minigame
+        _minigameInputProvider.OnMove += MoveCharacter;
+
+        _minigameInputProvider.OnStartTouch += StartTouch;
+        _minigameInputProvider.OnEndTouch += EndTouch;
+
+        // Events
+        _HitEvent.Subscribe(HitCharacter);
+        _JumpEndEvent.Subscribe(OnJumpEnd);
+        _JumpStartEvent.Subscribe(OnMinigameStart);
+        _RampHitEvent.Subscribe(OnRampHitEvent);
+        _LifeUpEvent.Subscribe(LifeUp);
+
+
+    }
+    private void OnDisable()
+    {
+        _gameplayInputProvider.OnMove -= MoveCharacter;
+
+        _gameplayInputProvider.OnStartTouch -= StartTouch;
+        _gameplayInputProvider.OnEndTouch -= EndTouch;
+
+        _minigameInputProvider.OnMove -= MoveCharacter;
+
+        _minigameInputProvider.OnStartTouch -= StartTouch;
+        _minigameInputProvider.OnEndTouch -= EndTouch;
+
+
+        _HitEvent.Unsubscribe(HitCharacter);
+        _JumpEndEvent.Unsubscribe(OnJumpEnd);
+        _JumpStartEvent.Unsubscribe(OnMinigameStart);
+        _RampHitEvent.Unsubscribe(OnRampHitEvent);
+        _LifeUpEvent.Unsubscribe(LifeUp);
+
+    }
+
     private void Start()
     {
-
-
         //Debug.LogFormat("Value of max speed: {0}", _MaxSpeed);
         //Debug.LogFormat("Value of acceleration: {0}", _AccelerationRatio);
         //Debug.LogFormat("Value of slow: {0}", _SlowRatio);
@@ -198,11 +240,8 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-
-
         // Clamp the speed between 2 value
         _xSpeed = Math.Clamp(_xSpeed, -_MaxSpeed, _MaxSpeed);
-
 
         // Set the speed to 0 if is less then the AccelerationRatio
         if (Math.Abs(_xSpeed) < _AccelerationRatio)
@@ -224,72 +263,22 @@ public class CharacterController : MonoBehaviour
             transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
         }
         
-
-
-
         //Debug.LogFormat("Transform Position {0}", transform.position.x);
     }
 
-    private void OnEnable()
-    {
-        //Gameplay
-        _gameplayInputProvider.OnMove += MoveCharacter;
-
-        _gameplayInputProvider.OnStartTouch += StartTouch;
-        _gameplayInputProvider.OnEndTouch += EndTouch;
-
-        //Minigame
-        _minigameInputProvider.OnMove += MoveCharacter;
-
-        _minigameInputProvider.OnStartTouch += StartTouch;
-        _minigameInputProvider.OnEndTouch += EndTouch;
-
-        _HitEvent.Subscribe(HitCharacter);
-        _JumpEndEvent.Subscribe(OnJumpEnd);
-        _JumpStartEvent.Subscribe(OnMinigameStart);
-        _RampHitEvent.Subscribe(OnRampHitEvent);
-        _LifeUpEvent.Subscribe(LifeUp);
-
-
-    }
-    private void OnDisable()
-    {
-        _gameplayInputProvider.OnMove -= MoveCharacter;
-
-        _gameplayInputProvider.OnStartTouch -= StartTouch;
-        _gameplayInputProvider.OnEndTouch -= EndTouch;
-
-        _minigameInputProvider.OnMove -= MoveCharacter;
-
-        _minigameInputProvider.OnStartTouch -= StartTouch;
-        _minigameInputProvider.OnEndTouch -= EndTouch;
-
-
-        _HitEvent.Unsubscribe(HitCharacter);
-        _JumpEndEvent.Unsubscribe(OnJumpEnd);
-        _JumpStartEvent.Unsubscribe(OnMinigameStart);
-        _RampHitEvent.Unsubscribe(OnRampHitEvent);
-        _LifeUpEvent.Unsubscribe(LifeUp);
-
-    }
-
+    // If a swipe up is detected, makes the character jump in the air.
     private void JumpCharacter()
     {
-        //Debug.Log("JUMP");
-
         if (_canJump)
         {
-
             gameObject.layer = LayerMask.NameToLayer("Air");
 
             _JumpController.StartJump(_jumpDifficulty, _canMinigameStart);
             
             _canJump = false;
-
-            Debug.Log("Jump started");
             _isJumping = true;
 
-            StartCoroutine(JumpAnimationStart());
+            StartCoroutine(JumpAnimationStart()); // zooms the character in increasing his z-value
         }
 
     }
@@ -381,6 +370,7 @@ public class CharacterController : MonoBehaviour
         collision.GetComponentInParent<MovableObject>().HitObject();
     }
 
+    // Called when the character takes damage
     private void HitCharacter(GameEvent evt)
     {
         //Debug.Log("Character hit");
@@ -397,6 +387,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Called when the character takes a heart
     private void LifeUp(GameEvent evt) {
         // add half heart
         if( _playerLife < _PlayerMaxLife.value) {
@@ -407,12 +398,18 @@ public class CharacterController : MonoBehaviour
         
     }
 
+    // Called when a minigame (ramp) ends
     private void OnJumpEnd(GameEvent evt)
     {
+        JumpEndEvent jumpEnd = (JumpEndEvent)evt;
+
         Debug.Log("Jump end event called");
         _isJumping = false;
         _direction = MovementDirection.STILL;
-        StartCoroutine(JumpAnimationEnd());
+
+        StartCoroutine(JumpAnimationEnd(jumpEnd));
+        
+        
     }
 
     private void OnMinigameStart(GameEvent evt)
@@ -420,6 +417,7 @@ public class CharacterController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Minigame");
     }
 
+    // event called when touching a ramp
     private void OnRampHitEvent(GameEvent evt)
     {
         //Debug.Log("Ramp hit event from player");
@@ -438,19 +436,24 @@ public class CharacterController : MonoBehaviour
         _canMinigameStart = true;
         yield return new WaitForSeconds(_JumpAcceptanceDuration);
         _canMinigameStart = false;
-        _jumpDifficulty = 0;
-
+        if(!_isJumping)
+        {
+            _jumpDifficulty = 0;
+        }
+        
     }
 
+    // Starts the animation when the character is damaged.
     IEnumerator OuchSpriteAnimation() {
         _PlayerAnimator.SetTrigger("OnOuchEnter");
         yield return new WaitForSeconds(_OuchTime);
         _PlayerAnimator.SetTrigger("OnOuchExit");
     }
 
+    // Increases the z-values of the character when jumping
     IEnumerator JumpAnimationStart()
     {
-        Debug.Log("current z: " + transform.position.z);
+        //Debug.Log("current z: " + transform.position.z);
         
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
@@ -458,19 +461,24 @@ public class CharacterController : MonoBehaviour
             transform.Translate(0, 0, - Time.deltaTime * _JumpHeight);
             yield return null;
         }
-        Debug.Log("final z: " + transform.position.z);
+        //Debug.Log("final z: " + transform.position.z);
 
     }
 
-    IEnumerator JumpAnimationEnd()
+    IEnumerator JumpAnimationEnd(JumpEndEvent evt)
     {
-        Debug.Log("Difficolta rampHitEvent: " +_RampHitEvent.difficulty);
-        if (_RampHitEvent.difficulty == 3) { // jump performed on a hard ramp: cool jump animation
-            _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
-        }
-        else if (_RampHitEvent.difficulty == 1 || _RampHitEvent.difficulty == 2) _PlayerAnimator.SetTrigger("OnJumpEnter"); // jump performed on an easy/medium ramp: jump animation
+        // Debug.Log("Difficolta rampHitEvent: " + _jumpDifficulty);
+        if(evt.IsMinigame && evt.MinigamePassed)
+        {
+            if (_jumpDifficulty == 3)
+            { // jump performed on a hard ramp: cool jump animation
+                _PlayerAnimator.SetTrigger("OnCoolJumpEnter");
+            }
+            else if (_jumpDifficulty == 1 || _jumpDifficulty == 2) _PlayerAnimator.SetTrigger("OnJumpEnter"); // jump performed on an easy/medium ramp: jump animation
 
-        _RampHitEvent.difficulty = 0;
+        }
+
+        _jumpDifficulty = 0;
 
         float maxTime = _BaseJumpScriptable.JumpDurationWithoutMinigame / 2;
         for (float t = 0; t < maxTime; t += Time.deltaTime)
@@ -480,6 +488,7 @@ public class CharacterController : MonoBehaviour
         }
         gameObject.layer = LayerMask.NameToLayer("Ground-Air");
         _canJump = true;
-        Debug.Log("final z: " + transform.position.z);
+        // Debug.Log("final z: " + transform.position.z);
     }
+
 }

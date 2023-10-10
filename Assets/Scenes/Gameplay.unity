@@ -551,6 +551,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: db056139d3fc58f4db2fdc85e5667eb0, type: 2}
     - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
+      propertyPath: _JumpEndEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: b8ac00fc7900c9345b98b0693a831f1d, type: 2}
+    - target: {fileID: -5764347161440750338, guid: d290d9e260735cf4c816da0c715c7796, type: 3}
       propertyPath: _PlayerMaxLife
       value: 
       objectReference: {fileID: 11400000, guid: bd1c154b15ae85147908a5b3f8b0a38b, type: 2}
@@ -725,6 +729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpController
       objectReference: {fileID: 0}
+    - target: {fileID: 8268681097825696393, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
+      propertyPath: _JumpMinigameEndEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: b8ac00fc7900c9345b98b0693a831f1d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d4abc40659bcb44380f48509cd60881, type: 3}
 --- !u!114 &1454714131 stripped
