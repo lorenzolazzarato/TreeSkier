@@ -78,13 +78,8 @@ public class JumpController : MonoBehaviour
         _timeReductionJumpMedium = _BaseJumpScriptable.TimeReductionForMedium;
         _timeReductionJumpHard = _BaseJumpScriptable.TimeReductionForHard;
 
-        _easyJumpMinAcceptanceTime = _EasyJumpScriptable._EasyJumpMinAcceptanceTime;
-        _easyJumpMaxAcceptanceTime = _EasyJumpScriptable._EasyJumpMaxAcceptanceTime;
-
         _FinishMinigameEvent.Subscribe(MinigameEnd);
 
-        // Max acceptance time must be >= than Min acceptance time
-        _easyJumpMaxAcceptanceTime = Mathf.Clamp(_easyJumpMaxAcceptanceTime, _easyJumpMinAcceptanceTime, _timeForJump);
     }
 
     private void OnDisable()
@@ -267,7 +262,7 @@ public class JumpController : MonoBehaviour
     private void EasyJump(float jumpTime)
     {
         _myEasyJumpPrefab = Instantiate(_EasyJumpPrefab);
-        _myEasyJumpPrefab.InitEasyJump(jumpTime);
+        _myEasyJumpPrefab.InitEasyJump(jumpTime, _difficulty);
     }
 
     private void HardJump(float jumpTime)

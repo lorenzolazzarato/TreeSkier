@@ -38,17 +38,34 @@ public class EasyJump : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
-    public void InitEasyJump(float jumpTime)
+    public void InitEasyJump(float jumpTime, int difficulty = 0)
     {
         _jumpTime = jumpTime;
 
         _JumpBaseScript.InitBaseJump(_jumpTime);
+        switch (difficulty)
+        {
+            case 1:
+                _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTimeEasy;
+                _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTimeEasy;
+                break;
+            case 2:
+                _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTimeMedium;
+                _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTimeMedium;
+                break;
+            case 3:
+                _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTimeHard;
+                _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTimeHard;
+                break;
+            default:
+                _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTimeEasy;
+                _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTimeEasy;
+                break;
+        }
 
-        _minAcceptanceTime = _EasyJumpInfo._EasyJumpMinAcceptanceTime;
-        _maxAcceptanceTime = _EasyJumpInfo._EasyJumpMaxAcceptanceTime;
 
         // Some nasty calculation to get the correct width of the target ring
         float minW = Mathf.Lerp(_MoovingStartingRadius, 0, _minAcceptanceTime / _jumpTime);
@@ -86,7 +103,7 @@ public class EasyJump : MonoBehaviour
                 break;
             }
             _MoovingCircle.radius = Mathf.Lerp(_MoovingStartingRadius - _MoovingCircle.circleRenderer.startWidth, 0, t / _jumpTime);
-            
+
             _MoovingCircle.Draw();
             yield return null;
         }
