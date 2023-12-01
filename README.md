@@ -1,6 +1,7 @@
 # group1
-
-
+Luca Bertini
+Lorenzo Lazzarato
+Andrea Mocellin
 
 ## Getting started
 
